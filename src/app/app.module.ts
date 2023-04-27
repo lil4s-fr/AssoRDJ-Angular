@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 // Import Angular material
 import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -48,7 +49,8 @@ import { FormulairesComponent } from './formulaires/formulaires.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatCardModule
+    MatCardModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
