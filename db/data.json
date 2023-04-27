@@ -1,34 +1,35 @@
 [
     {
-        "id_utilisateur": "0001",
+        "id_utilisateur": 1,
         " nom": "Dias",
         "prenom": "Antoine",
         "numero_adherant": "001",
         "pseudo": "The best",
         "mail": "antoine-the-best@master.com",
         "telephone": "0022558800",
-        "coordonnees": "1"
+        "coordonnees": 1,
+        "id_permission": 1
     },
     {
-        "id_permission": "0002",
+        "id_permission": 2,
         "statut": "administrateur",
-        "utilisateur": "002"
+        "utilisateur": [2]
     },
     {
-        "id_article": "003",
+        "id_article":3,
         "titre": "Vive les jeux",
         "corps": "J'aime jouer alors je rejoins l'assoRDJ dont le président assure grave !",
         "date_ecriture": "12/12/12",
         "date_modif": "13/13/13",
-        "like_dislike": "Top",
-        "utilisateur": "002"
+        "like_dislike": 1,
+        "utilisateur": 2
     },
     {
-        "id_commentaire": "005",
+        "id_commentaire": 5,
         "commentaire": "L'article est super intéressant",
         "like_dislike": "Génial",
-        "utilisateur": "002",
-        "article": "003"
+        "utilisateur": 2,
+        "article": 3
     },
     {
         "id_categorie": "006",
