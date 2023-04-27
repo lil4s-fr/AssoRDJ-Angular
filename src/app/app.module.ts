@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+// Import Angular material
+import {MatCardModule} from '@angular/material/card';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './commons/navbar/navbar.component';
@@ -12,8 +15,8 @@ import { ConnectionComponent } from './formulaires/connection/connection.compone
 import { ContactComponent } from './formulaires/contact/contact.component';
 import { BookComponent } from './formulaires/book/book.component';
 import { JoinEventComponent } from './formulaires/join-event/join-event.component';
-import { EventCardComponent } from './listes/event-card/event-card.component';
-import { ArticleCardComponent } from './listes/article-card/article-card.component';
+import { EventCardComponent } from './lists/event-card/event-card.component';
+import { ArticleCardComponent } from './lists/article-card/article-card.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ArticlesComponent } from './pages/articles/articles.component';
 import { EventsComponent } from './pages/events/events.component';
@@ -44,7 +47,8 @@ import { FormulairesComponent } from './formulaires/formulaires.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
