@@ -9,5 +9,4 @@ export class EventCardComponent {
 
   @Input()
   card!: any;
-  
 }
