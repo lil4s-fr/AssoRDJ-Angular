@@ -18,6 +18,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { ArticlesComponent } from './pages/articles/articles.component';
 import { EventsComponent } from './pages/events/events.component';
 import { ButtonsComponent } from './commons/buttons/buttons.component';
+import { ListsComponent } from './lists/lists.component';
+import { FormulairesComponent } from './formulaires/formulaires.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { ButtonsComponent } from './commons/buttons/buttons.component';
     HomeComponent,
     ArticlesComponent,
     EventsComponent,
-    ButtonsComponent
+    ButtonsComponent,
+    ListsComponent,
+    FormulairesComponent
   ],
   imports: [
     BrowserModule,
