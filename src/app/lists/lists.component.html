@@ -1,1 +1,16 @@
-<p>lists works!</p>
+<!-- Verifie si l'element a l'index 0 de l'événement possède un champ description et que la typeList n'est pas vide -->
+<div *ngIf="typeList[0].description!=='' && typeList.length > 0">
+    <ul *ngFor="let card of typeList">
+        <li>
+            <app-event-card [card]="card"></app-event-card>
+        </li>
+    </ul>
+</div>
+<!-- Verifie si l'element a l'index 0 de l'article possède un champ corps et que la typeList n'est pas vide -->
+<div *ngIf="typeList[0].corps!=='' && typeList.length > 0">
+    <ul *ngFor="let card of typeList">
+        <li>
+            <app-event-card [card]="card"></app-event-card>
+        </li>
+    </ul>
+</div>
