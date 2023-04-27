@@ -12,8 +12,8 @@ import { ConnectionComponent } from './formulaires/connection/connection.compone
 import { ContactComponent } from './formulaires/contact/contact.component';
 import { BookComponent } from './formulaires/book/book.component';
 import { JoinEventComponent } from './formulaires/join-event/join-event.component';
-import { EventCardComponent } from './lists/event-card/event-card.component';
-import { ArticleCardComponent } from './lists/article-card/article-card.component';
+import { EventCardComponent } from './listes/event-card/event-card.component';
+import { ArticleCardComponent } from './listes/article-card/article-card.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ArticlesComponent } from './pages/articles/articles.component';
 import { EventsComponent } from './pages/events/events.component';
