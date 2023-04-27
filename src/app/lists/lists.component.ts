@@ -9,5 +9,4 @@ export class ListsComponent {
 
   @Input()
   typeList!: any[];
-
 }
