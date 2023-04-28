@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
+// Impot du modele event
 import IdEvent from '../models/idEvent.model';
 
 @Injectable({
