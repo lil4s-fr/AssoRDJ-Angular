@@ -23,13 +23,11 @@ export class ListsComponent {
   ){}
 
   ngOnInit(): void {
-    
-    this.eventService.getEvent().subscribe((events) => {
+    this.eventService.getEvents().subscribe((events) => {
       this.events = events;
     });
   }
 
-
   @Input()
-  typeList!: any[];
+  typeCard!: string;
 }
