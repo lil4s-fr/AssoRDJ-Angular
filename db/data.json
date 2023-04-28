@@ -10,7 +10,7 @@
         "telephone": "0022558800",
         "coordonnees": 1,
         "id_permission": 1
-    }
+    },
     {
         "id_permission": 2,
         "statut": "administrateur",
@@ -121,6 +121,6 @@
         "date_fin": "36/36/36",
         "description": "On se rejoint pour jouer ensemble",
         "organisateur": "Moi"
-    },
+    }
 ]
 }
