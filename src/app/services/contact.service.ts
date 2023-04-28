@@ -17,7 +17,7 @@ export class ContactService {
   getContacts(): Observable<ContactRequest[]> {
     // On demande à retourner une liste de films (Film étant notre interface)
     // La partie entre parenthèse correspond à l'URL complète de notre route API
-    return this.httpClient.get<ContactRequest[]>(`${this.apiUrl}/comments`)
+    return this.httpClient.get<ContactRequest[]>(`${this.apiUrl}/contacts`)
   }
 
   // Idem ici mais pour récupérer un film en particulier
