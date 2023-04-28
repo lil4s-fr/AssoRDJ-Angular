@@ -14,7 +14,7 @@ export class EventService {
   // Injection de la dépendence HttpClient
   constructor(private httpClient: HttpClient) { }
 
-  getEvent(): Observable<IdEvent[]> {
+  getEvents(): Observable<IdEvent[]> {
     // On demande à retourner une liste de films (Film étant notre interface)
     // La partie entre parenthèse correspond à l'URL complète de notre route API
     return this.httpClient.get<IdEvent[]>(`${this.apiUrl}/events`)
@@ -22,21 +22,21 @@ export class EventService {
 
   // Idem ici mais pour récupérer un film en particulier
   // Lorsqu'on appellera la méthode, on devra alors lui passer l'ID en argument
-  getFilm(id: number): Observable<IdEvent> {
+  getEvent(id: number): Observable<IdEvent> {
     return this.httpClient.get<IdEvent>(`${this.apiUrl}/events/${id}`);
   }
 
   // Et ensuite c'est pareil pour toutes les autres requêtes
-  createFilm(event: IdEvent): Observable<IdEvent> {
+  createEvent(event: IdEvent): Observable<IdEvent> {
     return this.httpClient.post<IdEvent>(`${this.apiUrl}/events`, event);
   }
 
   // attention au paramètre de l'URL ${film.id} celui-ci fait référence au paramètre de l'objet film déclaré comme argument de ma fonction 
-  updateFilm(event: IdEvent): Observable<IdEvent> {
+  updateEvent(event: IdEvent): Observable<IdEvent> {
     return this.httpClient.put<IdEvent>(`${this.apiUrl}/events/${event.id_evenement}`, event);
   }
 
-  deleteFilm(id: number): Observable<IdEvent> {
+  deleteEvent(id: number): Observable<IdEvent> {
     return this.httpClient.delete<IdEvent>(`${this.apiUrl}/events/${id}`);
   }
 
