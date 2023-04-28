@@ -1,4 +1,4 @@
-export default interface idReservation{
+export default interface Room{
     id_salle: number,
     nom: string,
     capacite: number,

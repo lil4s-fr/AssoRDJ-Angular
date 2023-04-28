@@ -1,4 +1,4 @@
-export default interface comment{
+export default interface Comment{
 
     id_commentaire: number,
     commentaire: string,

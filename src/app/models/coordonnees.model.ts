@@ -1,4 +1,4 @@
-export default interface idReservation{
+export default interface Coordonnees{
     id_coordonnees: number,
     numero_rue: string,
     rue: string,

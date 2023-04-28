@@ -1,4 +1,4 @@
-export default interface user{
+export default interface Article{
     id_article: number,
     titre: string,
     corp: string,

@@ -1,4 +1,4 @@
-export default interface idReservation{
+export default interface Reservation{
     id_reservation: number,
     demandeur: string,
     participant: string,

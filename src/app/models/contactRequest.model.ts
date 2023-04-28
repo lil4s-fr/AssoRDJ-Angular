@@ -1,4 +1,4 @@
-export default interface contactRequest{
+export default interface ContactRequest{
     id_demandecontact: number,
     utilisateur: string,
     mail: string,
