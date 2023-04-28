@@ -1,5 +1,5 @@
 {
-[
+ "bdd":[
     {
         "id_utilisateur": 1,
         " nom": "Dias",
@@ -10,7 +10,7 @@
         "telephone": "0022558800",
         "coordonnees": 1,
         "id_permission": 1
-    },
+    }
     {
         "id_permission": 2,
         "statut": "administrateur",
@@ -102,7 +102,8 @@
         "categories_id_categorie": 125,
     "evenements_id_evenement": 33
     }
-], "events":[
+], 
+"events":[
     {
         "id_evenement": 3522,
         "nom": "Rassemblons-nous",
