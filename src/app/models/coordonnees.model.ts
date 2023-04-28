@@ -3,6 +3,6 @@ export default interface idReservation{
     numero_rue: string,
     rue: string,
     complement_adresse: string,
-    cp: number,
+    cp: string,
     ville: string,
 }
