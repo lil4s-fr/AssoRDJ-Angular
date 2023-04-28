@@ -1,6 +1,6 @@
 <!-- Verifie si l'element a l'index 0 de l'événement possède un champ description et que la typeList n'est pas vide -->
 <div *ngIf="typeList[0].description!=='' && typeList.length > 0">
-    <ul *ngFor="let card of typeList">
+    <ul *ngFor="let card of events">
         <li>
             <app-event-card [card]="card"></app-event-card>
         </li>
