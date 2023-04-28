@@ -1,3 +1,4 @@
+{
 [
     {
         "id_utilisateur": 1,
@@ -42,15 +43,6 @@
         "mail": "Godefroy-de-Montmirail@moyen-age.com",
         "message": "Sus aux sarasins !",
         "type_demande": "Je veux vous rejoindre"
-    },
-    {
-        "id_evenement": 3522,
-        "nom": "Rassemblons-nous",
-        "date_creation": "45/45/45",
-        "date_début": "25/25/25",
-        "date_fin": "36/36/36",
-        "description": "On se rejoint pour jouer ensemble",
-        "organisateur": "Moi"
     },
     {
         "id_reservation": 254,
@@ -110,4 +102,24 @@
         "categories_id_categorie": 125,
     "evenements_id_evenement": 33
     }
+], "events":[
+    {
+        "id_evenement": 3522,
+        "nom": "Rassemblons-nous",
+        "date_creation": "45/45/45",
+        "date_début": "25/25/25",
+        "date_fin": "36/36/36",
+        "description": "On se rejoint pour jouer ensemble",
+        "organisateur": "Moi"
+    },
+    {
+        "id_evenement": 3522,
+        "nom": "Rassemblons-nous",
+        "date_creation": "45/45/45",
+        "date_début": "25/25/25",
+        "date_fin": "36/36/36",
+        "description": "On se rejoint pour jouer ensemble",
+        "organisateur": "Moi"
+    },
 ]
+}
