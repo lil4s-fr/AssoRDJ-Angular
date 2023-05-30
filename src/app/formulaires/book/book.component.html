@@ -1,14 +1,14 @@
 <h1><u>Réservation de salle</u></h1>
 <div class="groupe">
     <!-- selection date-->
-    <mat-form-field>
+    <mat-form-field class="date">
     <input matInput [matDatepicker]="picker" placeholder="Date de la réservation">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
    </mat-form-field>
 
    <!-- choix salle-->
-   <mat-form-field>
+   <mat-form-field class="salle">
     <mat-label>Choisir une salle</mat-label>
     <mat-select [(ngModel)]="selectedRooms">
       <mat-option *ngFor="let room of rooms" [value]="room.value">
@@ -17,6 +17,16 @@
     </mat-select>
   </mat-form-field>
   
+  <!-- choix des participants-->
+  <mat-form-field class="participant">
+    <mat-label>Choisir les participants</mat-label>
+      <mat-select [(ngModel)]="selectedParticipants" multiple>
+        <mat-option *ngFor="let participant of participants" [value]="participant.value">
+          {{ participant.label }}
+        </mat-option>
+      </mat-select>
+  </mat-form-field>
 </div>
+<app-buttons [value]="btnValide" (click)="onAddBook($event)"></app-buttons>
 
   

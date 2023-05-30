@@ -39,4 +39,6 @@ export class ReservationService {
   deleteReservation(id: number): Observable<Reservation> {
     return this.httpClient.delete<Reservation>(`${this.apiUrl}/reservations/${id}`);
   }
+// méthode à renseigner pour ajouter une réservation à la bdd
+  onAddBook = (): void => {}
 }
