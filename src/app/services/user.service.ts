@@ -9,6 +9,13 @@ import User from '../models/user.model';
   providedIn: 'root'
 })
 export class UserService {
+// valeurs en dur pour le codage en attendant le lien dans la base de données
+  nom: string = "Dias";
+  prenom: string = "Antoine";
+  adresse: string = "Rue de l'espérance 59144 Dunkerque";
+  numeroAsso: number = 123654;
+
+
   private apiUrl = 'http://localhost:3000';
 
   // Injection de la dépendence HttpClient

@@ -9,7 +9,7 @@
 
    <!-- choix salle-->
    <mat-form-field>
-    <mat-label>Choisir une option</mat-label>
+    <mat-label>Choisir une salle</mat-label>
     <mat-select [(ngModel)]="selectedRooms">
       <mat-option *ngFor="let room of rooms" [value]="room.value">
         {{ room.label }}

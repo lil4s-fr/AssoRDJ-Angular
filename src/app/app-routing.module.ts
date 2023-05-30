@@ -15,6 +15,7 @@ import { PersonalDataComponent } from './pages/personal-data/personal-data.compo
 const routes: Routes = [
   {path :'', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
+  {path: 'reservation', component: BookComponent},
   {path: 'infoPerso', component: PersonalDataComponent},
   {path: 'events', component: EventsComponent},
   {path: 'articles', component: ArticlesComponent},

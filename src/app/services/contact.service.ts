@@ -1,34 +1,3 @@
-import { Injectable } from "@angular/core";
-
-@Injectable({
-    providedIn: 'root'
-})
-export class ContactService {
-    // valeur en dur temporaires pour le temps du codage
-    private _nom: string = "Dias";
-    private _prenom: string = "Antoine";
-    private _adresse: string = "Rue de l'avenir 59144 Dunkerque";
-    private _numeroAsso: number = 123456;
-
-    constructor() {}
-
-    get nom(): string{
-        return this._nom;
-    }
-
-    get prenom(): string{
-        return this._prenom;
-    }
-
-    get adresse(): string{
-        return this._adresse;
-    }
-
-    get numeroAsso(): number{
-        return this._numeroAsso;
-    }
-}
-=======
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -40,6 +9,8 @@ import ContactRequest from '../models/contactRequest.model';
   providedIn: 'root'
 })
 export class ContactService {
+
+
   private apiUrl = 'http://localhost:3000';
 
   // Injection de la dépendence HttpClient
@@ -70,4 +41,6 @@ export class ContactService {
   deleteContact(id: number): Observable<ContactRequest> {
     return this.httpClient.delete<ContactRequest>(`${this.apiUrl}/contacts/${id}`);
   }
+
+  
 }
