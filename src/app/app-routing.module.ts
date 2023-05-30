@@ -10,10 +10,12 @@ import { CreateArticleComponent } from './formulaires/create-article/create-arti
 import { CreateEventComponent } from './formulaires/create-event/create-event.component';
 import { JoinEventComponent } from './formulaires/join-event/join-event.component';
 import { NotFoundComponent } from './commons/not-found/not-found.component';
+import { PersonalDataComponent } from './pages/personal-data/personal-data.component';
 
 const routes: Routes = [
   {path :'', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
+  {path: 'infoPerso', component: PersonalDataComponent},
   {path: 'events', component: EventsComponent},
   {path: 'articles', component: ArticlesComponent},
   {path: 'book', component: BookComponent},

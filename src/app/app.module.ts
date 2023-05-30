@@ -24,6 +24,7 @@ import { EventsComponent } from './pages/events/events.component';
 import { ButtonsComponent } from './commons/buttons/buttons.component';
 import { ListsComponent } from './lists/lists.component';
 import { FormulairesComponent } from './formulaires/formulaires.component';
+import { PersonalDataComponent } from './pages/personal-data/personal-data.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { FormulairesComponent } from './formulaires/formulaires.component';
     EventsComponent,
     ButtonsComponent,
     ListsComponent,
-    FormulairesComponent
+    FormulairesComponent,
+    PersonalDataComponent
   ],
   imports: [
     BrowserModule,
