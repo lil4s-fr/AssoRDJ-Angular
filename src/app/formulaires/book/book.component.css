@@ -1,0 +1,10 @@
+h1 {
+    text-align: center;
+}
+
+.groupe {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: auto;
+}

@@ -1,1 +1,22 @@
-<p>book works!</p>
+<h1><u>Réservation de salle</u></h1>
+<div class="groupe">
+    <!-- selection date-->
+    <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Date de la réservation">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+   </mat-form-field>
+
+   <!-- choix salle-->
+   <mat-form-field>
+    <mat-label>Choisir une option</mat-label>
+    <mat-select [(ngModel)]="selectedRooms">
+      <mat-option *ngFor="let room of rooms" [value]="room.value">
+        {{ room.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+</div>
+
+  
