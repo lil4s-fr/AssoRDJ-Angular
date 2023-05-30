@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 // Import Angular material
 import {MatCardModule} from '@angular/material/card';
@@ -50,7 +51,8 @@ import { PersonalDataComponent } from './pages/personal-data/personal-data.compo
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatCardModule
+    MatCardModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
