@@ -4,10 +4,11 @@ import { Injectable } from "@angular/core";
     providedIn: 'root'
 })
 export class ContactService {
-    private _nom!: string;
-    private _prenom!: string;
-    private _adresse!: string;
-    private _numeroAsso!: number;
+    // valeur en dur temporaires pour le temps du codage
+    private _nom: string = "Dias";
+    private _prenom: string = "Antoine";
+    private _adresse: string = "Rue de l'avenir 59144 Dunkerque";
+    private _numeroAsso: number = 123456;
 
     constructor() {}
 

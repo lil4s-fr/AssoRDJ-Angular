@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ContactService } from 'src/app/services/contact.service';
 
 @Component({
@@ -7,6 +7,7 @@ import { ContactService } from 'src/app/services/contact.service';
   styleUrls: ['./personal-data.component.css']
 })
 export class PersonalDataComponent implements OnInit{
+  @Input()
   nom!: string;
   prenom!: string;
   adresse!: string;
@@ -18,6 +19,9 @@ export class PersonalDataComponent implements OnInit{
       this.getPersonnalData();
   }
 
+  /**
+   * récupération des données du service contact
+   */
   getPersonnalData = () => {
     this.nom = this.contactService.nom;
     this.prenom = this.contactService.prenom;
