@@ -1,49 +1,88 @@
-[
+{
+ "users":[
     {
-        "id_utilisateur": "0001",
+        "id_utilisateur": 1,
         " nom": "Dias",
         "prenom": "Antoine",
         "numero_adherant": "001",
         "pseudo": "The best",
         "mail": "antoine-the-best@master.com",
         "telephone": "0022558800",
-        "coordonnees": "1"
-    },
+        "coordonnees": 1,
+        "id_permission": 1
+    }
+ ], 
+ "articles": [
     {
-        "id_permission": "0002",
-        "statut": "administrateur",
-        "utilisateur": "002"
-    },
-    {
-        "id_article": "003",
+        "id_article":3,
         "titre": "Vive les jeux",
         "corps": "J'aime jouer alors je rejoins l'assoRDJ dont le président assure grave !",
         "date_ecriture": "12/12/12",
         "date_modif": "13/13/13",
-        "like_dislike": "Top",
-        "utilisateur": "002"
-    },
+        "like_dislike": 1,
+        "utilisateur": 2
+    }
+ ],
+ "coordonnees": [
     {
-        "id_commentaire": "005",
+        "id_coordonnees": 254,
+        "numero_rue": "21",
+        "rue": "la rue",
+        "complement_adresse": "je complète",
+        "cp": "62222",
+        "ville": "Là-bas"
+    }
+ ],
+ "commentaire": [
+    {
+        "id_commentaire": 5,
         "commentaire": "L'article est super intéressant",
         "like_dislike": "Génial",
-        "utilisateur": "002",
-        "article": "003"
-    },
+        "utilisateur": 2,
+        "article": 3
+    }
+ ],
+ "reservations": [
     {
-        "id_categorie": "006",
-        "nom": "Jeux de mains",
-        "description": "Jeux de vilains"
-    },
+        "id_reservation": 254,
+        "demandeur": "celui qui veut jouer",
+        "participant": "un pote",
+        "validation": "true",
+        "date_reservation": "15/15/15",
+        "date_evenement": "18/18/18",
+        "heure_debut": "12:15",
+        "duree": 251,
+        "description": "Je réserve une salle pour qu'on s'amuse"
+    }
+ ],
+ "contacts": [
     {
-        "id_demandecontact": "12010",
+        "id_demandecontact": 12010,
         "utilisateur": "Godefroy de Montmirail",
         "mail": "Godefroy-de-Montmirail@moyen-age.com",
         "message": "Sus aux sarasins !",
         "type_demande": "Je veux vous rejoindre"
-    },
+    }
+ ],
+ "salles": [
     {
-        "id_evenement": "3522",
+        "id_salle": 541,
+        "nom": "Salle de jeux",
+        "capacite": 15201,
+        "lieu": "Quelque part",
+        "acces_pmr": "true"
+    }
+ ],
+ "permissions": [
+    {
+        "id_permission": 2,
+        "statut": "administrateur",
+        "utilisateur": [2]
+    }
+ ],
+"events":[
+    {
+        "id_evenement": 3522,
         "nom": "Rassemblons-nous",
         "date_creation": "45/45/45",
         "date_début": "25/25/25",
@@ -52,61 +91,52 @@
         "organisateur": "Moi"
     },
     {
-        "id_reservation": "254",
-        "demandeur": "celui qui veut jouer",
-        "participant": "un pote",
-        "validation": "true",
-        "date_reservation": "15/15/15",
-        "date_evenement": "18/18/18",
-        "heure_debut": "12:15",
-        "duree": "251",
-        "description": "Je réserve une salle pour qu'on s'amuse"
+        "id_evenement": 3522,
+        "nom": "Rassemblons-nous",
+        "date_creation": "45/45/45",
+        "date_début": "25/25/25",
+        "date_fin": "36/36/36",
+        "description": "On se rejoint pour jouer ensemble",
+        "organisateur": "Moi"
+    }
+],
+"foreignKeys":[
+    {
+        "id_categorie": 6,
+        "nom": "Jeux de mains",
+        "description": "Jeux de vilains"
     },
     {
-        "id_salle": "541",
-        "nom": "Salle de jeux",
-        "capacite": "15201",
-        "lieu": "Quelque part",
-        "acces_pmr": "true"
+        "id_rdjsign": 2556,
+        "reservation": 521
     },
     {
-        "id_rdjsign": "2556",
-        "reservation": "521"
+        "utilisateurs_id_utilisateur": 225,
+        "evenements_id_evenement": 251
     },
     {
-        "utilisateurs_id_utilisateur": "225",
-        "evenements_id_evenement": "251"
+        "utilisateurs_id_utilisateur": 254,
+        "reservations_id_reservation": 25
     },
     {
-        "utilisateurs_id_utilisateur": "254",
-        "reservations_id_reservation": "25"
-    },
-    {
-        "id_coordonnees": "254",
-        "numero_rue": "21",
-        "rue": "la rue",
-        "complement_adresse": "je complète",
-        "cp": "62222",
-        "ville": "Là-bas"
-    },
-    {
-        "id_typedemande": "254",
+        "id_typedemande": 254,
         "nom_type": "nom du type"
     },
     {
-        "articles_id_article": "1254",
-        "categories_id_categorie": "1"
+        "articles_id_article": 1254,
+        "categories_id_categorie": 1
     },
     {
-        "reservations_id_reservation": "1",
-        "salles_id_salle": "25"
+        "reservations_id_reservation": 1,
+        "salles_id_salle": 25
     },
     {
-        "reservations_id_reservation": "22",
-        "categories_id_categorie": "225"
+        "reservations_id_reservation": 22,
+        "categories_id_categorie": 225
     },
     {
-        "categories_id_categorie": "125",
-    "evenements_id_evenement": "33"
+        "categories_id_categorie": 125,
+    "evenements_id_evenement": 33
     }
 ]
+}
