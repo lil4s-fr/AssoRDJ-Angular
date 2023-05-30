@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 // Import Angular material
 import {MatCardModule} from '@angular/material/card';
+import {MatButtonModule} from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -52,6 +53,7 @@ import { PersonalDataComponent } from './pages/personal-data/personal-data.compo
     BrowserModule,
     AppRoutingModule,
     MatCardModule,
+    MatButtonModule
     HttpClientModule
   ],
   providers: [],
