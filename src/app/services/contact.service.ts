@@ -10,37 +10,56 @@ import ContactRequest from '../models/contactRequest.model';
 })
 export class ContactService {
 
-
+  // Déclaration de l'URL vers notre API, pour ne pas avoir à la rappeller à chaque fois.
+  // Idéalement, on devrait la placer en tant que variable d'environnement.
   private apiUrl = 'http://localhost:3000';
 
   // Injection de la dépendence HttpClient
   constructor(private httpClient: HttpClient) { }
 
+  /**
+   * On demande à retourner une liste de contacts
+   * @returns URL complète de notre route API
+   */
   getContacts(): Observable<ContactRequest[]> {
-    // On demande à retourner une liste de films (Film étant notre interface)
-    // La partie entre parenthèse correspond à l'URL complète de notre route API
     return this.httpClient.get<ContactRequest[]>(`${this.apiUrl}/contacts`)
   }
 
-  // Idem ici mais pour récupérer un film en particulier
-  // Lorsqu'on appellera la méthode, on devra alors lui passer l'ID en argument
+  /**
+   * récupérer un contact en particulier
+   * Lorsqu'on appellera la méthode, on devra alors lui passer l'ID en argument
+   * @param id id contact
+   * @returns URL complète de notre route API
+   */
   getContact(id: number): Observable<ContactRequest> {
     return this.httpClient.get<ContactRequest>(`${this.apiUrl}/contacts/${id}`);
   }
 
-  // Et ensuite c'est pareil pour toutes les autres requêtes
+  /**
+   * création d'un contact
+   * @param contactRequest id contact
+   * @returns URL complète de notre route API
+   */
   createContact(contactRequest: ContactRequest): Observable<ContactRequest> {
     return this.httpClient.post<ContactRequest>(`${this.apiUrl}/contacts`, contactRequest);
   }
 
-  // attention au paramètre de l'URL ${film.id} celui-ci fait référence au paramètre de l'objet film déclaré comme argument de ma fonction 
+  /**
+   * attention au paramètre de l'URL ${contactRequest.id}
+   * celui-ci fait référence au paramètre de l'objet contact déclaré comme argument de ma fonction 
+   * @param contactRequest id contact
+   * @returns URL complète de notre route API
+   */
   updateContact(contactRequest: ContactRequest): Observable<ContactRequest> {
     return this.httpClient.put<ContactRequest>(`${this.apiUrl}/contacts/${contactRequest.id_demandecontact}`, contactRequest);
   }
 
+  /**
+   * destruction d'un contact
+   * @param id id contact
+   * @returns URL complète de notre route API
+   */
   deleteContact(id: number): Observable<ContactRequest> {
     return this.httpClient.delete<ContactRequest>(`${this.apiUrl}/contacts/${id}`);
-  }
-
-  
+  }  
 }
