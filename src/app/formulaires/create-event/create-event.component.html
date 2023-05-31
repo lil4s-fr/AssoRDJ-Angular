@@ -1,1 +1,39 @@
-<p>create-event works!</p>
+<div class="d-flex flex-column p-3">
+    <h1 class="d-flex justify-content-center">Créer un évènement</h1>
+    <p class="d-flex justify-content-center">Partagez les évènements avec les co-membres</p>
+</div>
+<div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
+    <h3 class="d-flex justify-content-center ">Date de l'évènement : </h3>
+    <div class="input-group input-group-lg p-3 ">
+            <input type="datetime-local"  class="form-control" >
+    </div>
+    <h3 class="d-flex justify-content-center ">Catégorie de jeux : </h3>
+    <div class="input-group input-group-lg p-3 ">
+            <select name="categorie" class="form-control">
+                <option>Choisi la categorie de jeu</option>
+                <option>Option 1</option>
+                <option>Option 2</option>
+            </select>
+    </div>
+    <h3 class="d-flex justify-content-center ">Lieu : </h3>
+    <div class="input-group input-group-lg p-3 ">
+            <select name="lieu" class="form-control">
+                <option>Choisi le lieu</option>
+                <option>Hébécrevon </option>
+                <option>Montcuq</option>
+            </select>
+    </div>
+    <h3 class="d-flex justify-content-center">Déscription de l'évènement : </h3>
+    <div class="input-group input-group-lg p-3">
+        <textarea class="form-control" name="descriptioon" ></textarea>
+    </div>
+
+    <div class="d-flex input-group input-group-lg p-5 ">
+        <div class="d-flex align-items-center p-2 flex-grow-1">
+            <input type="file" class="form-control">
+        </div>
+        <div class="d-flex justify-content-center p-2 flex-grow-1">
+                <button type="button" class="btn btn-primary btn-block btn-lg">Publier</button>
+        </div>
+    </div>
+</div>

@@ -1,1 +1,5 @@
 <app-lists [typeCard]="'events'"></app-lists>
+<app-buttons *ngIf="!addEvent" [value]="btnValide" (click)="onAddEvent($event)" class="button"></app-buttons>
+<ng-container *ngIf="addEvent">
+    <app-create-event></app-create-event>
+</ng-container>
