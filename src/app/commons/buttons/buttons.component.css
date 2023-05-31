@@ -1,14 +1,21 @@
 button {
-    display: inline-block;    
+    background-color: gray;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    height: 4em;
+    width: 8em;
+    border: 5px outset dark;
     border-radius: 10px;
-    border: 5px double #ccccccca;    
-    -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;
-    -o-transition: all 0.5s;
-    transition: all 0.5s;
+    font-size: 1.5em;
+    font-weight: bold;
     cursor: pointer;
-    margin: 5px;
-  }
+    color: dark;
+}
+
   button:hover {
     background-color: gray;
   }
+
