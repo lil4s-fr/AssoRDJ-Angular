@@ -35,17 +35,20 @@
         <textarea matInput placeholder="Description" [(ngModel)]="description" class="matinput"></textarea>
     </mat-form-field>
 
+<!--ce matériel angular fait planter les ngIf du composant parent
+    <mat-form-field>
+        <mat-label>Choisissez un fichier</mat-label>
+        <input matInput type="file" (change)="onFileSelected($event)">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="clearFileInput()">
+            <mat-icon>clear</mat-icon>
+        </button>
+    </mat-form-field>-->
     <div class="d-flex input-group input-group-lg p-5 ">
-        <!--
-        <mat-form-field>
-            <mat-label>Choisissez un fichier</mat-label>
-            <input matInput type="file" (change)="onFileSelected($event)">
-            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="clearFileInput()">
-              <mat-icon>clear</mat-icon>
-            </button>
-          </mat-form-field>-->
-          
-        <app-buttons [value]="btnValide" (click)="onAddEvent($event)" class="button"></app-buttons>
+        <div class="d-flex align-items-center p-2 flex-grow-1">
+            <input type="file" class="form-control" [(ngModel)]="selectedFile">
+        </div>
     </div>
-    
+        
+    <app-buttons [value]="btnValide" (click)="onAddEvent($event)" class="button"></app-buttons>
+
 </div>

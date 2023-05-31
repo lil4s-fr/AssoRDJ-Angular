@@ -12,7 +12,7 @@ export class CreateEventComponent {
   selectedGame: string = "";
   lieu: string = "";
   description: string = "";
-  selectedFile!: File | null;
+  selectedFile!: File;
 
   // je donne le nom au bouton
   btnValide: string = "Valider l'évènement";
@@ -34,26 +34,31 @@ export class CreateEventComponent {
    * @param e event du template
    */
   onAddEvent= (e: any) => {
+    if (this.selectedDate == null
+       || this.selectedGame == ""
+        || this.lieu == "") return;
     this.eventService.onAddEvent(
       this.selectedDate,
       this.selectedGame,
       this.lieu,
-      this.description
+      this.description,
+      this.selectedFile
     )
   } 
-
-  /**
+/**
+les méthodes sont associées au material angular du template qui pose problème
    * récupère le fichier sélectionné
    * @param event 
-   */
+   * 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
   }
 
   /**
    * Réinitialiser la sélection du fichier
-   */
+   *
   clearFileInput() {
     this.selectedFile = null;
   }
+*/
 }
