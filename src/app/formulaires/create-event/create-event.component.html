@@ -3,37 +3,49 @@
     <p class="d-flex justify-content-center">Partagez les évènements avec les co-membres</p>
 </div>
 <div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
-    <h3 class="d-flex justify-content-center ">Date de l'évènement : </h3>
-    <div class="input-group input-group-lg p-3 ">
-            <input type="datetime-local"  class="form-control" >
-    </div>
-    <h3 class="d-flex justify-content-center ">Catégorie de jeux : </h3>
-    <div class="input-group input-group-lg p-3 ">
-            <select name="categorie" class="form-control">
-                <option>Choisi la categorie de jeu</option>
-                <option>Option 1</option>
-                <option>Option 2</option>
-            </select>
-    </div>
-    <h3 class="d-flex justify-content-center ">Lieu : </h3>
-    <div class="input-group input-group-lg p-3 ">
-            <select name="lieu" class="form-control">
-                <option>Choisi le lieu</option>
-                <option>Hébécrevon </option>
-                <option>Montcuq</option>
-            </select>
-    </div>
-    <h3 class="d-flex justify-content-center">Déscription de l'évènement : </h3>
-    <div class="input-group input-group-lg p-3">
-        <textarea class="form-control" name="descriptioon" ></textarea>
-    </div>
+
+    <!-- selection date-->
+    <h3 class="groupe">Date de l'évènement : </h3>
+    <mat-form-field class="date">
+        <input matInput [matDatepicker]="picker" placeholder="Date de la réservation" [(ngModel)]="selectedDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+    <!-- catégorie de jeux-->
+    <h3>Catégorie de jeux :</h3>
+    <mat-form-field class="categorie">
+        <mat-label>Choisir la catégorie</mat-label>
+        <mat-select [(ngModel)]="selectedGame">
+          <mat-option *ngFor="let game of games" [value]="game.value">
+            {{ game.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    <!-- lieu-->
+    <h3>Lieu : </h3>
+    <mat-form-field >
+        <textarea matInput placeholder="Lieu" [(ngModel)]="lieu" class="matinput"></textarea>
+      </mat-form-field>  
+
+      <!-- description-->
+    <h3>Description de l'évènement : </h3>
+    <mat-form-field >
+        <textarea matInput placeholder="Description" [(ngModel)]="description" class="matinput"></textarea>
+    </mat-form-field>
 
     <div class="d-flex input-group input-group-lg p-5 ">
-        <div class="d-flex align-items-center p-2 flex-grow-1">
-            <input type="file" class="form-control">
-        </div>
-        <div class="d-flex justify-content-center p-2 flex-grow-1">
-                <button type="button" class="btn btn-primary btn-block btn-lg">Publier</button>
-        </div>
+        <!--
+        <mat-form-field>
+            <mat-label>Choisissez un fichier</mat-label>
+            <input matInput type="file" (change)="onFileSelected($event)">
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="clearFileInput()">
+              <mat-icon>clear</mat-icon>
+            </button>
+          </mat-form-field>-->
+          
+        <app-buttons [value]="btnValide" (click)="onAddEvent($event)" class="button"></app-buttons>
     </div>
+    
 </div>

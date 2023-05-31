@@ -61,4 +61,14 @@ export class EventService {
     return this.httpClient.delete<IdEvent>(`${this.apiUrl}/events/${id}`);
   }
 
+  /**
+   * crée un évènement en appelant la méthode createEvent
+   * @param date 
+   * @param categorie 
+   * @param lieu 
+   * @param description 
+   */
+  onAddEvent= (date: Date, categorie: string, lieu: string, description: string) => {
+    
+  } 
 }

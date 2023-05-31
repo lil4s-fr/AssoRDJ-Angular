@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./events.component.css']
 })
 export class EventsComponent implements OnInit{
-  addEvent: boolean = false;
+  addButton: boolean = false;
   // je donne le nom au bouton
   btnValide: string = "Créer un évènement";
 
@@ -15,7 +15,14 @@ export class EventsComponent implements OnInit{
   ngOnInit(): void {
       
   }
-  onAddEvent = (e: any) => {
-    this.addEvent = !this.addEvent;
+
+  /**
+   * change le statut du bouton pour le faire apparaître ou disparaître
+   * @param e event du template
+   */
+  onAddButton = (e: any) => {
+    this.addButton = !this.addButton;
   } 
+
+
 }
