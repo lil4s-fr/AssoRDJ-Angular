@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { EventService } from 'src/app/services/event.service';
 
 @Component({
   selector: 'app-create-event',
@@ -6,5 +7,53 @@ import { Component } from '@angular/core';
   styleUrls: ['./create-event.component.css']
 })
 export class CreateEventComponent {
+  // je récupère les infos des inputs
+  selectedDate: Date;
+  selectedGame: string = "";
+  lieu: string = "";
+  description: string = "";
+  selectedFile!: File | null;
 
+  // je donne le nom au bouton
+  btnValide: string = "Valider l'évènement";
+
+  constructor(private eventService: EventService){
+    this.selectedDate = new Date();
+  }
+
+  // Liste de jeux à récupérer de la bdd
+  games = [
+    { label: 'Game 1', value: 'game1' },
+    { label: 'Game 2', value: 'game2' },
+    { label: 'Game 3', value: 'game3' },
+    { label: 'Game 4', value: 'game4' }
+  ];  
+
+  /**
+   * envoie les éléments de l'évènement vers le service
+   * @param e event du template
+   */
+  onAddEvent= (e: any) => {
+    this.eventService.onAddEvent(
+      this.selectedDate,
+      this.selectedGame,
+      this.lieu,
+      this.description
+    )
+  } 
+
+  /**
+   * récupère le fichier sélectionné
+   * @param event 
+   */
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
+  /**
+   * Réinitialiser la sélection du fichier
+   */
+  clearFileInput() {
+    this.selectedFile = null;
+  }
 }
