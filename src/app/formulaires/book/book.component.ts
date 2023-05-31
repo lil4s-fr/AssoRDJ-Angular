@@ -7,14 +7,18 @@ import { ReservationService } from 'src/app/services/reservation.service';
   styleUrls: ['./book.component.css']
 })
 export class BookComponent {
-  // je récupère la salle sélectionnée et le tableau de participants
-  selectedRooms!: string;
+  // je récupère la date, la salle sélectionnée et le tableau de participants
+  selectedDate: Date;
+  selectedRooms: string = "";
   selectedParticipants: string[] = [];
+  descriptionReservation: string = "";
 
   // je donne le nom au bouton
   btnValide: string = "Valider la réservation";
 
-  constructor(private reservationService: ReservationService){}
+  constructor(private reservationService: ReservationService){
+    this.selectedDate = new Date();
+  }
 
   // Liste de salle à récupérer de la bdd
   rooms = [
@@ -34,6 +38,7 @@ export class BookComponent {
 
   onAddBook = (e: any) => {
     // appelle la fonction de compte service pour provoquer l'ajout des points
-    this.reservationService.onAddBook();  
+    if (this.selectedRooms == "" || this.selectedDate == null) return;
+    this.reservationService.onAddBook(this.selectedDate, this.selectedRooms, this.selectedParticipants, this.descriptionReservation);  
   } 
 }

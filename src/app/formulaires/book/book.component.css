@@ -9,6 +9,17 @@ h1 {
     justify-content: center;
 }
 
-.date, .salle, .participant {
+.date, .salle, .participant, .description{
     margin: 50px;
+}
+
+.description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.matinput {
+    width: 100%;
+    resize: vertical;
 }

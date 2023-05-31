@@ -2,7 +2,7 @@
 <div class="groupe">
     <!-- selection date-->
     <mat-form-field class="date">
-    <input matInput [matDatepicker]="picker" placeholder="Date de la réservation">
+    <input matInput [matDatepicker]="picker" placeholder="Date de la réservation" [(ngModel)]="selectedDate">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
    </mat-form-field>
@@ -26,6 +26,12 @@
         </mat-option>
       </mat-select>
   </mat-form-field>
+</div>
+<div class="description">
+  <!--description de la réservation-->
+  <mat-form-field >
+    <textarea matInput placeholder="Description" [(ngModel)]="descriptionReservation" class="matinput"></textarea>
+  </mat-form-field>  
 </div>
 <app-buttons [value]="btnValide" (click)="onAddBook($event)"></app-buttons>
 
