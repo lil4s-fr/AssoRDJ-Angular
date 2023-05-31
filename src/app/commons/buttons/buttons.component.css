@@ -14,3 +14,8 @@ button {
     cursor: pointer;
     color: dark;
 }
+
+  button:hover {
+    background-color: gray;
+  }
+
