@@ -67,8 +67,9 @@ export class EventService {
    * @param categorie 
    * @param lieu 
    * @param description 
+   * @param fichier
    */
-  onAddEvent= (date: Date, categorie: string, lieu: string, description: string) => {
+  onAddEvent= (date: Date, categorie: string, lieu: string, description: string, fichier: File) => {
     
   } 
 }
