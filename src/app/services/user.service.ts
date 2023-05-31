@@ -67,4 +67,6 @@ export class UserService {
   deleteUser(id: number): Observable<User> {
     return this.httpClient.delete<User>(`${this.apiUrl}/users/${id}`);
   }
+
+  connexion = (email: string, password: string):void => {}
 }
