@@ -63,4 +63,6 @@ export class ArticleService {
   deleteArticle(id: number): Observable<Article> {
     return this.httpClient.delete<Article>(`${this.apiUrl}/articles/${id}`);
   }
+
+  onAddArticle(game: string, title: string, corpsArticle: string): void { }
 }
