@@ -2,11 +2,22 @@
 <div class="groupe">
     <!-- selection date-->
     <mat-form-field class="date">
-    <input matInput [matDatepicker]="picker" placeholder="Date de la réservation" [(ngModel)]="selectedDate">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-   </mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Date de la réservation" [(ngModel)]="selectedDate">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
 
+   <!-- heure de début de la réservation-->
+   <mat-form-field class="heure">
+    <mat-label>Choisir une heure de début</mat-label>
+    <mat-select [(ngModel)]="selectedTime">
+      <mat-option *ngFor="let time of times" [value]="time.value">
+        {{ time.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  
    <!-- choix salle-->
    <mat-form-field class="salle">
     <mat-label>Choisir une salle</mat-label>

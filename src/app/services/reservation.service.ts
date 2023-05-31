@@ -64,7 +64,7 @@ export class ReservationService {
   }
 
 // méthode à renseigner pour ajouter une réservation à la bdd
-  onAddBook = (date: Date, salle: string, participants: string[], description: string): void => {
+  onAddBook = (date: Date, heure: string, salle: string, participants: string[], description: string): void => {
 
   }
 }
