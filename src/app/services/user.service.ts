@@ -10,14 +10,14 @@ import User from '../models/utilisateur.model';
 })
 export class UserService {
 // valeurs en dur pour le codage en attendant le lien dans la base de données
-  nom: string = "Dias";
-  prenom: string = "Antoine";
-  adresse: string = "Rue de l'espérance 59144 Dunkerque";
-  numeroAsso: number = 123654;
+  nom: string = "";
+  prenom: string = "";
+  adresse: string = "";
+  numeroAsso: number = 0;
 
   // Déclaration de l'URL vers notre API, pour ne pas avoir à la rappeller à chaque fois.
   // Idéalement, on devrait la placer en tant que variable d'environnement.
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'http://localhost:8080';
 
   // Injection de la dépendence HttpClient
   constructor(private httpClient: HttpClient) { }
@@ -56,7 +56,7 @@ export class UserService {
    * @returns URL complète de notre route API
    */
   updateUser(user: User): Observable<User> {
-    return this.httpClient.put<User>(`${this.apiUrl}/users/${user.numero_adherent}`, user);
+    return this.httpClient.put<User>(`${this.apiUrl}/users/${user.numeroAdherent}`, user);
   }
 
   /**

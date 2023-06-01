@@ -4,6 +4,5 @@ export default interface Coordonnee{
     rue: string,
     complementAdresse: string,
     codePostal: number,
-    ville: string,
-    numeroTelephone: string
+    ville: string
 }

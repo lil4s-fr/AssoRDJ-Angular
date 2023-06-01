@@ -11,7 +11,7 @@ import Reservation from '../models/reservation.model';
 export class ReservationService {
   // Déclaration de l'URL vers notre API, pour ne pas avoir à la rappeller à chaque fois.
   // Idéalement, on devrait la placer en tant que variable d'environnement.
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'http://localhost:8080';
 
   // Injection de la dépendence HttpClient
   constructor(private httpClient: HttpClient) { }
@@ -51,7 +51,7 @@ export class ReservationService {
    * @returns URL complète de notre route API
    */
   updateReservation(reservation: Reservation): Observable<Reservation> {
-    return this.httpClient.put<Reservation>(`${this.apiUrl}/reservations/${reservation.id_reservation}`, reservation);
+    return this.httpClient.put<Reservation>(`${this.apiUrl}/reservations/${reservation.id}`, reservation);
   }
 
   /**

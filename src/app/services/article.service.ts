@@ -52,7 +52,7 @@ export class ArticleService {
    * @returns lien vers l'API
    */
   updateArticle(article: Article): Observable<Article> {
-    return this.httpClient.put<Article>(`${this.apiUrl}/artciles/${article.id_article}`, article);
+    return this.httpClient.put<Article>(`${this.apiUrl}/artciles/${article.id}`, article);
   }
 
   /**

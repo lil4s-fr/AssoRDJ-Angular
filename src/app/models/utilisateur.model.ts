@@ -1,6 +1,5 @@
 import Categorie from "./categorie.model"
 import Coordonnee from "./coordonnee.model"
-import Permission from "./permission.model"
 
 export default interface Utilisateur{
     id: number,
@@ -8,8 +7,8 @@ export default interface Utilisateur{
     prenom: string,
     numeroAdherent: number,
     pseudo: string,
-    motDePasse: string,
+    email: string,
+    hashMotDePasse: string,
     coordonnees: Coordonnee[],
-    permission: Permission,
     categories: Categorie[]
 }
