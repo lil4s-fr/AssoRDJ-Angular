@@ -1,4 +1,4 @@
-<app-lists [typeCard]="'articles'"></app-lists>
+<app-lists [articles]="articles"></app-lists>
 <ng-container *ngIf="!seeButton">
     <app-buttons [value]="btnValide" (click)="onAddNewEvent($event)" class="button"></app-buttons>
 

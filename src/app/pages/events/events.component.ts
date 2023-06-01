@@ -14,7 +14,7 @@ export class EventsComponent implements OnInit{
   btnValide: string = "Créer un évènement";
 
   // liste d'évènements
-  events: Evenement[] = [];
+  events: Evenement [] = [];
   
   constructor(private eventService: EventService){}
 
