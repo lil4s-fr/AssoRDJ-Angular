@@ -1,5 +1,7 @@
+import Utilisateur from "./utilisateur.model";
+
 export default interface Permission{
-    id_permission: number,
-    statut: string,
-    utilisateur: number[],
+    id: number,    
+    utilisateurs: Utilisateur[],
+    statut: string
 }

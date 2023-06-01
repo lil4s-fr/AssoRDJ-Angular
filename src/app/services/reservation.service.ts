@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 //import du modèle de reservation
-import Reservation from '../models/idReservation.model';
+import Reservation from '../models/reservation.model';
 
 @Injectable({
   providedIn: 'root'

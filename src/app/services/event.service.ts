@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 // Impot du modele event
-import IdEvent from '../models/idEvent.model';
+import IdEvent from '../models/evenement.model';
 
 @Injectable({
   providedIn: 'root'

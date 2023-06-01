@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 //import du modèle coordonnee
-import Coordonnees from '../models/coordonnees.model';
+import Coordonnees from '../models/coordonnee.model';
 
 @Injectable({
   providedIn: 'root'

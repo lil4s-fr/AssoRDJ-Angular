@@ -1,9 +1,13 @@
+import Categorie from "./categorie.model";
+import Utilisateur from "./utilisateur.model";
+
 export default interface Article{
-    id_article: number,
+    id: number,
+    categories: Categorie[],
+    utilisateurs: Utilisateur[],
     titre: string,
-    corp: string,
+    corps: string,
     date_ecriture: string,
     date_modif: string,
-    like_dislike: number,
-    utilisateur: number
+    like_dislike: string    
 }
