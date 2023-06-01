@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 // Impot du modele event
-import IdEvent from '../models/idEvent.model';
+import IdEvent from '../models/evenement.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ import IdEvent from '../models/idEvent.model';
 export class EventService {
   // Déclaration de l'URL vers notre API, pour ne pas avoir à la rappeller à chaque fois.
   // Idéalement, on devrait la placer en tant que variable d'environnement.
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'http://localhost:8080';
 
   // Injection de la dépendence HttpClient
   constructor(private httpClient: HttpClient) { }
@@ -49,7 +49,7 @@ export class EventService {
    * @returns lien vers l'API
    */
   updateEvent(event: IdEvent): Observable<IdEvent> {
-    return this.httpClient.put<IdEvent>(`${this.apiUrl}/events/${event.id_evenement}`, event);
+    return this.httpClient.put<IdEvent>(`${this.apiUrl}/events/${event.id}`, event);
   }
 
   /**

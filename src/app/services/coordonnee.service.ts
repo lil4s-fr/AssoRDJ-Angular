@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 //import du modèle coordonnee
-import Coordonnees from '../models/coordonnees.model';
+import Coordonnees from '../models/coordonnee.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ import Coordonnees from '../models/coordonnees.model';
 export class CoordonneeService {
   // Déclaration de l'URL vers notre API, pour ne pas avoir à la rappeller à chaque fois.
   // Idéalement, on devrait la placer en tant que variable d'environnement.
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'http://localhost:8080';
 
   // Injection de la dépendence HttpClient
   constructor(private httpClient: HttpClient) { }
@@ -50,7 +50,7 @@ export class CoordonneeService {
    * @returns URL complète de notre route API
    */
   updateCoordonnee(coordonnee: Coordonnees): Observable<Coordonnees> {
-    return this.httpClient.put<Coordonnees>(`${this.apiUrl}/coordonnees/${coordonnee.id_coordonnees}`, coordonnee);
+    return this.httpClient.put<Coordonnees>(`${this.apiUrl}/coordonnees/${coordonnee.id}`, coordonnee);
   }
 
   /**

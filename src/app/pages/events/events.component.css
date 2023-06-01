@@ -1,3 +1,14 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    justify-content: space-around;
+    width: auto;
+  
+  }
+  
 .button {
     margin: 50px;
 }

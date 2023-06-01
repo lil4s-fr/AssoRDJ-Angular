@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 //import du modèle commentaire
-import Comment from '../models/comment.model';
+import Comment from '../models/commentaire.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class CommentaireService {
 
   // Déclaration de l'URL vers notre API, pour ne pas avoir à la rappeller à chaque fois.
   // Idéalement, on devrait la placer en tant que variable d'environnement.
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'http://localhost:8080';
 
   // Injection de la dépendence HttpClient
   constructor(private httpClient: HttpClient) { }
@@ -51,7 +51,7 @@ export class CommentaireService {
    * @returns URL complète de notre route API
    */
   updateComment(comment: Comment): Observable<Comment> {
-    return this.httpClient.put<Comment>(`${this.apiUrl}/comments/${comment.id_commentaire}`, comment);
+    return this.httpClient.put<Comment>(`${this.apiUrl}/comments/${comment.id}`, comment);
   }
 
   /**

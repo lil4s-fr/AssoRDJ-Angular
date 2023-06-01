@@ -13,7 +13,7 @@ export class ArticleService {
 
   // Déclaration de l'URL vers notre API, pour ne pas avoir à la rappeller à chaque fois.
   // Idéalement, on devrait la placer en tant que variable d'environnement.
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'http://localhost:8080';
 
   // Injection de la dépendence HttpClient
   constructor(private httpClient: HttpClient) { }
@@ -52,7 +52,7 @@ export class ArticleService {
    * @returns lien vers l'API
    */
   updateArticle(article: Article): Observable<Article> {
-    return this.httpClient.put<Article>(`${this.apiUrl}/artciles/${article.id_article}`, article);
+    return this.httpClient.put<Article>(`${this.apiUrl}/artciles/${article.id}`, article);
   }
 
   /**
