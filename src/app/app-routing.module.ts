@@ -25,6 +25,9 @@ const routes: Routes = [
   {path: 'createArticle', component: CreateArticleComponent},
   {path: 'createEvent', component: CreateEventComponent},
   {path: 'joinEvent', component: JoinEventComponent},
+  // a retirr quand la page 404 sera finie
+  {path: '404', component: NotFoundComponent},
+
   {path: '**', component: NotFoundComponent},
 ];
 
