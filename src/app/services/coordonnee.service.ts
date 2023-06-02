@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 //import du modèle coordonnee
@@ -13,6 +13,13 @@ export class CoordonneeService {
   // Idéalement, on devrait la placer en tant que variable d'environnement.
   private apiUrl = 'http://localhost:8080';
 
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    })
+  };
+
   // Injection de la dépendence HttpClient
   constructor(private httpClient: HttpClient) { }
 
@@ -21,7 +28,7 @@ export class CoordonneeService {
    * @returns URL complète de notre route API
    */
   getCoordonnees(): Observable<Coordonnees[]> {
-    return this.httpClient.get<Coordonnees[]>(`${this.apiUrl}/coordonnees`)
+    return this.httpClient.get<Coordonnees[]>(`${this.apiUrl}/coordonnees`, this.httpOptions)
   }
 
   /**
@@ -31,7 +38,7 @@ export class CoordonneeService {
    * @returns URL complète de notre route API
    */
   getCoordonnee(id: number): Observable<Coordonnees> {
-    return this.httpClient.get<Coordonnees>(`${this.apiUrl}/coordonnees/${id}`);
+    return this.httpClient.get<Coordonnees>(`${this.apiUrl}/coordonnees/${id}`, this.httpOptions);
   }
 
   /**
@@ -40,7 +47,7 @@ export class CoordonneeService {
    * @returns URL complète de notre route API
    */
   createCoordonnee(coordonnee: Coordonnees): Observable<Coordonnees> {
-    return this.httpClient.post<Coordonnees>(`${this.apiUrl}/coordonnees`, coordonnee);
+    return this.httpClient.post<Coordonnees>(`${this.apiUrl}/coordonnees`, coordonnee, this.httpOptions);
   }
 
   /**
@@ -50,7 +57,7 @@ export class CoordonneeService {
    * @returns URL complète de notre route API
    */
   updateCoordonnee(coordonnee: Coordonnees): Observable<Coordonnees> {
-    return this.httpClient.put<Coordonnees>(`${this.apiUrl}/coordonnees/${coordonnee.id}`, coordonnee);
+    return this.httpClient.put<Coordonnees>(`${this.apiUrl}/coordonnees/${coordonnee.id}`, coordonnee, this.httpOptions);
   }
 
   /**
@@ -59,6 +66,6 @@ export class CoordonneeService {
    * @returns URL complète de notre route API
    */
   deleteCoordonnee(id: number): Observable<Coordonnees> {
-    return this.httpClient.delete<Coordonnees>(`${this.apiUrl}/coordonnees/${id}`);
+    return this.httpClient.delete<Coordonnees>(`${this.apiUrl}/coordonnees/${id}`, this.httpOptions);
   }
 }
