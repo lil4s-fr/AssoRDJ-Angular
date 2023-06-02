@@ -1,2 +1,7 @@
-<p>not-found works!</p>
-<!-- Modification -->
+<div class="container">
+    <img [src]="imagePath" alt="Ma super image">
+    <h1>Nous revenons quand vous aurez fait 24 !</h1>
+    <app-buttons [value]="btnValide" (click)="generateDiceValues()"></app-buttons>
+    <h1>Vous obtenez : {{ totalDices }}</h1>
+</div>
+

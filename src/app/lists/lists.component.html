@@ -1,0 +1,15 @@
+<div *ngIf="events">
+    <ul *ngFor="let event of events">
+        <li>
+            <app-event-card [event]="event"></app-event-card>
+        </li>
+    </ul>
+</div>
+
+<div *ngIf="articles">
+    <ul *ngFor="let article of articles">
+        <li>
+            <app-article-card [article]="article"></app-article-card>
+        </li>
+    </ul>
+</div>

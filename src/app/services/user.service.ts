@@ -1,0 +1,79 @@
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+//import du modele user
+import User from '../models/utilisateur.model';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UserService {
+// valeurs en dur pour le codage en attendant le lien dans la base de données
+  nom: string = "";
+  prenom: string = "";
+  adresse: string = "";
+  numeroAsso: number = 0;
+
+  // Déclaration de l'URL vers notre API, pour ne pas avoir à la rappeller à chaque fois.
+  // Idéalement, on devrait la placer en tant que variable d'environnement.
+  private apiUrl = 'http://localhost:8080';
+
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    })
+  };
+
+  // Injection de la dépendence HttpClient
+  constructor(private httpClient: HttpClient) { }
+
+  /**
+   * On demande à retourner une liste d'utilisateurs
+   * @returns URL complète de notre route API
+   */
+  getUsers(): Observable<User[]> {
+    return this.httpClient.get<User[]>(`${this.apiUrl}/users`, this.httpOptions)
+  }
+
+  /**
+   * récupérer un utilisateur en particulier
+   * Lorsqu'on appellera la méthode, on devra alors lui passer l'ID en argument
+   * @param id id user
+   * @returns URL complète de notre route API
+   */
+  getUser(id: number): Observable<User> {
+    return this.httpClient.get<User>(`${this.apiUrl}/users/${id}`, this.httpOptions);
+  }
+
+  /**
+   * création d'un utilisateur
+   * @param user id user
+   * @returns URL complète de notre route API
+   */
+  createUser(user: User): Observable<User> {
+    return this.httpClient.post<User>(`${this.apiUrl}/users`, user, this.httpOptions);
+  }
+
+  /**
+   * attention au paramètre de l'URL ${user.id}
+   * celui-ci fait référence au paramètre de l'objet user déclaré comme argument de ma fonction 
+   * @param user id user
+   * @returns URL complète de notre route API
+   */
+  updateUser(user: User): Observable<User> {
+    return this.httpClient.put<User>(`${this.apiUrl}/users/${user.numeroAdherent}`, user, this.httpOptions);
+  }
+
+  /**
+   * suppression d'un utilisateur
+   * @param id id user
+   * @returns URL complète de notre route API
+   */
+  deleteUser(id: number): Observable<User> {
+    return this.httpClient.delete<User>(`${this.apiUrl}/users/${id}`, this.httpOptions);
+  }
+
+  connexion = (email: string, password: string):void => {}
+}
