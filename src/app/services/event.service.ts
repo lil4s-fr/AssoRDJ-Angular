@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 // Impot du modele event
@@ -13,6 +13,13 @@ export class EventService {
   // Idéalement, on devrait la placer en tant que variable d'environnement.
   private apiUrl = 'http://localhost:8080';
 
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    })
+  };
+
   // Injection de la dépendence HttpClient
   constructor(private httpClient: HttpClient) { }
 
@@ -21,7 +28,7 @@ export class EventService {
    * @returns La partie entre parenthèse correspond à l'URL complète de notre route API
    */
   getEvents(): Observable<IdEvent[]> {
-    return this.httpClient.get<IdEvent[]>(`${this.apiUrl}/events`)
+    return this.httpClient.get<IdEvent[]>(`${this.apiUrl}/evenements`, this.httpOptions)
   }
 
   /**
@@ -30,7 +37,7 @@ export class EventService {
    * @returns lien vers l'API
    */
   getEvent(id: number): Observable<IdEvent> {
-    return this.httpClient.get<IdEvent>(`${this.apiUrl}/events/${id}`);
+    return this.httpClient.get<IdEvent>(`${this.apiUrl}/evenements/${id}`, this.httpOptions);
   }
 
   /**
@@ -39,7 +46,7 @@ export class EventService {
    * @returns lien vers l'API
    */
   createEvent(event: IdEvent): Observable<IdEvent> {
-    return this.httpClient.post<IdEvent>(`${this.apiUrl}/events`, event);
+    return this.httpClient.post<IdEvent>(`${this.apiUrl}/evenements`, event, this.httpOptions);
   }
 
   /**
@@ -49,7 +56,7 @@ export class EventService {
    * @returns lien vers l'API
    */
   updateEvent(event: IdEvent): Observable<IdEvent> {
-    return this.httpClient.put<IdEvent>(`${this.apiUrl}/events/${event.id}`, event);
+    return this.httpClient.put<IdEvent>(`${this.apiUrl}/evenements/${event.id}`, event, this.httpOptions);
   }
 
   /**
@@ -58,7 +65,7 @@ export class EventService {
    * @returns lien vers l'API
    */
   deleteEvent(id: number): Observable<IdEvent> {
-    return this.httpClient.delete<IdEvent>(`${this.apiUrl}/events/${id}`);
+    return this.httpClient.delete<IdEvent>(`${this.apiUrl}/evenements/${id}`, this.httpOptions);
   }
 
   /**

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 //import du modèle de reservation
@@ -13,6 +13,13 @@ export class ReservationService {
   // Idéalement, on devrait la placer en tant que variable d'environnement.
   private apiUrl = 'http://localhost:8080';
 
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    })
+  };
+
   // Injection de la dépendence HttpClient
   constructor(private httpClient: HttpClient) { }
 
@@ -21,7 +28,7 @@ export class ReservationService {
    * @returns URL complète de notre route API
    */
   getReservations(): Observable<Reservation[]> {
-    return this.httpClient.get<Reservation[]>(`${this.apiUrl}/reservations`)
+    return this.httpClient.get<Reservation[]>(`${this.apiUrl}/reservations`, this.httpOptions)
   }
 
   /**
@@ -31,7 +38,7 @@ export class ReservationService {
    * @returns URL complète de notre route API
    */
   getReservation(id: number): Observable<Reservation> {
-    return this.httpClient.get<Reservation>(`${this.apiUrl}/reservations/${id}`);
+    return this.httpClient.get<Reservation>(`${this.apiUrl}/reservations/${id}`, this.httpOptions);
   }
 
   /**
@@ -40,7 +47,7 @@ export class ReservationService {
    * @returns URL complète de notre route API
    */
   createReservation(reservation: Reservation): Observable<Reservation> {
-    return this.httpClient.post<Reservation>(`${this.apiUrl}/reservations`, reservation);
+    return this.httpClient.post<Reservation>(`${this.apiUrl}/reservations`, reservation, this.httpOptions);
   }
 
   // 
@@ -51,7 +58,7 @@ export class ReservationService {
    * @returns URL complète de notre route API
    */
   updateReservation(reservation: Reservation): Observable<Reservation> {
-    return this.httpClient.put<Reservation>(`${this.apiUrl}/reservations/${reservation.id}`, reservation);
+    return this.httpClient.put<Reservation>(`${this.apiUrl}/reservations/${reservation.id}`, reservation, this.httpOptions);
   }
 
   /**
@@ -60,7 +67,7 @@ export class ReservationService {
    * @returns URL complète de notre route API
    */
   deleteReservation(id: number): Observable<Reservation> {
-    return this.httpClient.delete<Reservation>(`${this.apiUrl}/reservations/${id}`);
+    return this.httpClient.delete<Reservation>(`${this.apiUrl}/reservations/${id}`, this.httpOptions);
   }
 
 // méthode à renseigner pour ajouter une réservation à la bdd

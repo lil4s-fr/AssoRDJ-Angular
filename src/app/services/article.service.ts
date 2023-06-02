@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 //import du modele article
@@ -15,6 +15,13 @@ export class ArticleService {
   // Idéalement, on devrait la placer en tant que variable d'environnement.
   private apiUrl = 'http://localhost:8080';
 
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    })
+  };
+
   // Injection de la dépendence HttpClient
   constructor(private httpClient: HttpClient) { }
 
@@ -23,7 +30,7 @@ export class ArticleService {
    * @returns La partie entre parenthèse correspond à l'URL complète de notre route API
    */
   getArticles(): Observable<Article[]> {
-    return this.httpClient.get<Article[]>(`${this.apiUrl}/articles`)
+    return this.httpClient.get<Article[]>(`${this.apiUrl}/articles`, this.httpOptions)
   }
 
   /**
@@ -33,7 +40,7 @@ export class ArticleService {
    * @returns lien vers l'API
    */
   getArticle(id: number): Observable<Article> {
-    return this.httpClient.get<Article>(`${this.apiUrl}/articles/${id}`);
+    return this.httpClient.get<Article>(`${this.apiUrl}/articles/${id}`, this.httpOptions);
   }
 
   /**
@@ -42,7 +49,7 @@ export class ArticleService {
    * @returns lien vers l'API
    */
   createArticle(article: Article): Observable<Article> {
-    return this.httpClient.post<Article>(`${this.apiUrl}/articles`, article);
+    return this.httpClient.post<Article>(`${this.apiUrl}/articles`, article, this.httpOptions);
   }
 
   /**
@@ -52,7 +59,7 @@ export class ArticleService {
    * @returns lien vers l'API
    */
   updateArticle(article: Article): Observable<Article> {
-    return this.httpClient.put<Article>(`${this.apiUrl}/artciles/${article.id}`, article);
+    return this.httpClient.put<Article>(`${this.apiUrl}/artciles/${article.id}`, article, this.httpOptions);
   }
 
   /**
@@ -61,7 +68,7 @@ export class ArticleService {
    * @returns lien vers l'API
    */
   deleteArticle(id: number): Observable<Article> {
-    return this.httpClient.delete<Article>(`${this.apiUrl}/articles/${id}`);
+    return this.httpClient.delete<Article>(`${this.apiUrl}/articles/${id}`, this.httpOptions);
   }
 
   onAddArticle(game: string, title: string, corpsArticle: string): void { }

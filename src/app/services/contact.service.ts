@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 // import du modèle de contact 
@@ -14,6 +14,13 @@ export class ContactService {
   // Idéalement, on devrait la placer en tant que variable d'environnement.
   private apiUrl = 'http://localhost:8080';
 
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    })
+  };
+
   // Injection de la dépendence HttpClient
   constructor(private httpClient: HttpClient) { }
 
@@ -22,7 +29,7 @@ export class ContactService {
    * @returns URL complète de notre route API
    */
   getContacts(): Observable<ContactRequest[]> {
-    return this.httpClient.get<ContactRequest[]>(`${this.apiUrl}/contacts`)
+    return this.httpClient.get<ContactRequest[]>(`${this.apiUrl}/contacts`, this.httpOptions)
   }
 
   /**
@@ -32,7 +39,7 @@ export class ContactService {
    * @returns URL complète de notre route API
    */
   getContact(id: number): Observable<ContactRequest> {
-    return this.httpClient.get<ContactRequest>(`${this.apiUrl}/contacts/${id}`);
+    return this.httpClient.get<ContactRequest>(`${this.apiUrl}/contacts/${id}`, this.httpOptions);
   }
 
   /**
@@ -41,7 +48,7 @@ export class ContactService {
    * @returns URL complète de notre route API
    */
   createContact(contactRequest: ContactRequest): Observable<ContactRequest> {
-    return this.httpClient.post<ContactRequest>(`${this.apiUrl}/contacts`, contactRequest);
+    return this.httpClient.post<ContactRequest>(`${this.apiUrl}/contacts`, contactRequest, this.httpOptions);
   }
 
   /**
@@ -51,7 +58,7 @@ export class ContactService {
    * @returns URL complète de notre route API
    */
   updateContact(contactRequest: ContactRequest): Observable<ContactRequest> {
-    return this.httpClient.put<ContactRequest>(`${this.apiUrl}/contacts/${contactRequest.id}`, contactRequest);
+    return this.httpClient.put<ContactRequest>(`${this.apiUrl}/contacts/${contactRequest.id}`, contactRequest, this.httpOptions);
   }
 
   /**
@@ -60,6 +67,6 @@ export class ContactService {
    * @returns URL complète de notre route API
    */
   deleteContact(id: number): Observable<ContactRequest> {
-    return this.httpClient.delete<ContactRequest>(`${this.apiUrl}/contacts/${id}`);
+    return this.httpClient.delete<ContactRequest>(`${this.apiUrl}/contacts/${id}`, this.httpOptions);
   }  
 }
