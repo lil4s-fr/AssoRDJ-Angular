@@ -1,15 +1,15 @@
-<div *ngIf="typeCard === 'events'">
-    <ul *ngFor="let card of events">
+<div *ngIf="events">
+    <ul *ngFor="let event of events">
         <li>
-            <app-event-card [card]="card"></app-event-card>
+            <app-event-card [event]="event"></app-event-card>
         </li>
     </ul>
 </div>
 
-<div *ngIf="typeCard === 'articles'">
-    <ul *ngFor="let card of articles">
+<div *ngIf="articles">
+    <ul *ngFor="let article of articles">
         <li>
-            <app-event-card [card]="card"></app-event-card>
+            <app-article-card [article]="article"></app-article-card>
         </li>
     </ul>
 </div>

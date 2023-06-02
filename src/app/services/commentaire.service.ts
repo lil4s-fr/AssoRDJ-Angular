@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 //import du modèle commentaire
@@ -14,6 +14,13 @@ export class CommentaireService {
   // Idéalement, on devrait la placer en tant que variable d'environnement.
   private apiUrl = 'http://localhost:8080';
 
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    })
+  };
+
   // Injection de la dépendence HttpClient
   constructor(private httpClient: HttpClient) { }
 
@@ -22,7 +29,7 @@ export class CommentaireService {
    * @returns URL complète de notre route API
    */
   getComments(): Observable<Comment[]> {
-    return this.httpClient.get<Comment[]>(`${this.apiUrl}/comments`)
+    return this.httpClient.get<Comment[]>(`${this.apiUrl}/comments`, this.httpOptions)
   }
 
   /**
@@ -32,7 +39,7 @@ export class CommentaireService {
    * @returns URL complète de notre route API
    */
   getComment(id: number): Observable<Comment> {
-    return this.httpClient.get<Comment>(`${this.apiUrl}/comments/${id}`);
+    return this.httpClient.get<Comment>(`${this.apiUrl}/comments/${id}`, this.httpOptions);
   }
 
   /**
@@ -41,7 +48,7 @@ export class CommentaireService {
    * @returns URL complète de notre route API
    */
   createComment(comment: Comment): Observable<Comment> {
-    return this.httpClient.post<Comment>(`${this.apiUrl}/comments`, comment);
+    return this.httpClient.post<Comment>(`${this.apiUrl}/comments`, comment, this.httpOptions);
   }
 
   /**
@@ -51,7 +58,7 @@ export class CommentaireService {
    * @returns URL complète de notre route API
    */
   updateComment(comment: Comment): Observable<Comment> {
-    return this.httpClient.put<Comment>(`${this.apiUrl}/comments/${comment.id}`, comment);
+    return this.httpClient.put<Comment>(`${this.apiUrl}/comments/${comment.id}`, comment, this.httpOptions);
   }
 
   /**
@@ -60,6 +67,6 @@ export class CommentaireService {
    * @returns URL complète de notre route API
    */
   deleteComment(id: number): Observable<Comment> {
-    return this.httpClient.delete<Comment>(`${this.apiUrl}/comments/${id}`);
+    return this.httpClient.delete<Comment>(`${this.apiUrl}/comments/${id}`, this.httpOptions);
   }
 }
