@@ -14,7 +14,10 @@
     <mat-form-field >
         <textarea matInput formControlName="description" placeholder="Description" class="matinput"></textarea>
     </mat-form-field>
-        
+    
+    <div *ngIf="categorieValide">
+        <h3>La nouvelle catégorie est validée !</h3>
+    </div>
     <app-buttons [value]="btnValide" class="button"></app-buttons>
 </form>
 </div>

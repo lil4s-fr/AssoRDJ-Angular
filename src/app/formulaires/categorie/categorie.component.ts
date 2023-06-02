@@ -10,6 +10,9 @@ import { CategorieService } from 'src/app/services/categorie.service';
 })
 export class CategorieComponent implements OnInit{
 
+  // boolean pour affichage de la validation de la requelle
+  categorieValide: boolean = false;
+
   // je donne le nom au bouton
   btnValide: string = "Valider la catégorie";
 
@@ -49,8 +52,7 @@ export class CategorieComponent implements OnInit{
       // à l'utilisateur que le formulaire a bien été validé via un message
       this.categorieService.createCategorie(this.formValues.value).subscribe(
         (response:any) => {
-          //mettre un message ok à l'utilisateur
-          console.log(response);
+          this.categorieValide=true;
         },
         (error:any) => {
           //throw erreur
