@@ -8,7 +8,7 @@ import { CategorieService } from 'src/app/services/categorie.service';
 @Component({
   selector: 'app-categorie',
   templateUrl: './categorie.component.html',
-  styleUrls: ['./categorie.component.css']
+  styleUrls: ['./categorie.component.css'],
 })
 export class CategorieComponent implements OnInit{
 
@@ -70,6 +70,29 @@ export class CategorieComponent implements OnInit{
         }
       )
     }
-    
-  } 
+  }
+
+  onDeleteCategory(category: Categorie, e: Event) {// empeche de rafraichir la page au moment de la soumisson
+    e.preventDefault();
+    console.log(category.id);
+    const i = category.id;
+    const c = 4; //chiffre au hasard pour éviter une erreur pendant le debuggage ...
+    // je passe la variable submitted à true
+    this.submitted = true;
+    //  je vérifie si le formulaire est valide
+    if (this.formValues.valid) {
+      
+      // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
+      // à l'utilisateur que le formulaire a bien été validé via un message
+      this.categorieService.deleteCategorie(c).subscribe(
+        (response:any) => {
+          this.categorieValide=true;
+        },
+        (error:any) => {
+          //throw erreur
+          console.log(error);
+        }
+      )
+    }
+  }
 }
