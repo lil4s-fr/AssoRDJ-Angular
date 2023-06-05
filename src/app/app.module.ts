@@ -35,7 +35,8 @@ import { ButtonsComponent } from './commons/buttons/buttons.component';
 import { ListsComponent } from './lists/lists.component';
 import { FormulairesComponent } from './formulaires/formulaires.component';
 import { PersonalDataComponent } from './pages/personal-data/personal-data.component';
-import { CategorieComponent } from './formulaires/categorie/categorie.component';
+import { CategorieComponent } from './formulaires/create-category/categorie.component';
+import { CreateRoomComponent } from './formulaires/create-room/create-room.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { CategorieComponent } from './formulaires/categorie/categorie.component'
     ListsComponent,
     FormulairesComponent,
     PersonalDataComponent,
-    CategorieComponent
+    CategorieComponent,
+    CreateRoomComponent
   ],
   imports: [
     BrowserModule,

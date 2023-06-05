@@ -11,12 +11,14 @@ import { CreateEventComponent } from './formulaires/create-event/create-event.co
 import { JoinEventComponent } from './formulaires/join-event/join-event.component';
 import { NotFoundComponent } from './commons/not-found/not-found.component';
 import { PersonalDataComponent } from './pages/personal-data/personal-data.component';
-import { CategorieComponent } from './formulaires/categorie/categorie.component';
+import { CategorieComponent } from './formulaires/create-category/categorie.component';
+import { CreateRoomComponent } from './formulaires/create-room/create-room.component';
 
 const routes: Routes = [
   {path :'', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
   {path: 'category', component: CategorieComponent},
+  {path: 'room', component: CreateRoomComponent},
   {path: 'reservation', component: BookComponent},
   {path: 'infoPerso', component: PersonalDataComponent},
   {path: 'event', component: EventsComponent},
