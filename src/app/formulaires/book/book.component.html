@@ -16,14 +16,13 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-
   
    <!-- choix salle-->
    <mat-form-field class="salle">
     <mat-label>Choisir une salle</mat-label>
     <mat-select [(ngModel)]="selectedRooms">
-      <mat-option *ngFor="let room of rooms" [value]="room.value">
-        {{ room.label }}
+      <mat-option *ngFor="let salle of salles$ | async" [value]="salle.nom">
+        {{ salle.nom }}
       </mat-option>
     </mat-select>
   </mat-form-field>
