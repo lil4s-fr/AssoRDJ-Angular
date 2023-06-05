@@ -24,10 +24,10 @@
         </div>
         <div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
             <ul>
-                <li *ngFor="let salle of salleList | async; let i=index">{{salle.nom}}
+                <li *ngFor="let salle of salleList$ | async; let i=index">{{salle.nom}}
                     <div class="example-button-container">
-                        <form [formGroup]="formValues" (ngSubmit)="onDeleteSalle(salle,$event)">
-                            <div *ngIf="salleValide">
+                        <form [formGroup]="formValues" (ngSubmit)="onDeleteSalle($event)">
+                            <div *ngIf="salleDeleted">
                                 <h3>La catégorie est supprimée !</h3>
                             </div>
                             <button mat-icon-button style="color: red; font-size: 20px;">

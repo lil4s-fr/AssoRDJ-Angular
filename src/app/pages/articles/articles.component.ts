@@ -9,7 +9,7 @@ import { ArticleService } from 'src/app/services/article.service';
 })
 export class ArticlesComponent implements OnInit{
   seeButton!: boolean;
-  addNewEvent!: boolean;
+  addNewArticle!: boolean;
   // je donne le nom au bouton
   btnValide: string = "Créer un article";
 
@@ -20,7 +20,7 @@ export class ArticlesComponent implements OnInit{
 
   ngOnInit(): void {
       this.seeButton = false;
-      this.addNewEvent = false;
+      this.addNewArticle = false;
       this.articleService.getArticles().subscribe((articles) => {
         this.articles = articles;
       })
@@ -30,8 +30,8 @@ export class ArticlesComponent implements OnInit{
    * change le statut du bouton pour le faire apparaître ou disparaître
    * @param e event du template
    */
-  onAddNewEvent = (e: any) => {
-    this.addNewEvent = !this.addNewEvent;
+  onAddNewArticle = (e: any) => {
+    this.addNewArticle = !this.addNewArticle;
     this.seeButton = !this.seeButton;
   } 
 }

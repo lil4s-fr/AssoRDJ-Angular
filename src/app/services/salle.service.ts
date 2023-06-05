@@ -60,7 +60,7 @@ export class SalleService {
    * @returns lien vers l'API
    */
   createSalle(salle: Salle): Observable<Salle> {    
-    return this.http.post<Salle>(`${this.apiUrl}/salles`, salle).pipe(catchError(this.handleError));
+    return this.http.post<Salle>(`${this.apiUrl}/salles`, salle).pipe(catchError(this.handleError)).pipe(catchError(this.handleError));
   }
 
 
@@ -80,7 +80,7 @@ export class SalleService {
    * @returns lien vers l'API
    */
   deleteSalle(id: number): Observable<Salle> {
-    return this.http.delete<Salle>(`${this.apiUrl}/salles/${id}`, this.httpOptions);
+    return this.http.delete<Salle>(`${this.apiUrl}/salles/${id}`, this.httpOptions).pipe(catchError(this.handleError));
   }
  
 }

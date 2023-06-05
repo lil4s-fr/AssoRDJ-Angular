@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs/internal/Observable';
+import { Observable } from 'rxjs';
 import Categorie from 'src/app/models/categorie.model';
 import { CategorieService } from 'src/app/services/categorie.service';
 
@@ -28,7 +28,7 @@ export class CategorieComponent implements OnInit{
   formValidated: boolean = false;
 
   // je crée une liste de catégories pour l'afficher
-  categoryList!: Observable<Categorie[]>;
+  categoryList$!: Observable<Categorie[]>;
 
   // je crée un constructeur qui prend en paramètre la déclaration d'une variable nommée formBuilder de type formBuilder
   constructor(
@@ -43,9 +43,10 @@ export class CategorieComponent implements OnInit{
       this.submitted=false;
     })
 
-    // j'initialise la liste des catégories en allant chercher dans le service
-    this.categoryList = this.categorieService.getCategories();
+    // j'initialise la liste des salles en allant chercher dans le service
+    this.categoryList$ = this.categorieService.getCategories();
   }
+
   /**
    * envoie les éléments de l'évènement vers le service au click
    */
@@ -71,12 +72,10 @@ export class CategorieComponent implements OnInit{
       )
     }
   }
-
+/**bugg avec category.id inexpliqué ...
   onDeleteCategory(category: Categorie, e: Event) {// empeche de rafraichir la page au moment de la soumisson
     e.preventDefault();
-    console.log(category.id);
-    const i = category.id;
-    const c = 4; //chiffre au hasard pour éviter une erreur pendant le debuggage ...
+
     // je passe la variable submitted à true
     this.submitted = true;
     //  je vérifie si le formulaire est valide
@@ -84,7 +83,7 @@ export class CategorieComponent implements OnInit{
       
       // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
       // à l'utilisateur que le formulaire a bien été validé via un message
-      this.categorieService.deleteCategorie(c).subscribe(
+      this.categorieService.deleteCategorie(category.id).subscribe(
         (response:any) => {
           this.categorieValide=true;
         },
@@ -94,5 +93,5 @@ export class CategorieComponent implements OnInit{
         }
       )
     }
-  }
+  } */
 }
