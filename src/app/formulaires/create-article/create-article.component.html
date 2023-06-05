@@ -9,8 +9,8 @@
     <mat-form-field class="categorie">
         <mat-label>Choisir la catégorie</mat-label>
         <mat-select [(ngModel)]="selectedGame">
-          <mat-option *ngFor="let game of games" [value]="game.value">
-            {{ game.label }}
+          <mat-option *ngFor="let categorie of categories$ | async" [value]="categorie.nom">
+            {{ categorie.nom }}
           </mat-option>
         </mat-select>
       </mat-form-field>

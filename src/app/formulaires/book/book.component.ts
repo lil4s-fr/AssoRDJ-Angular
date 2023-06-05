@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import Categorie from 'src/app/models/categorie.model';
+import { CategorieService } from 'src/app/services/categorie.service';
 import { ReservationService } from 'src/app/services/reservation.service';
 
 @Component({
@@ -11,13 +14,20 @@ export class BookComponent {
   selectedDate: Date;
   selectedTime: string = "";
   selectedRooms: string = "";
+  selectedGame: string = "";
   selectedParticipants: string[] = [];
   descriptionReservation: string = "";
 
+  // Liste de jeux à récupérer de la bdd
+  categories$: Observable<Categorie[]> =  this.categorieService.getCategories();
+  
   // je donne le nom au bouton
   btnValide: string = "Valider la réservation";
 
-  constructor(private reservationService: ReservationService){
+  constructor(
+    private reservationService: ReservationService,
+    private categorieService: CategorieService
+    ){
     this.selectedDate = new Date();
   }
 

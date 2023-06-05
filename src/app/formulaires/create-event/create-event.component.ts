@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import Categorie from 'src/app/models/categorie.model';
+import { CategorieService } from 'src/app/services/categorie.service';
 import { EventService } from 'src/app/services/event.service';
 
 @Component({
@@ -14,20 +17,18 @@ export class CreateEventComponent {
   description: string = "";
   selectedFile!: File;
 
+  // Liste de jeux à récupérer de la bdd
+  categories$: Observable<Categorie[]> =  this.categorieService.getCategories();
+
   // je donne le nom au bouton
   btnValide: string = "Valider l'évènement";
 
-  constructor(private eventService: EventService){
+  constructor(
+    private eventService: EventService,
+    private categorieService:  CategorieService
+    ){
     this.selectedDate = new Date();
   }
-
-  // Liste de jeux à récupérer de la bdd
-  games = [
-    { label: 'Game 1', value: 'game1' },
-    { label: 'Game 2', value: 'game2' },
-    { label: 'Game 3', value: 'game3' },
-    { label: 'Game 4', value: 'game4' }
-  ];  
 
   /**
    * envoie les éléments de l'évènement vers le service

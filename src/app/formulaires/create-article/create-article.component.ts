@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import Categorie from 'src/app/models/categorie.model';
 import { ArticleService } from 'src/app/services/article.service';
+import { CategorieService } from 'src/app/services/categorie.service';
 
 @Component({
   selector: 'app-create-article',
@@ -12,20 +15,18 @@ export class CreateArticleComponent {
   title: string = "";
   corpsArticle: string = "";
 
+  //je récupère la liste des catégories
+  categories$: Observable<Categorie[]> =  this.categorieService.getCategories();
+
   // je donne le nom au bouton
   btnValide: string = "Valider l'article";
 
-  constructor(private articleService: ArticleService){
+  constructor(
+    private articleService: ArticleService,
+    private categorieService: CategorieService
+    ){
 
   }
-
-  // Liste de jeux à récupérer de la bdd
-  games = [
-    { label: 'Game 1', value: 'game1' },
-    { label: 'Game 2', value: 'game2' },
-    { label: 'Game 3', value: 'game3' },
-    { label: 'Game 4', value: 'game4' }
-  ];  
 
   /**
    * envoie les éléments de l'évènement vers le service
