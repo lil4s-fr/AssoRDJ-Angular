@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs/internal/Observable';
+import Categorie from 'src/app/models/categorie.model';
 import { CategorieService } from 'src/app/services/categorie.service';
 
 @Component({
@@ -25,9 +27,14 @@ export class CategorieComponent implements OnInit{
   submitted: boolean = false;
   formValidated: boolean = false;
 
-  // je crée un constructeur qui prend en paramètre la déclaration d'une variable nommée formBuilder de type formBuilder
+  // je crée une liste de catégories pour l'afficher
+  categoryList!: Observable<Categorie[]>;
 
-  constructor(private formBuilder: FormBuilder, private categorieService: CategorieService){
+  // je crée un constructeur qui prend en paramètre la déclaration d'une variable nommée formBuilder de type formBuilder
+  constructor(
+    private formBuilder: FormBuilder,
+    private categorieService: CategorieService
+    ){
   }
 
   ngOnInit() {
@@ -35,6 +42,9 @@ export class CategorieComponent implements OnInit{
     this.formValues.valueChanges.subscribe(()=> {
       this.submitted=false;
     })
+
+    // j'initialise la liste des catégories en allant chercher dans le service
+    this.categoryList = this.categorieService.getCategories();
   }
   /**
    * envoie les éléments de l'évènement vers le service au click
