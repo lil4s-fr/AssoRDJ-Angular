@@ -1,0 +1,20 @@
+<!--EVENT -->
+<div *ngFor="let event of events" class="mb-2"style="
+background-image: url(https://www.gundamplanet.com/media/catalog/product/cache/89806700f2f2fe9ae1d5c7ebaf942715/f/i/figure-rise-standard-amplified-blue-eyes-white-dragon-yu-gi-oh-t10th.jpg);
+background-repeat: no-repeat;
+background-size: cover;
+height: 25vh;
+border-radius: 10px;
+">
+    <div class="d-inline-flex flex-column justify-content-center align-items-start" style="
+    background-color: rgba(0, 0, 0, 0.75);
+    height: 25vh;
+    border-radius: 10px;
+    padding: 5px;
+    ">
+    <h4 class="mb-0">{{event.nom.substring(0, 15)}}</h4>
+    <p class="mb-1">{{event.dateDebut | date: 'dd/MM/yy, à HH:mm' }}</p>
+    <p class="mb-2">{{event.description.substring(0, 70)+("...")}}</p>
+    <a class="btn btn-primary btn-sm align-self-end">S'inscrire!</a>
+    </div>
+</div>

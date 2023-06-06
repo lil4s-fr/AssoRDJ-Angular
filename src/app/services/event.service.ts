@@ -30,6 +30,13 @@ export class EventService {
   getEvents(): Observable<IdEvent[]> {
     return this.httpClient.get<IdEvent[]>(`${this.apiUrl}/evenements`, this.httpOptions)
   }
+  /**
+   * On demande a retourner les 2 derniers evenements
+   * @returns La partie entre parenthèse correspond à l'URL complète de notre route API
+   */
+  getTwoLastEvents(): Observable<IdEvent[]> {
+    return this.httpClient.get<IdEvent[]>(`${this.apiUrl}/evenements/twonextevents`, this.httpOptions)
+  }
 
   /**
    * Idem ici mais pour récupérer un évènement en particulier
