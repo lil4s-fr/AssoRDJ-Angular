@@ -18,16 +18,16 @@ export class PersonalDataComponent implements OnInit{
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-      this.getPersonnalData();
+      //this.getPersonnalData();
   }
 
   /**
    * récupération des données du service contact
-   */
+   
   getPersonnalData = () => {
     this.nom = this.userService.nom;
     this.prenom = this.userService.prenom;
     this.adresse = this.userService.adresse;
     this.numeroAsso = this.userService.numeroAsso;
-  }
+  }*/
 }
