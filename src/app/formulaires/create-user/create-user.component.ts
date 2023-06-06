@@ -24,11 +24,12 @@ export class CreateUserComponent implements OnInit{
     // je crée un champ nom qui est un FormControl, idem pour les autres champs
     nom: ['', Validators.required],
     prenom: ['', Validators.required],
-    numeroAdherent: [0, Validators.required],
+    numeroAdherent: ['', Validators.required],
     pseudo: [''],
     email: ['', Validators.required],
     numeroTelephone: ['', Validators.required],
-    hashMotDePasse: ['']
+    hashMotDePasse: ['', Validators.required],
+    permission: ['', Validators.required]
   });
 
   // formValues pour la suppression du membre
@@ -71,20 +72,17 @@ export class CreateUserComponent implements OnInit{
   /**
    * envoie les éléments de l'évènement vers le service au click
    */
-  onAddUser(e: Event) {
-    // empeche de rafraichir la page au moment de la soumisson
-    e.preventDefault();
-    console.log( " FormValue : " + this.formValues.value);
+  onAddUser(formGroup: FormGroup) {
+    //debug
+    console.log(JSON.stringify(formGroup.value, null, 2));
+    formGroup.value.permission = { "id": formGroup.value.permission }
 
     // je passe la variable submitted à true pour pouvoir afficher a confirmation à l'écran avec un ngIf
     this.submitted = true;
 
     //  je vérifie si le formulaire est valide
-    if (this.formValues.valid) {
-      const id = this.formValues.value.id;
-      // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
-      // à l'utilisateur que le formulaire a bien été validé via un message
-      this.userService.createUser(id).subscribe(
+    if (formGroup.valid) {
+      this.userService.createUser(formGroup.value).subscribe(
         (response:any) => {
           this.userValide=true;
         },
@@ -96,27 +94,25 @@ export class CreateUserComponent implements OnInit{
     }
   }
 
-  onDeleteUser(e: Event) {// empeche de rafraichir la page au moment de la soumisson
-    e.preventDefault();
+  onDeleteUser(id: number) {
     console.log(" deleteFormValue : " + this.deleteFormValues);
     
-    // je passe la variable submitted à true
-    this.deleteSubmitted = true;
-    //  je vérifie si le formulaire est valide
-    if (this.deleteFormValues.valid) {
-      console.log("formulaire valide");
-      
-      // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
-      // à l'utilisateur que le formulaire a bien été validé via un message
-      this.userService.deleteUser(this.deleteFormValues.value).subscribe(
-        (response:any) => {
-          this.userDeleted=true;
-        },
-        (error:any) => {
-          //throw erreur
-          console.log(error);
-        }
-      )
-    }
+    // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
+    // à l'utilisateur que le formulaire a bien été validé via un message
+    this.userService.deleteUser(id).subscribe(
+      (response:any) => {
+        this.userDeleted=true;
+      },
+      (error:any) => {
+        //throw erreur
+        console.log(error);
+      }
+    )
+    
+  }
+
+  //debug pour vérifier si les datas sont valides.
+  alertFormValues(formGroup: FormGroup) {
+    alert(JSON.stringify(formGroup.value, null, 2));
   }
 }
