@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import Categorie from 'src/app/models/categorie.model';
+import Reservation from 'src/app/models/reservation.model';
 import Salle from 'src/app/models/salle.model';
 import Utilisateur from 'src/app/models/utilisateur.model'
 import { CategorieService } from 'src/app/services/categorie.service';
@@ -13,14 +15,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.css']
 })
-export class BookComponent {
-  // je récupère la date, la salle sélectionnée et le tableau de participants
-  selectedDate: Date;
-  selectedTime: string = "";
-  selectedRooms: string = "";
-  selectedGame: string = "";
-  selectedParticipants: string[] = [];
-  descriptionReservation: string = "";
+export class BookComponent implements OnInit{  
 
   // Liste de salle à récupérer de la bdd
   salles$: Observable<Salle[]> = this.salleService.getSalles();
@@ -31,18 +26,15 @@ export class BookComponent {
   // Liste des participants qui est en fait la liste des contacts
   participants$: Observable<Utilisateur[]> = this.userService.getUsers();
 
+  // Liste des réservations de salle
+  bookList$: Observable<Reservation[]> = this.reservationService.getReservations();
+
   // je donne le nom au bouton
   btnValide: string = "Valider la réservation";
 
-  constructor(
-    private reservationService: ReservationService,
-    private salleService: SalleService,
-    private categorieService: CategorieService,
-    private userService: UserService
-    ){
-    this.selectedDate = new Date();
-  }
-
+  // boolean pour affichage de la validation de la requète
+  bookValide: boolean = false;
+  bookDeleted: boolean = false;
 
   // Liste des créneaux horaires de début de réservation
   times = [
@@ -95,23 +87,96 @@ export class BookComponent {
     { label: '23:00', value: '23' },
     { label: '23:30', value: '2330' }
   ];  
+  
+  // formValues pour la soumission de la nouvelle salle
+  formValues: FormGroup = this.formBuilder.group({
+    // je crée un champ nom qui est un FormControl, idem pour description
+    date_reservation: ['', Validators.required],
+    // TODO: programmer la date du jour à envoyer et l'utilisateur qui crée la réservation
+    creneau: ['', Validators.required],
+    salle: ['', Validators.required],
+    categorie: ['', Validators.required],
+    participant: [[], Validators.required],
+    description: ['', Validators.required]
+  });
+  
+  // formValues pour la suppression de la salle
+  deleteFormValues: FormGroup = this.formBuilder.group([{
+    id: [0, Validators.required]    
+  }]);
 
-  // Liste de participants à récupérer de la bdd
-  participants = [
-    { label: 'Antoine', value: 'id1' },
-    { label: 'Alexis', value: 'id2' },
-    { label: 'Dorian', value: 'id3' },
-    { label: 'Ln', value: 'id4' }
-  ];  
+  // je crée une variable de soumission et de validation pour la création de la réservation
+  submitted: boolean = false;
+  formValidated: boolean = false;
 
-  onAddBook = (e: any) => {
-    // appelle la fonction de compte service pour provoquer l'ajout des points
-    if (this.selectedRooms == "" || this.selectedDate == null) return;
-    this.reservationService.onAddBook(
-      this.selectedDate,
-      this.selectedTime,
-      this.selectedRooms,
-      this.selectedParticipants,
-      this.descriptionReservation);  
-  } 
+  // je crée une variable de soumission et de validation pour la suppression de la réservation
+  deleteSubmitted: boolean = false;
+  deleteFormValidated: boolean = false;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private reservationService: ReservationService,
+    private salleService: SalleService,
+    private categorieService: CategorieService,
+    private userService: UserService
+    ){}
+
+  ngOnInit() {
+    // je réinitialise si l'utilisateur change les champs
+    this.formValues.valueChanges.subscribe(()=> {
+      this.submitted=false;
+    })
+    this.deleteFormValues.valueChanges.subscribe(()=> {
+      this.submitted=false;
+    })
+  }
+
+  /**
+   * envoie les éléments de l'évènement vers le service au click
+   */
+  onAddBook(formGroup: FormGroup) {
+    // empeche de rafraichir la page au moment de la soumisson
+    console.log(JSON.stringify(formGroup.value, null, 2));
+
+    // je passe la variable submitted à true pour pouvoir afficher a confirmation à l'écran avec un ngIf
+    this.submitted = true;
+
+    //  je vérifie si le formulaire est valide
+    if (formGroup.valid) {
+      // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
+      // à l'utilisateur que le formulaire a bien été validé via un message
+      this.salleService.createSalle(formGroup.value).subscribe(
+        (response:any) => {
+          this.bookValide=true;
+        },
+        (error:any) => {
+          //throw erreur
+          console.log(error);
+        }
+      )
+    }
+  }
+
+  onDeleteBook(id: number) {// empeche de rafraichir la page au moment de la soumisson
+    console.log("index:" + id);
+    
+    // je passe la variable submitted à true
+    this.deleteSubmitted = true;
+      
+    this.reservationService.deleteReservation(id).subscribe(
+      (response:any) => {
+        this.bookDeleted=true;
+      },
+      (error:any) => {
+        //throw erreur
+        console.log(error);
+      }
+    )
+    
+  }
+
+  //debug pour vérifier si les datas sont valides.
+  alertFormValues(formGroup: FormGroup) {
+    alert(JSON.stringify(formGroup.value, null, 2));
+  }
 }

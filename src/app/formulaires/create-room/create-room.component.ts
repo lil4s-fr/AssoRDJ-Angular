@@ -11,7 +11,7 @@ import { SalleService } from 'src/app/services/salle.service';
   styleUrls: ['./create-room.component.css']
 })
 export class CreateRoomComponent  implements OnInit{
-  // boolean pour affichage de la validation de la requelle
+  // boolean pour affichage de la validation de la requète
   salleValide: boolean = false;
   salleDeleted: boolean = false;
 
