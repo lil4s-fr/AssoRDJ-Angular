@@ -21,16 +21,16 @@ export class CreateRoomComponent  implements OnInit{
   // formValues pour la soumission de la nouvelle salle
   formValues: FormGroup = this.formBuilder.group({
     // je crée un champ nom qui est un FormControl, idem pour description
-    nom: ['', Validators.required]
+    nom: ['', Validators.required],
+    capacite: ['', Validators.required],
+    lieu: ['', Validators.required],
+    accessibilite: ['', Validators.required]
   });
 
   // formValues pour la soumission de la nouvelle salle
   deleteFormValues: FormGroup = this.formBuilder.group([{
     // je crée un champ id qui est un FormControl, idem pour nom
     id: [0, Validators.required]    
-  },
-  {
-    nom: ['', Validators.required]    
   }]);
 
   // je crée une variable de soumission et de validation pour la création de la nouvelle salle
@@ -67,20 +67,18 @@ export class CreateRoomComponent  implements OnInit{
   /**
    * envoie les éléments de l'évènement vers le service au click
    */
-  onAddSalle(e: Event) {
+  onAddSalle(formGroup: FormGroup) {
     // empeche de rafraichir la page au moment de la soumisson
-    e.preventDefault();
-    console.log( " FormValue : " + this.formValues.value);
+    console.log(JSON.stringify(formGroup.value, null, 2));
 
     // je passe la variable submitted à true pour pouvoir afficher a confirmation à l'écran avec un ngIf
     this.submitted = true;
 
     //  je vérifie si le formulaire est valide
-    if (this.formValues.valid) {
-      const id = this.formValues.value.id;
+    if (formGroup.valid) {
       // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
       // à l'utilisateur que le formulaire a bien été validé via un message
-      this.salleService.createSalle(id).subscribe(
+      this.salleService.createSalle(formGroup.value).subscribe(
         (response:any) => {
           this.salleValide=true;
         },
@@ -92,27 +90,26 @@ export class CreateRoomComponent  implements OnInit{
     }
   }
 
-  onDeleteSalle(e: Event) {// empeche de rafraichir la page au moment de la soumisson
-    e.preventDefault();
-    console.log(" deleteFormValue : " + this.deleteFormValues);
+  onDeleteSalle(id: number) {// empeche de rafraichir la page au moment de la soumisson
+    console.log("index:" + id);
     
     // je passe la variable submitted à true
     this.deleteSubmitted = true;
-    //  je vérifie si le formulaire est valide
-    if (this.deleteFormValues.valid) {
-      console.log("formulaire valide");
       
-      // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
-      // à l'utilisateur que le formulaire a bien été validé via un message
-      this.salleService.deleteSalle(this.deleteFormValues.value).subscribe(
-        (response:any) => {
-          this.salleDeleted=true;
-        },
-        (error:any) => {
-          //throw erreur
-          console.log(error);
-        }
-      )
-    }
+    this.salleService.deleteSalle(id).subscribe(
+      (response:any) => {
+        this.salleDeleted=true;
+      },
+      (error:any) => {
+        //throw erreur
+        console.log(error);
+      }
+    )
+    
+  }
+
+  //debug pour vérifier si les datas sont valides.
+  alertFormValues(formGroup: FormGroup) {
+    alert(JSON.stringify(formGroup.value, null, 2));
   }
 }
