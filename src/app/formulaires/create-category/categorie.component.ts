@@ -21,10 +21,11 @@ export class CategorieComponent implements OnInit{
   formValues: FormGroup = this.formBuilder.group({
     // je crée un champ nom qui est un FormControl, idem pour description
     nom: ['', Validators.required], // je peux mettre un ou plusieurs validateur(s)
-    description: [''], 
+    description: ['', Validators.required], 
   });
   // je crée une variable submitted qui est un boolean
   submitted: boolean = false;
+  salleDeleted: boolean = false;
   formValidated: boolean = false;
 
   // je crée une liste de catégories pour l'afficher
@@ -50,18 +51,16 @@ export class CategorieComponent implements OnInit{
   /**
    * envoie les éléments de l'évènement vers le service au click
    */
-  onAddCategorie(e: Event) {
-    // empeche de rafraichir la page au moment de la soumisson
-    e.preventDefault();
-    
-    
+  onAddCategorie(formGroup: FormGroup) {
+    //debug
+    console.log(JSON.stringify(formGroup.value, null, 2));
     // je passe la variable submitted à true
     this.submitted = true;
     //  je vérifie si le formulaire est valide
-    if (this.formValues.valid) {
+    if (formGroup.valid) {
       // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
       // à l'utilisateur que le formulaire a bien été validé via un message
-      this.categorieService.createCategorie(this.formValues.value).subscribe(
+      this.categorieService.createCategorie(formGroup.value).subscribe(
         (response:any) => {
           this.categorieValide=true;
         },
@@ -72,26 +71,21 @@ export class CategorieComponent implements OnInit{
       )
     }
   }
-/**bugg avec category.id inexpliqué ...
-  onDeleteCategory(category: Categorie, e: Event) {// empeche de rafraichir la page au moment de la soumisson
-    e.preventDefault();
 
-    // je passe la variable submitted à true
-    this.submitted = true;
-    //  je vérifie si le formulaire est valide
-    if (this.formValues.valid) {
-      
-      // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
-      // à l'utilisateur que le formulaire a bien été validé via un message
-      this.categorieService.deleteCategorie(category.id).subscribe(
-        (response:any) => {
-          this.categorieValide=true;
-        },
-        (error:any) => {
-          //throw erreur
-          console.log(error);
-        }
-      )
-    }
-  } */
+  onDeleteCategory(id: number) {    
+    this.categorieService.deleteCategorie(id).subscribe(
+      (response:any) => {
+        this.salleDeleted = true;
+      },
+      (error:any) => {
+        //throw erreur
+        console.log(error);
+      }
+    )
+  }
+
+  //debug pour vérifier si les datas sont valides.
+  alertFormValues(formGroup: FormGroup) {
+    alert(JSON.stringify(formGroup.value, null, 2));
+  }
 }
