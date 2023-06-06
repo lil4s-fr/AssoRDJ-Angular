@@ -3,27 +3,32 @@
     <div class="d-flex flex-column p-3">
       <h1 class="d-flex justify-content-center">Créer une salle</h1>
     </div>
-    <div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
+    <div class="d-flex flex-column container p-5  mb-5 bg-body-tertiary">
       <form [formGroup]="formValues" (ngSubmit)="onAddSalle(formValues)">
       <!-- <form [formGroup]="formValues" (ngSubmit)="alertFormValues(formValues)"> -->
         <!--Nom-->
-        <mat-form-field>
+        <mat-form-field class="w-100">
           <mat-label>Nom de la salle</mat-label>
           <input matInput formControlName="nom" placeholder="Nom" class="matinput">
         </mat-form-field>
         
         <!--Capacité-->
-        <mat-form-field>
+        <br>
+        <mat-form-field class="w-100">
           <mat-label>Capacité de la salle</mat-label>
           <input matInput formControlName="capacite" placeholder="10" class="matinput">
         </mat-form-field>
+
         <!--Lieu-->
-        <mat-form-field>
+        <br>
+        <mat-form-field class="w-100">
           <mat-label>Adresse de la salle</mat-label>
           <input matInput formControlName="lieu" placeholder="8 Rue de l'Adroit 59140 Dunkerque" class="matinput">
         </mat-form-field>
+
         <!--Accès PMR-->
-        <mat-form-field>
+        <br>
+        <mat-form-field class="w-100">
           <mat-label>Accessibilité</mat-label>
           <mat-select formControlName="accessibilite">
             <mat-option [value]="false">Non accessible</mat-option>
