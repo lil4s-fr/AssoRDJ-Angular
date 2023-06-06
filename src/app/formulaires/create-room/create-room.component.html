@@ -50,7 +50,7 @@
     <div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
       <ul>
         <div *ngIf="salleDeleted">
-          <h3>La catégorie est supprimée !</h3>
+          <h3>La salle est supprimée !</h3>
         </div>
         <li *ngFor="let salle of salleList$ | async; let i=index">{{salle.nom}}
           <div class="example-button-container">

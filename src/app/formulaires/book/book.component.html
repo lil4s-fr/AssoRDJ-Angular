@@ -1,69 +1,119 @@
-<h1><u>Réservation de salle</u></h1>
-<div class="groupe">
-  <!-- selection date-->
-  <mat-form-field class="date">
-    <input
-      matInput
-      [matDatepicker]="picker"
-      placeholder="Date de la réservation"
-      [(ngModel)]="selectedDate"
-    />
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+<div class="row">
+  <div class="col-md-7">
+    <div class="d-flex flex-column p-3">
+      <h1 class="d-flex justify-content-center">Réservation d'une salle</h1>
+    </div>
+    <div class="d-flex flex-column container p-5 mb-5 bg-body-tertiary">
+      <form [formGroup]="formValues" (ngSubmit)="onAddBook(formValues)">
+        <!-- <form [formGroup]="formValues" (ngSubmit)="alertFormValues(formValues)"> -->
 
-  <!-- heure de début de la réservation-->
-  <mat-form-field class="heure">
-    <mat-label>Choisir une heure de début</mat-label>
-    <mat-select [(ngModel)]="selectedTime">
-      <mat-option *ngFor="let time of times" [value]="time.value">
-        {{ time.label }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+        <!-- selection date-->
+        <mat-form-field class="w-100">
+          <input
+            matInput formControlName="date_reservation"
+            [matDatepicker]="picker"
+            placeholder="Date de la réservation"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
 
-  <!-- choix salle-->
-  <mat-form-field class="salle">
-    <mat-label>Choisir une salle</mat-label>
-    <mat-select [(ngModel)]="selectedRooms">
-      <mat-option *ngFor="let salle of salles$ | async" [value]="salle.nom">
-        {{ salle.nom }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+        <!-- heure de début de la réservation-->
+        <br />
+        <mat-form-field class="w-100">
+          <mat-label>Choisir une heure de début</mat-label>
+          <mat-select formControlName="creneau">
+            <mat-option *ngFor="let time of times" [value]="time.value">
+              {{ time.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-  <!-- catégorie de jeux-->
-  <mat-form-field class="categorie">
-    <mat-label>Choisir la catégorie</mat-label>
-    <mat-select [(ngModel)]="selectedGame">
-      <mat-option
-        *ngFor="let categorie of categories$ | async"
-        [value]="categorie.nom"
-      >
-        {{ categorie.nom }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+        <!-- choix salle-->
+        <br />
+        <mat-form-field class="w-100">
+          <mat-label>Choisir une salle</mat-label>
+          <mat-select formControlName="salle">
+            <mat-option
+              *ngFor="let salle of salles$ | async"
+              [value]="salle.nom"
+            >
+              {{ salle.nom }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-  <!-- choix des participants-->
-  <mat-form-field class="participant">
-    <mat-label>Choisir les participants</mat-label>
-    <mat-select [(ngModel)]="selectedParticipants" multiple>
-      <mat-option *ngFor="let participant of participants$ | async" [value]="participant.nom">
-        {{ participant.prenom }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+        <!-- catégorie de jeux-->
+        <br />
+        <mat-form-field class="w-100">
+          <mat-label>Choisir la catégorie</mat-label>
+          <mat-select formControlName="categorie">
+            <mat-option
+              *ngFor="let categorie of categories$ | async"
+              [value]="categorie.nom"
+            >
+              {{ categorie.nom }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- choix des participants-->
+        <br />
+        <mat-form-field class="w-100">
+          <mat-label>Choisir les participants</mat-label>
+          <mat-select formControlName="participant" multiple>
+            <mat-option
+              *ngFor="let participant of participants$ | async"
+              [value]="participant.nom"
+            >
+              {{ participant.prenom }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <br />
+        <!--description de la réservation-->
+        <mat-form-field class="w-100">
+          <textarea
+            matInput
+            placeholder="Description"
+            formControlName="description"
+            class="matinput"
+          ></textarea>
+        </mat-form-field>
+
+        <div *ngIf="bookValide">
+          <h3>La réservation est validée !</h3>
+        </div>
+        <app-buttons
+          [value]="btnValide"
+          (click)="onAddBook(formValues)"
+        ></app-buttons>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="d-flex flex-column p-3">
+      <h1 class="d-flex justify-content-center">Réservations existantes</h1>
+    </div>
+    <div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
+      <ul>
+        <div *ngIf="bookDeleted">
+          <h3>La réservation est supprimée !</h3>
+        </div>
+        <li *ngFor="let book of bookList$ | async; let i=index">{{book.salle}} réservée le {{book.date_reservation}}
+          <div class="example-button-container">
+            <form [formGroup]="formValues" (ngSubmit)="onDeleteBook(book.id)">
+              <button mat-icon-button style="color: red; font-size: 20px;">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
-<div class="description">
-  <!--description de la réservation-->
-  <mat-form-field>
-    <textarea
-      matInput
-      placeholder="Description"
-      [(ngModel)]="descriptionReservation"
-      class="matinput"
-    ></textarea>
-  </mat-form-field>
-</div>
-<app-buttons [value]="btnValide" (click)="onAddBook($event)"></app-buttons>
