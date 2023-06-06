@@ -2,7 +2,7 @@ import Categorie from "./categorie.model";
 import Utilisateur from "./utilisateur.model";
 
 export default interface Article{
-    id?: number,
+    id: number,
     categories: Categorie[],
     utilisateurs?: Utilisateur[],
     titre: string,

@@ -1,31 +1,77 @@
-<div class="d-flex flex-column p-3">
-    <h1 class="d-flex justify-content-center">Créer un article</h1>
-    <p class="d-flex justify-content-center">Partagez les informations, nouveautés... avec les co-membres</p>
+<div class="row">
+  <div class="col-md-7">
+    <div class="d-flex flex-column p-3">
+      <h1 class="d-flex justify-content-center">Créer un article</h1>
+      <p class="d-flex justify-content-center">
+        Partagez les informations, nouveautés... avec les co-membres
+      </p>
+    </div>
+    <div class="d-flex flex-column container p-5 mb-5 bg-body-tertiary">
+      <form [formGroup]="formValues" (ngSubmit)="onAddArticle(formValues)">
+        <!-- catégorie de jeux-->
+        <h3></h3>
+        <mat-form-field class="w-100">
+          <mat-label>Choisir la catégorie</mat-label>
+          <mat-select formControlName="categorie">
+            <mat-option
+              *ngFor="let categorie of categories$ | async"
+              [value]="categorie.nom"
+            >
+              {{ categorie.nom }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- titre-->
+        <br />
+        <mat-form-field class="w-100">
+          <mat-label>Titre de l'article</mat-label>
+          <input
+            matInput
+            formControlName="titre"
+            placeholder="Titre de l'article"
+            class="matinput"
+          />
+        </mat-form-field>
+
+        <!-- corps de l'article-->
+        <br />
+        <mat-form-field class="w-100">
+          <mat-label>Corps de l'article</mat-label>
+          <input
+            matInput
+            formControlName="corps"
+            placeholder="Corps de l'article"
+            class="matinput"
+          >
+        </mat-form-field>
+
+        <div *ngIf="articleValide">
+          <h3>Le nouvel article est validée !</h3>
+        </div>
+        <app-buttons [value]="btnValide" class="button"></app-buttons>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="d-flex flex-column p-3">
+      <h1 class="d-flex justify-content-center">Articles existants</h1>
+    </div>
+    <div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
+      <ul>
+        <div *ngIf="articleDeleted">
+          <h3>L'article est supprimé !</h3>
+        </div>
+        <li *ngFor="let article of articleList$ | async">{{article.titre}}
+          <div class="example-button-container">
+            <form [formGroup]="formValues" (ngSubmit)="onDeleteArticle(article.id)">
+              <button mat-icon-button style="color: red; font-size: 20px;">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
-<div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
-  <form [formGroup]="formValues" (ngSubmit)="onAddArticle($event)">
-    <!-- catégorie de jeux-->
-    <h3>Catégorie de jeux :</h3>
-    <mat-form-field class="categorie">
-        <mat-label>Choisir la catégorie</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let categorie of categories$ | async" [value]="categorie.nom">
-            {{ categorie.nom }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <!-- titre-->
-    <mat-form-field >
-      <textarea matInput placeholder="Titre de l'article" class="matinput"></textarea>
-    </mat-form-field>
-
-      <!-- corps de l'article-->
-    <mat-form-field >
-        <textarea matInput placeholder="Corps de l'article" class="matinput"></textarea>
-    </mat-form-field>
-        
-    <app-buttons [value]="btnValide" class="button"></app-buttons>
-  </form>
-</div>
-
