@@ -1,29 +1,4 @@
-h1, h3 {
-    text-align: center;
-}
-
-.groupe {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: center;
-}
-
-.date, .heure, .categorie, .participant, .description{
-    margin: 50px;
-}
-
-.description {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.matinput {
-    width: 100%;
-    resize: vertical;
-}
-
-.button {
-    margin: 50px;
-}
+.form{
+    min-width: 100% !important;
+    width: 100% !important;
+  }
