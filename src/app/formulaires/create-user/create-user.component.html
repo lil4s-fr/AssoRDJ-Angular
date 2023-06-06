@@ -1,89 +1,102 @@
 <div class="row">
-    <div class="col-md-7">
-        <div class="d-flex flex-column p-3">
-            <h1 class="d-flex justify-content-center">Créer un membre :</h1>
+  <div class="col-md-7">
+    <div class="d-flex flex-column p-3">
+      <h1 class="d-flex justify-content-center">Créer un membre :</h1>
+    </div>
+    <div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
+      <form [formGroup]="formValues" (ngSubmit)="onAddUser(formValues)">
+      <!-- <form [formGroup]="formValues" (ngSubmit)="alertFormValues(formValues)"> -->
+        <!-- nom-->
+        <br>
+        <mat-form-field class="w-100">
+          <mat-label>Nom de l'utilisateur :</mat-label>
+          <input matInput formControlName="nom" placeholder="Nom" class="matinput">
+        </mat-form-field>
+        
+        <!-- prénom-->
+        <br>
+        <mat-form-field class="w-100">
+          <mat-label>Prénom de l'utilisateur :</mat-label>
+          <input matInput formControlName="prenom" placeholder="Prénom" class="matinput">
+        </mat-form-field>
+        
+        <!-- numero adhérent-->
+        <br>
+        <mat-form-field class="w-100">
+          <mat-label>Numero d'adhérent :</mat-label>
+          <input matInput formControlName="numeroAdherent" placeholder="Numero adhérent" class="matinput">
+        </mat-form-field>
+        
+        <!-- pseudo-->
+        <br>
+        <mat-form-field class="w-100">
+          <mat-label>Pseudo :</mat-label>
+          <input matInput formControlName="pseudo" placeholder="Pseudo" class="matinput">
+        </mat-form-field>
+        
+        <!-- email-->
+        <br>
+        <mat-form-field class="w-100">
+          <mat-label>Email :</mat-label>
+          <input matInput formControlName="email" placeholder="email" class="matinput">
+        </mat-form-field>
+        
+        <!-- num téléphone-->
+        <br>
+        <mat-form-field class="w-100">
+          <mat-label>Numero de téléphone :</mat-label>
+          <input matInput formControlName="numeroTelephone" placeholder="Numéro de téléphone" class="matinput">
+        </mat-form-field>
+        
+        <!-- mot de passe provisoire-->
+        <br>
+        <mat-form-field class="w-100">
+          <mat-label>Mot de passe provisoire</mat-label>
+          <input matInput formControlName="hashMotDePasse" placeholder="Mot de passe" class="matinput">
+        </mat-form-field>
+        
+        <!--Permissions-->
+        <br>  
+        <mat-form-field class="w-100">
+          <mat-label>Permissions</mat-label>
+          <mat-select formControlName="permission">
+            <mat-option [value]="1">Super-Admin</mat-option>
+            <mat-option [value]="2">Administrateur</mat-option>
+            <mat-option [value]="3">Adhérent de l'asso</mat-option>
+            <mat-option [value]="4">Membre du site</mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <div *ngIf="userValide">
+          <h3>Le nouvel utilisateur est créé !</h3>
         </div>
-        <div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
-            <form [formGroup]="formValues" (ngSubmit)="onAddUser($event)">
-                <!-- nom-->
-                <h3></h3>
-                <mat-form-field >
-                    <mat-label>Nom de l'utilisateur :</mat-label>
-                    <input matInput formControlName="nom" placeholder="Nom" class="matinput">
-                </mat-form-field>
-                
-                <!-- prénom-->
-                <h3></h3>
-                <mat-form-field >
-                    <mat-label>Prénom de l'utilisateur :</mat-label>
-                    <input matInput formControlName="prenom" placeholder="Prénom" class="matinput">
-                </mat-form-field>
-
-                <!-- numero adhérant-->
-                <h3></h3>
-                <mat-form-field >
-                    <mat-label>Numero d'adhérent :</mat-label>
-                    <input matInput formControlName="numeroAdherent" placeholder="Numero adhérent" class="matinput">
-                </mat-form-field>
-
-                <!-- pseudo-->
-                <h3></h3>
-                <mat-form-field >
-                    <mat-label>Pseudo :</mat-label>
-                    <input matInput formControlName="pseudo" placeholder="Pseudo" class="matinput">
-                </mat-form-field>
-
-                <!-- email-->
-                <h3></h3>
-                <mat-form-field >
-                    <mat-label>Email :</mat-label>
-                    <input matInput formControlName="email" placeholder="email" class="matinput">
-                </mat-form-field>
-
-                <!-- num téléphone-->
-                <h3></h3>
-                <mat-form-field >
-                    <mat-label>Numero de téléphone :</mat-label>
-                    <input matInput formControlName="numeroTelephone" placeholder="Numéro de téléphone" class="matinput">
-                </mat-form-field>
-
-                <!-- mot de passe-->
-                <h3></h3>
-                <mat-form-field >
-                    <mat-label>Numero de téléphone :</mat-label>
-                    <input matInput formControlName="hashMotDePasse" placeholder="Mot de passe" class="matinput">
-                </mat-form-field>
-
-                <div *ngIf="userValide">
-                    <h3>La nouvelle salle est validée !</h3>
-                </div>
-                <app-buttons [value]="btnValide" class="button"></app-buttons>
+        <app-buttons [value]="btnValide" class="button"></app-buttons>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <div class="d-flex flex-column p-3">
+      <h1 class="d-flex justify-content-center">Membres existants :</h1>
+    </div>
+    <div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
+      <ul>
+        <div *ngIf="userDeleted">
+          <h3>Le membre est supprimé !</h3>
+        </div>
+        <li *ngFor="let user of userList$ | async; let i=index">{{user.nom}}
+          <div class="example-button-container">
+            <form [formGroup]="formValues" (ngSubmit)="onDeleteUser(user.id)">
+              <button mat-icon-button style="color: red; font-size: 20px;">
+                <mat-icon>delete</mat-icon>
+              </button>
             </form>
-        </div>
+          </div>
+        </li>
+      </ul>
     </div>
-    <div class="col-md-5">
-        <div class="d-flex flex-column p-3">
-            <h1 class="d-flex justify-content-center">Membres existants :</h1>
-        </div>
-        <div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
-            <ul>
-                <li *ngFor="let user of userList$ | async; let i=index">{{user.nom}}
-                    <div class="example-button-container">
-                        <form [formGroup]="formValues" (ngSubmit)="onDeleteUser($event)">
-                            <div *ngIf="userDeleted">
-                                <h3>Le membre est supprimé !</h3>
-                            </div>
-                            <button mat-icon-button style="color: red; font-size: 20px;">
-                            <mat-icon>delete</mat-icon>
-                            </button>
-                        </form>
-                      </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-    
-    
+  </div>
+  
+  
 </div>
 
 
