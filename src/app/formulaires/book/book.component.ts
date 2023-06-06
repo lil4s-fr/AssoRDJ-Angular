@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import Categorie from 'src/app/models/categorie.model';
 import Salle from 'src/app/models/salle.model';
+import Utilisateur from 'src/app/models/utilisateur.model'
 import { CategorieService } from 'src/app/services/categorie.service';
 import { ReservationService } from 'src/app/services/reservation.service';
 import { SalleService } from 'src/app/services/salle.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-book',
@@ -26,13 +28,17 @@ export class BookComponent {
   // Liste de jeux à récupérer de la bdd
   categories$: Observable<Categorie[]> =  this.categorieService.getCategories();
   
+  // Liste des participants qui est en fait la liste des contacts
+  participants$: Observable<Utilisateur[]> = this.userService.getUsers();
+
   // je donne le nom au bouton
   btnValide: string = "Valider la réservation";
 
   constructor(
     private reservationService: ReservationService,
     private salleService: SalleService,
-    private categorieService: CategorieService
+    private categorieService: CategorieService,
+    private userService: UserService
     ){
     this.selectedDate = new Date();
   }

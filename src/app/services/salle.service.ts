@@ -4,7 +4,6 @@ import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 
 //import du modele categorie
-import Categorie from '../models/categorie.model';
 import Salle from '../models/salle.model';
 
 
