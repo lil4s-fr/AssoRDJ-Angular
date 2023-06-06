@@ -67,7 +67,7 @@ export class CreateRoomComponent  implements OnInit{
    * envoie les éléments de l'évènement vers le service au click
    */
   onAddSalle(formGroup: FormGroup) {
-    // empeche de rafraichir la page au moment de la soumisson
+    // debug
     console.log(JSON.stringify(formGroup.value, null, 2));
 
     // je passe la variable submitted à true pour pouvoir afficher a confirmation à l'écran avec un ngIf
