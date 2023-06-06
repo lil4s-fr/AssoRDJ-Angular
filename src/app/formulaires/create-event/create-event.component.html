@@ -17,8 +17,8 @@
     <mat-form-field class="categorie">
         <mat-label>Choisir la catégorie</mat-label>
         <mat-select [(ngModel)]="selectedGame">
-          <mat-option *ngFor="let game of games" [value]="game.value">
-            {{ game.label }}
+          <mat-option *ngFor="let categorie of categories$ | async" [value]="categorie.nom">
+            {{ categorie.nom }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -29,6 +29,16 @@
         <textarea matInput placeholder="Lieu" [(ngModel)]="lieu" class="matinput"></textarea>
       </mat-form-field>  
 
+      <!-- choix salle-->
+   <mat-form-field class="salle">
+    <mat-label>Choisir une salle</mat-label>
+    <mat-select [(ngModel)]="selectedRooms">
+      <mat-option *ngFor="let salle of salles$ | async" [value]="salle.nom">
+        {{ salle.nom }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  
       <!-- description-->
     <h3>Description de l'évènement : </h3>
     <mat-form-field >

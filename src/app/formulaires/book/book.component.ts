@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import Categorie from 'src/app/models/categorie.model';
+import Salle from 'src/app/models/salle.model';
+import { CategorieService } from 'src/app/services/categorie.service';
 import { ReservationService } from 'src/app/services/reservation.service';
+import { SalleService } from 'src/app/services/salle.service';
 
 @Component({
   selector: 'app-book',
@@ -11,23 +16,27 @@ export class BookComponent {
   selectedDate: Date;
   selectedTime: string = "";
   selectedRooms: string = "";
+  selectedGame: string = "";
   selectedParticipants: string[] = [];
   descriptionReservation: string = "";
 
+  // Liste de salle à récupérer de la bdd
+  salles$: Observable<Salle[]> = this.salleService.getSalles();
+  
+  // Liste de jeux à récupérer de la bdd
+  categories$: Observable<Categorie[]> =  this.categorieService.getCategories();
+  
   // je donne le nom au bouton
   btnValide: string = "Valider la réservation";
 
-  constructor(private reservationService: ReservationService){
+  constructor(
+    private reservationService: ReservationService,
+    private salleService: SalleService,
+    private categorieService: CategorieService
+    ){
     this.selectedDate = new Date();
   }
 
-  // Liste de salle à récupérer de la bdd
-  rooms = [
-    { label: 'Salle 1', value: 'salle1' },
-    { label: 'Salle 2', value: 'salle2' },
-    { label: 'Salle 3', value: 'salle3' },
-    { label: 'Salle 4', value: 'salle4' }
-  ];  
 
   // Liste des créneaux horaires de début de réservation
   times = [

@@ -16,18 +16,27 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-
   
    <!-- choix salle-->
    <mat-form-field class="salle">
     <mat-label>Choisir une salle</mat-label>
     <mat-select [(ngModel)]="selectedRooms">
-      <mat-option *ngFor="let room of rooms" [value]="room.value">
-        {{ room.label }}
+      <mat-option *ngFor="let salle of salles$ | async" [value]="salle.nom">
+        {{ salle.nom }}
       </mat-option>
     </mat-select>
   </mat-form-field>
   
+  <!-- catégorie de jeux-->
+  <mat-form-field class="categorie">
+      <mat-label>Choisir la catégorie</mat-label>
+      <mat-select [(ngModel)]="selectedGame">
+        <mat-option *ngFor="let categorie of categories$ | async" [value]="categorie.nom">
+          {{ categorie.nom }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
   <!-- choix des participants-->
   <mat-form-field class="participant">
     <mat-label>Choisir les participants</mat-label>

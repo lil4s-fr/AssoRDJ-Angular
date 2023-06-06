@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -35,6 +35,8 @@ import { ButtonsComponent } from './commons/buttons/buttons.component';
 import { ListsComponent } from './lists/lists.component';
 import { FormulairesComponent } from './formulaires/formulaires.component';
 import { PersonalDataComponent } from './pages/personal-data/personal-data.component';
+import { CategorieComponent } from './formulaires/create-category/categorie.component';
+import { CreateRoomComponent } from './formulaires/create-room/create-room.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { PersonalDataComponent } from './pages/personal-data/personal-data.compo
     ButtonsComponent,
     ListsComponent,
     FormulairesComponent,
-    PersonalDataComponent
+    PersonalDataComponent,
+    CategorieComponent,
+    CreateRoomComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +74,8 @@ import { PersonalDataComponent } from './pages/personal-data/personal-data.compo
     MatSelectModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

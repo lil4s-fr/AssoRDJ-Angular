@@ -1,38 +1,77 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import Categorie from 'src/app/models/categorie.model';
 import { ArticleService } from 'src/app/services/article.service';
+import { CategorieService } from 'src/app/services/categorie.service';
 
 @Component({
   selector: 'app-create-article',
   templateUrl: './create-article.component.html',
   styleUrls: ['./create-article.component.css']
 })
-export class CreateArticleComponent {
+export class CreateArticleComponent implements OnInit{
   // je récupère les infos des inputs
   selectedGame: string = "";
   title: string = "";
   corpsArticle: string = "";
 
+  //je récupère la liste des catégories
+  categories$: Observable<Categorie[]> =  this.categorieService.getCategories();
+
+  // boolean pour affichage de la validation de la requelle
+  articleValide: boolean = false;
+
   // je donne le nom au bouton
   btnValide: string = "Valider l'article";
 
-  constructor(private articleService: ArticleService){
+  formValues: FormGroup = this.formBuilder.group({
+    // je crée les champs qui sont un FormControl
+    categorie: [[]],
+    titre: ['', Validators.required], // je peux mettre un ou plusieurs validateur(s)
+    corps: [''], 
+  });
+  // je crée une variable submitted qui est un boolean
+  submitted: boolean = false;
+  formValidated: boolean = false;
 
+  constructor(
+    private formBuilder: FormBuilder,
+    private articleService: ArticleService,
+    private categorieService: CategorieService
+    ){
   }
 
-  // Liste de jeux à récupérer de la bdd
-  games = [
-    { label: 'Game 1', value: 'game1' },
-    { label: 'Game 2', value: 'game2' },
-    { label: 'Game 3', value: 'game3' },
-    { label: 'Game 4', value: 'game4' }
-  ];  
+  ngOnInit(): void {
+      
+  }
 
   /**
    * envoie les éléments de l'évènement vers le service
    * @param e event du template
    */
-  onAddArticle= (e: any) => {
-    if (this.selectedGame == "") return;
-    this.articleService.onAddArticle(this.selectedGame, this.title, this.corpsArticle)
+  onAddArticle= (e: Event) => {
+    // empeche de rafraichir la page au moment de la soumisson
+    e.preventDefault();
+    
+    
+    // je passe la variable submitted à true
+    this.submitted = true;
+    //  je vérifie si le formulaire est valide
+    if (this.formValues.valid) {
+      console.log("formulaire valide");
+      
+      // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
+      // à l'utilisateur que le formulaire a bien été validé via un message
+      this.articleService.createArticle(this.formValues.value).subscribe(
+        (response:any) => {
+          this.articleValide=true;
+        },
+        (error:any) => {
+          //throw erreur
+          console.log(error);
+        }
+      )
+    }
   }
 }

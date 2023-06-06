@@ -1,8 +1,8 @@
 <app-lists [articles]="articles"></app-lists>
 <ng-container *ngIf="!seeButton">
-    <app-buttons [value]="btnValide" (click)="onAddNewEvent($event)" class="button"></app-buttons>
+    <app-buttons [value]="btnValide" (click)="onAddNewArticle($event)" class="button"></app-buttons>
 
 </ng-container>
-<ng-container *ngIf="addNewEvent">
+<ng-container *ngIf="addNewArticle">
     <app-create-article></app-create-article>
 </ng-container>
