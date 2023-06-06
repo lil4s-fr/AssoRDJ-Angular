@@ -39,6 +39,7 @@ import { PersonalDataComponent } from './pages/personal-data/personal-data.compo
 import { CategorieComponent } from './formulaires/create-category/categorie.component';
 import { CreateRoomComponent } from './formulaires/create-room/create-room.component';
 import { CreateUserComponent } from './formulaires/create-user/create-user.component';
+import { LastEventComponent } from './pages/home/last-event/last-event.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { CreateUserComponent } from './formulaires/create-user/create-user.compo
     PersonalDataComponent,
     CategorieComponent,
     CreateRoomComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    LastEventComponent
   ],
   imports: [
     BrowserModule,
