@@ -2,51 +2,56 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
-import Salle from 'src/app/models/salle.model';
-import { SalleService } from 'src/app/services/salle.service';
+import Utilisateur from 'src/app/models/utilisateur.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-create-room',
-  templateUrl: './create-room.component.html',
-  styleUrls: ['./create-room.component.css']
+  selector: 'app-create-user',
+  templateUrl: './create-user.component.html',
+  styleUrls: ['./create-user.component.css']
 })
-export class CreateRoomComponent  implements OnInit{
+export class CreateUserComponent implements OnInit{
+
   // boolean pour affichage de la validation de la requelle
-  salleValide: boolean = false;
-  salleDeleted: boolean = false;
+  userValide: boolean = false;
+  userDeleted: boolean = false;
 
   // je donne le nom du bouton
-  btnValide: string = "Valider la salle";
+  btnValide: string = "Valider le membre";
 
-  // formValues pour la soumission de la nouvelle salle
+  // formValues pour la soumission du nouveau membre
   formValues: FormGroup = this.formBuilder.group({
-    // je crée un champ nom qui est un FormControl, idem pour description
-    nom: ['', Validators.required]
+    // je crée un champ nom qui est un FormControl, idem pour les autres champs
+    nom: ['', Validators.required],
+    prenom: ['', Validators.required],
+    numeroAdherent: [0, Validators.required],
+    pseudo: [''],
+    email: ['', Validators.required],
+    numeroTelephone: ['', Validators.required],
+    hashMotDePasse: ['']
   });
 
-  // formValues pour la suppression de la salle
-  deleteFormValues: FormGroup = this.formBuilder.group([{
+  // formValues pour la suppression du membre
+  deleteFormValues: FormGroup = this.formBuilder.group({
     id: [0, Validators.required]    
-  },
-  {
-    nom: ['', Validators.required]    
-  }]);
+  } 
+  );
 
-  // je crée une variable de soumission et de validation pour la création de la nouvelle salle
+  // je crée une variable de soumission et de validation pour la création du nouveau membre
   submitted: boolean = false;
   formValidated: boolean = false;
 
-  // je crée une variable de soumission et de validation pour la suppression de la salle
+  // je crée une variable de soumission et de validation pour la suppression du membre
   deleteSubmitted: boolean = false;
   deleteFormValidated: boolean = false;
 
   // je crée une liste de salles pour l'afficher
-  salleList$!: Observable<Salle[]>;
+  userList$!: Observable<Utilisateur[]>;
 
   // je crée un constructeur qui prend en paramètre la déclaration d'une variable nommée formBuilder de type formBuilder
   constructor(
     private formBuilder: FormBuilder,
-    private salleService: SalleService
+    private userService: UserService
     ){
   }
 
@@ -60,13 +65,13 @@ export class CreateRoomComponent  implements OnInit{
     })
 
     // j'initialise la liste des salles en allant chercher dans le service
-    this.salleList$ = this.salleService.getSalles();
+    this.userList$ = this.userService.getUsers();
   }
 
   /**
    * envoie les éléments de l'évènement vers le service au click
    */
-  onAddSalle(e: Event) {
+  onAddUser(e: Event) {
     // empeche de rafraichir la page au moment de la soumisson
     e.preventDefault();
     console.log( " FormValue : " + this.formValues.value);
@@ -79,9 +84,9 @@ export class CreateRoomComponent  implements OnInit{
       const id = this.formValues.value.id;
       // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
       // à l'utilisateur que le formulaire a bien été validé via un message
-      this.salleService.createSalle(id).subscribe(
+      this.userService.createUser(id).subscribe(
         (response:any) => {
-          this.salleValide=true;
+          this.userValide=true;
         },
         (error:any) => {
           //throw erreur
@@ -91,7 +96,7 @@ export class CreateRoomComponent  implements OnInit{
     }
   }
 
-  onDeleteSalle(e: Event) {// empeche de rafraichir la page au moment de la soumisson
+  onDeleteUser(e: Event) {// empeche de rafraichir la page au moment de la soumisson
     e.preventDefault();
     console.log(" deleteFormValue : " + this.deleteFormValues);
     
@@ -103,9 +108,9 @@ export class CreateRoomComponent  implements OnInit{
       
       // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
       // à l'utilisateur que le formulaire a bien été validé via un message
-      this.salleService.deleteSalle(this.deleteFormValues.value).subscribe(
+      this.userService.deleteUser(this.deleteFormValues.value).subscribe(
         (response:any) => {
-          this.salleDeleted=true;
+          this.userDeleted=true;
         },
         (error:any) => {
           //throw erreur

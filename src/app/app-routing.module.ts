@@ -13,10 +13,12 @@ import { NotFoundComponent } from './commons/not-found/not-found.component';
 import { PersonalDataComponent } from './pages/personal-data/personal-data.component';
 import { CategorieComponent } from './formulaires/create-category/categorie.component';
 import { CreateRoomComponent } from './formulaires/create-room/create-room.component';
+import { CreateUserComponent } from './formulaires/create-user/create-user.component';
 
 const routes: Routes = [
   {path :'', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
+  {path: 'membre', component: CreateUserComponent},
   {path: 'category', component: CategorieComponent},
   {path: 'room', component: CreateRoomComponent},
   {path: 'reservation', component: BookComponent},
