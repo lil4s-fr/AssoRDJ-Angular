@@ -27,9 +27,8 @@ export class CreateRoomComponent  implements OnInit{
     accessibilite: ['', Validators.required]
   });
 
-  // formValues pour la soumission de la nouvelle salle
+  // formValues pour la suppression de la salle
   deleteFormValues: FormGroup = this.formBuilder.group([{
-    // je crée un champ id qui est un FormControl, idem pour nom
     id: [0, Validators.required]    
   }]);
 
@@ -37,7 +36,7 @@ export class CreateRoomComponent  implements OnInit{
   submitted: boolean = false;
   formValidated: boolean = false;
 
-  // je crée une variable de soumission et de validation pour la création de la nouvelle salle
+  // je crée une variable de soumission et de validation pour la suppression de la salle
   deleteSubmitted: boolean = false;
   deleteFormValidated: boolean = false;
 
