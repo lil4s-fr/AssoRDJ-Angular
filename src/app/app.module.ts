@@ -40,6 +40,7 @@ import { CategorieComponent } from './formulaires/create-category/categorie.comp
 import { CreateRoomComponent } from './formulaires/create-room/create-room.component';
 import { CreateUserComponent } from './formulaires/create-user/create-user.component';
 import { LastEventComponent } from './pages/home/last-event/last-event.component';
+import { ModifierUtilisateurComponent } from './pages/modifier-utilisateur/modifier-utilisateur.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { LastEventComponent } from './pages/home/last-event/last-event.component
     CategorieComponent,
     CreateRoomComponent,
     CreateUserComponent,
-    LastEventComponent
+    LastEventComponent,
+    ModifierUtilisateurComponent
   ],
   imports: [
     BrowserModule,
