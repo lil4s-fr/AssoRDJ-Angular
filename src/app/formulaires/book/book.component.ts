@@ -191,4 +191,16 @@ export class BookComponent implements OnInit{
   formatDate(date: Date): string {
   return formatDate(date, 'yyyy-MM-dd', 'en-US');
 }
+  updateValidation(reservation : Reservation){
+    reservation.validation = !reservation.validation;
+    this.reservationService.updateReservation(reservation).subscribe(
+      (response: any) => {
+        console.log('Mise à jour réussie :', response);
+      },
+      (error: any) => {
+        console.log('Erreur lors de la mise à jour :', error);
+      }
+    );
+  }
+
 }
