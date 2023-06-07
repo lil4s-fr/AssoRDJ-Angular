@@ -9,6 +9,7 @@ export default interface Utilisateur{
   numeroAdherent: number,
   pseudo: string,
   email: string,
+  numeroTelephone: string,
   hashMotDePasse: string,
   coordonnees: Coordonnee[],
   permission: Permission,

@@ -14,6 +14,7 @@ import { PersonalDataComponent } from './pages/personal-data/personal-data.compo
 import { CategorieComponent } from './formulaires/create-category/categorie.component';
 import { CreateRoomComponent } from './formulaires/create-room/create-room.component';
 import { CreateUserComponent } from './formulaires/create-user/create-user.component';
+import { ModifierUtilisateurComponent } from './pages/modifier-utilisateur/modifier-utilisateur.component';
 
 const routes: Routes = [
   {path :'', redirectTo: 'home', pathMatch: 'full'},
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path: 'createArticle', component: CreateArticleComponent},
   {path: 'createEvent', component: CreateEventComponent},
   {path: 'joinEvent', component: JoinEventComponent},
+  {path: 'modifierutilisateur/:id', component: ModifierUtilisateurComponent },
   // a retirer quand la page 404 sera finie
   {path: '404', component: NotFoundComponent},
 

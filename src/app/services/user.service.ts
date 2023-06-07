@@ -67,7 +67,7 @@ export class UserService {
    * @returns URL complète de notre route API
    */
   updateUser(user: Utilisateur): Observable<Utilisateur> {
-    return this.httpClient.put<Utilisateur>(`${this.apiUrl}/utilisateurs/${user.numeroAdherent}`, user, this.httpOptions);
+    return this.httpClient.put<Utilisateur>(`${this.apiUrl}/utilisateurs/${user.id}`, user, this.httpOptions);
   }
 
   /**
