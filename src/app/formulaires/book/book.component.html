@@ -10,9 +10,9 @@
         <!-- selection date-->
         <mat-form-field class="w-100">
           <input
-            matInput formControlName="date_reservation"
+            matInput formControlName="date_evenement"
             [matDatepicker]="picker"
-            placeholder="Date de la réservation"
+            placeholder="Date de l'événement"
           />
           <mat-datepicker-toggle
             matSuffix
@@ -21,7 +21,7 @@
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
-        <!-- heure de début de la réservation-->
+        <!-- heure de la réservation-->
         <br />
         <mat-form-field class="w-100">
           <mat-label>Choisir une heure de début</mat-label>
@@ -39,7 +39,7 @@
           <mat-select formControlName="salle">
             <mat-option
               *ngFor="let salle of salles$ | async"
-              [value]="salle.nom"
+              [value]="salle"
             >
               {{ salle.nom }}
             </mat-option>
@@ -64,12 +64,12 @@
         <br />
         <mat-form-field class="w-100">
           <mat-label>Choisir les participants</mat-label>
-          <mat-select formControlName="participant" multiple>
+          <mat-select formControlName="utilisateur" multiple>
             <mat-option
-              *ngFor="let participant of participants$ | async"
-              [value]="participant.nom"
+              *ngFor="let utilisateur of utilisateurs$ | async"
+              [value]="utilisateur"
             >
-              {{ participant.prenom }}
+              {{ utilisateur.nom }} {{utilisateur.prenom}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -90,7 +90,6 @@
         </div>
         <app-buttons
           [value]="btnValide"
-          (click)="onAddBook(formValues)"
         ></app-buttons>
       </form>
     </div>
@@ -104,9 +103,12 @@
         <div *ngIf="bookDeleted">
           <h3>La réservation est supprimée !</h3>
         </div>
-        <li *ngFor="let book of bookList$ | async; let i=index">{{book.salle}} réservée le {{book.date_reservation}}
+        <li class="d-flex align-items-center" *ngFor="let book of bookList$ | async; let i=index">
+          <span class="d-flex justify-content-start">
+            {{book.salle.nom}} réservée le {{book.date_evenement | date: 'dd/MM/yy' }} à {{ book.creneau | slice: 0:2 }}:{{ book.creneau | slice: 2 }}
+        </span>
           <div class="example-button-container">
-            <form [formGroup]="formValues" (ngSubmit)="onDeleteBook(book.id)">
+            <form  [formGroup]="formValues" (ngSubmit)="onDeleteBook(book.id)">
               <button mat-icon-button style="color: red; font-size: 20px;">
                 <mat-icon>delete</mat-icon>
               </button>
