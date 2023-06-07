@@ -1,51 +1,82 @@
-<div class="d-flex flex-column p-3">
-    <h1 class="d-flex justify-content-center">Créer un évènement</h1>
-    <p class="d-flex justify-content-center">Partagez les évènements avec les co-membres</p>
-</div>
-<div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
+<div class="row">
+  <div class="col-md-7">
+    <div class="d-flex flex-column p-3">
+      <h1 class="d-flex justify-content-center">Créer un évènement</h1>
+    </div>
+    <div class="d-flex flex-column container p-5 mb-5 bg-body-tertiary">
+      <form [formGroup]="formValues" (ngSubmit)="onAddEvent(formValues)">
+        <!-- <form [formGroup]="formValues" (ngSubmit)="alertFormValues(formValues)"> -->
+        <!-- selection date-->
+        <h3></h3>
+        <mat-form-field class="w-100">
+          <mat-label>Date de l'évènement</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            placeholder="Date de la réservation"
+            formControlName="dateEvenement"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
 
-    <!-- selection date-->
-    <h3 class="groupe">Date de l'évènement : </h3>
-    <mat-form-field class="date">
-        <input matInput [matDatepicker]="picker" placeholder="Date de la réservation" [(ngModel)]="selectedDate">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
+        <!-- catégorie de jeux-->
+        <br />
+        <mat-form-field class="w-100">
+          <mat-label>Choisir la catégorie</mat-label>
+          <mat-select formControlName="categorie">
+            <mat-option
+              *ngFor="let categorie of categories$ | async"
+              [value]="categorie.nom"
+            >
+              {{ categorie.nom }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-    <!-- catégorie de jeux-->
-    <h3>Catégorie de jeux :</h3>
-    <mat-form-field class="categorie">
-        <mat-label>Choisir la catégorie</mat-label>
-        <mat-select [(ngModel)]="selectedGame">
-          <mat-option *ngFor="let categorie of categories$ | async" [value]="categorie.nom">
-            {{ categorie.nom }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+        <!-- lieu-->
+        <br />
+        <mat-form-field class="w-100">
+          <mat-label>Lieu</mat-label>
+          <input
+            matInput
+            formControlName="lieu"
+            placeholder="Lieu"
+            class="matinput"
+          />
+        </mat-form-field>
 
-    <!-- lieu-->
-    <h3>Lieu : </h3>
-    <mat-form-field >
-        <textarea matInput placeholder="Lieu" [(ngModel)]="lieu" class="matinput"></textarea>
-      </mat-form-field>  
+        <!-- choix salle-->
+        <br />
+        <mat-form-field class="w-100">
+          <mat-label>Choisir une salle</mat-label>
+          <mat-select formControlName="salle">
+            <mat-option
+              *ngFor="let salle of salles$ | async"
+              [value]="salle.nom"
+            >
+              {{ salle.nom }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-      <!-- choix salle-->
-   <mat-form-field class="salle">
-    <mat-label>Choisir une salle</mat-label>
-    <mat-select [(ngModel)]="selectedRooms">
-      <mat-option *ngFor="let salle of salles$ | async" [value]="salle.nom">
-        {{ salle.nom }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  
-      <!-- description-->
-    <h3>Description de l'évènement : </h3>
-    <mat-form-field >
-        <textarea matInput placeholder="Description" [(ngModel)]="description" class="matinput"></textarea>
-    </mat-form-field>
+        <!-- description-->
+        <br />
 
-<!--ce matériel angular fait planter les ngIf du composant parent
+        <mat-form-field class="w-100">
+          <mat-label>Description de l'évènement</mat-label>
+          <input
+            matInput
+            formControlName="description"
+            placeholder="Description"
+            class="matinput"
+          />
+        </mat-form-field>
+
+        <!--ce matériel angular fait planter les ngIf du composant parent
     <mat-form-field>
         <mat-label>Choisissez un fichier</mat-label>
         <input matInput type="file" (change)="onFileSelected($event)">
@@ -53,12 +84,38 @@
             <mat-icon>clear</mat-icon>
         </button>
     </mat-form-field>-->
-    <div class="d-flex input-group input-group-lg p-5 ">
-        <div class="d-flex align-items-center p-2 flex-grow-1">
-            <input type="file" class="form-control" [(ngModel)]="selectedFile">
+        <div>
+          <input
+            class="w-100"
+            type="file"
+            class="form-control"
+            formControlName="file"
+          />
         </div>
+        <app-buttons [value]="btnValide" class="button"></app-buttons>
+      </form>
     </div>
-        
-    <app-buttons [value]="btnValide" (click)="onAddEvent($event)" class="button"></app-buttons>
-
+  </div>
+  <div class="col-md-5">
+    <div class="d-flex flex-column p-3">
+      <h1 class="d-flex justify-content-center">Evènements existants</h1>
+    </div>
+    <div class="d-flex flex-column container p-5 mb-5 bg-body-tertiary">
+      <ul>
+        <div *ngIf="eventDeleted">
+          <h3>L'évènement est supprimée !</h3>
+        </div>
+        <li *ngFor="let event of eventList$ | async; let i = index">
+          {{ event.nom }}
+          <div class="example-button-container">
+            <form [formGroup]="formValues" (ngSubmit)="onDeleteEvent(event.id)">
+              <button mat-icon-button style="color: red; font-size: 20px">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </form>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
