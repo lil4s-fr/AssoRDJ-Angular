@@ -5,6 +5,7 @@ import Article from 'src/app/models/article.model';
 import Categorie from 'src/app/models/categorie.model';
 import { ArticleService } from 'src/app/services/article.service';
 import { CategorieService } from 'src/app/services/categorie.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-create-article',
@@ -20,6 +21,8 @@ export class CreateArticleComponent implements OnInit{
   // boolean pour affichage de la validation de la requelle
   articleValide: boolean = false;
   articleDeleted: boolean = false;
+  dateDuJour!: Date;
+  formatedDateDuJour!: string;
 
   // je donne le nom au bouton
   btnValide: string = "Valider l'article";
@@ -27,12 +30,13 @@ export class CreateArticleComponent implements OnInit{
   formValues: FormGroup = this.formBuilder.group({
     // je crée les champs qui sont un FormControl
     categorie: [[]],
-    utilisateur: ['', Validators.required],
+    utilisateur: [[]],
     titre: ['', Validators.required], // je peux mettre un ou plusieurs validateur(s)
     corps: ['', Validators.required], 
-    date_ecriture: ['', Validators.required]
+    date_ecriture: ['', Validators.required],
+    date_modif: [''],
+    like_dislike: ['']
   });
-  //TODO: récupération de la date du jour pour l'envoyer dans le back
 
   // formValues pour la suppression de la salle
   deleteFormValues: FormGroup = this.formBuilder.group([{
@@ -52,9 +56,14 @@ export class CreateArticleComponent implements OnInit{
     private articleService: ArticleService,
     private categorieService: CategorieService
     ){
+      
+      
   }
 
   ngOnInit(): void {
+    this.dateDuJour = new Date();
+
+
       // je réinitialise si l'utilisateur change les champs
     this.formValues.valueChanges.subscribe(()=> {
       this.submitted=false;
@@ -63,6 +72,21 @@ export class CreateArticleComponent implements OnInit{
       this.submitted=false;
     })
   }
+
+
+  formatDate(dateDuJour: Date) {
+    let month = '' + (dateDuJour.getMonth() + 1);
+    let day = '' + dateDuJour.getDate();
+    let year = dateDuJour.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
 
   /**
    * envoie les éléments de l'évènement vers le service
@@ -75,6 +99,17 @@ export class CreateArticleComponent implements OnInit{
     // je passe la variable submitted à true pour pouvoir afficher a confirmation à l'écran avec un ngIf
     this.submitted = true;
 
+    console.log(this.dateDuJour);
+    
+    const formattedDateEcriture = this.formatDate(formGroup.value.date_ecriture);
+
+    console.log(formattedDateEcriture);
+    
+    formGroup.patchValue({
+      date_ecriture: formattedDateEcriture
+    });
+    console.log(formGroup);
+    
     //  je vérifie si le formulaire est valide
     if (formGroup.valid) {
       // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
@@ -113,4 +148,5 @@ export class CreateArticleComponent implements OnInit{
   alertFormValues(formGroup: FormGroup) {
     alert(JSON.stringify(formGroup.value, null, 2));
   }
+
 }
