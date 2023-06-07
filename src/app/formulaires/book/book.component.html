@@ -85,9 +85,6 @@
           ></textarea>
         </mat-form-field>
 
-        <div *ngIf="bookValide">
-          <h3>La réservation est validée !</h3>
-        </div>
         <app-buttons
           [value]="btnValide"
         ></app-buttons>
@@ -100,9 +97,6 @@
     </div>
     <div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
       <ul>
-        <div *ngIf="bookDeleted">
-          <h3>La réservation est supprimée !</h3>
-        </div>
         <li class="d-flex align-items-center justify-content-between" *ngFor="let book of bookList$ | async; let i=index">
           <span>
             {{book.salle.nom}} réservée le {{book.date_evenement | date: 'dd/MM/yy' }} à {{ book.creneau | slice: 0:2 }}:{{ book.creneau | slice: 2 }}

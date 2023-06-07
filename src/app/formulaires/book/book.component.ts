@@ -155,6 +155,7 @@ export class BookComponent implements OnInit{
       this.reservationService.createReservation(formGroup.value).subscribe(
         (response:any) => {
           this.bookValide=true;
+          window.location.reload();
         },
         (error:any) => {
           //throw erreur
@@ -173,6 +174,7 @@ export class BookComponent implements OnInit{
     this.reservationService.deleteReservation(id).subscribe(
       (response:any) => {
         this.bookDeleted=true;
+        window.location.reload();
       },
       (error:any) => {
         //throw erreur
