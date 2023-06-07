@@ -103,17 +103,23 @@
         <div *ngIf="bookDeleted">
           <h3>La réservation est supprimée !</h3>
         </div>
-        <li class="d-flex align-items-center" *ngFor="let book of bookList$ | async; let i=index">
-          <span class="d-flex justify-content-start">
+        <li class="d-flex align-items-center justify-content-between" *ngFor="let book of bookList$ | async; let i=index">
+          <span>
             {{book.salle.nom}} réservée le {{book.date_evenement | date: 'dd/MM/yy' }} à {{ book.creneau | slice: 0:2 }}:{{ book.creneau | slice: 2 }}
-        </span>
-          <div class="example-button-container">
-            <form  [formGroup]="formValues" (ngSubmit)="onDeleteBook(book.id)">
-              <button mat-icon-button style="color: red; font-size: 20px;">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </form>
-          </div>
+          </span>
+            <div class="example-button-container">
+              <form  [formGroup]="formValues" (ngSubmit)="onDeleteBook(book.id)">
+                <button *ngIf="book.validation" mat-icon-button style="color: green; font-size: 10px;">
+                  <mat-icon>done_outline</mat-icon>
+                </button>
+                <button *ngIf="!book.validation" mat-icon-button style="color: red; font-size: 10px;">
+                  <mat-icon>highlight_off</mat-icon>
+                </button>
+                <button mat-icon-button style="color: white; font-size: 10px;">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </form>
+            </div>
         </li>
       </ul>
     </div>
