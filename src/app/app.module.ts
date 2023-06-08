@@ -43,6 +43,7 @@ import { CreateUserComponent } from './formulaires/create-user/create-user.compo
 import { LastEventComponent } from './pages/home/last-event/last-event.component';
 import { DatePipe } from '@angular/common';
 import { ModifierUtilisateurComponent } from './pages/modifier-utilisateur/modifier-utilisateur.component';
+import { ModifierSalleComponent } from './pages/modifier-salle/modifier-salle.component';
 
 
 @NgModule({
@@ -70,7 +71,8 @@ import { ModifierUtilisateurComponent } from './pages/modifier-utilisateur/modif
     CreateRoomComponent,
     CreateUserComponent,
     LastEventComponent,
-    ModifierUtilisateurComponent
+    ModifierUtilisateurComponent,
+    ModifierSalleComponent
   ],
   imports: [
     BrowserModule,

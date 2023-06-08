@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import Salle from 'src/app/models/salle.model';
 import { SalleService } from 'src/app/services/salle.service';
 
@@ -47,7 +48,8 @@ export class CreateRoomComponent  implements OnInit{
   // nommée formBuilder de type formBuilder
   constructor(
     private formBuilder: FormBuilder,
-    private salleService: SalleService
+    private salleService: SalleService,
+    private router: Router,
     ){}
 
   ngOnInit() {
@@ -93,23 +95,27 @@ export class CreateRoomComponent  implements OnInit{
    * suppression d'une salle
    * @param id de la salle
    */
-  onDeleteSalle(id: number) {    
-    // je passe la variable submitted à true
-    this.deleteSubmitted = true;
+  // onDeleteSalle(id: number) {    
+  //   // je passe la variable submitted à true
+  //   this.deleteSubmitted = true;
       
-    this.salleService.deleteSalle(id).subscribe(
-      (response:any) => {
-        this.salleDeleted=true;
-      },
-      (error:any) => {
-        //throw erreur
-        console.log(error);
-      }
-    )    
-  }
+  //   this.salleService.deleteSalle(id).subscribe(
+  //     (response:any) => {
+  //       this.salleDeleted=true;
+  //     },
+  //     (error:any) => {
+  //       //throw erreur
+  //       console.log(error);
+  //     }
+  //   )    
+  // }
 
   //debug pour vérifier si les datas sont valides.
   alertFormValues(formGroup: FormGroup) {
     alert(JSON.stringify(formGroup.value, null, 2));
+  }
+
+  onRedirectEditSalle(id: number){
+    this.router.navigate(['/modifiersalle', id])
   }
 }
