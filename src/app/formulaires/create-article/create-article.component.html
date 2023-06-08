@@ -12,10 +12,10 @@
         <h3></h3>
         <mat-form-field class="w-100">
           <mat-label>Choisir la catégorie</mat-label>
-          <mat-select formControlName="categorie">
+          <mat-select formControlName="categories">
             <mat-option
               *ngFor="let categorie of categories$ | async"
-              [value]="categorie.nom"
+              [value]="categorie.id"
             >
               {{ categorie.nom }}
             </mat-option>
