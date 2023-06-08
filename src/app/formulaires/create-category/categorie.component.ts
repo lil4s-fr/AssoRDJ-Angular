@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import Categorie from 'src/app/models/categorie.model';
 import { CategorieService } from 'src/app/services/categorie.service';
 
@@ -34,7 +35,8 @@ export class CategorieComponent implements OnInit{
   // je crée un constructeur qui prend en paramètre la déclaration d'une variable nommée formBuilder de type formBuilder
   constructor(
     private formBuilder: FormBuilder,
-    private categorieService: CategorieService
+    private categorieService: CategorieService,
+    private router:Router
     ){
   }
 
@@ -87,5 +89,8 @@ export class CategorieComponent implements OnInit{
   //debug pour vérifier si les datas sont valides.
   alertFormValues(formGroup: FormGroup) {
     alert(JSON.stringify(formGroup.value, null, 2));
+  }
+  onRedirectEditSalle(id: number){
+    this.router.navigate(['/modifiercategorie', id])
   }
 }

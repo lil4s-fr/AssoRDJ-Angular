@@ -34,8 +34,13 @@
           <div *ngIf="salleDeleted">
             <h3>La catégorie est supprimée !</h3>
           </div>
-          <li *ngFor="let category of categoryList$ | async">{{category.nom}} : {{category.description}}
-            <div class="example-button-container">
+          <li *ngFor="let category of categoryList$ | async" class="d-flex flex-wrap align-items-center justify-content-between">{{category.nom}} : {{category.description}}
+            <div class="example-button-container d-flex ">
+              <form [formGroup]="formValues" >
+                <button mat-icon-button style="color: white; font-size: 20px;">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </form>
               <form [formGroup]="formValues" (ngSubmit)="onDeleteCategory(category.id)">
                 <button mat-icon-button style="color: red; font-size: 20px;">
                   <mat-icon>delete</mat-icon>
