@@ -23,6 +23,8 @@ export class ArticlesComponent implements OnInit{
       this.addNewArticle = false;
       this.articleService.getArticles().subscribe((articles) => {
         this.articles = articles;
+        console.log(articles);
+        
       })
   }
 

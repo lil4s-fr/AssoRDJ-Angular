@@ -40,7 +40,9 @@ import { CategorieComponent } from './formulaires/create-category/categorie.comp
 import { CreateRoomComponent } from './formulaires/create-room/create-room.component';
 import { CreateUserComponent } from './formulaires/create-user/create-user.component';
 import { LastEventComponent } from './pages/home/last-event/last-event.component';
+import { DatePipe } from '@angular/common';
 import { ModifierUtilisateurComponent } from './pages/modifier-utilisateur/modifier-utilisateur.component';
+
 
 @NgModule({
   declarations: [
@@ -85,7 +87,9 @@ import { ModifierUtilisateurComponent } from './pages/modifier-utilisateur/modif
     ReactiveFormsModule,
     MatSlideToggleModule
   ],
-  providers: [],
+  providers: [
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
