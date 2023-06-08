@@ -63,7 +63,7 @@
             </mat-form-field>
             
             <div *ngIf="userValide">
-              <h3>Le nouvel utilisateur est créé !</h3>
+              <h3>L'utilisateur a bien été modifié !</h3>
             </div>
             <app-buttons [value]="btnValide" class="button"></app-buttons>
           </form>
@@ -75,18 +75,37 @@
         </div>
         <div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
           <ul>
-            <div *ngIf="userDeleted">
-              <h3>Le membre est supprimé !</h3>
-            </div>
-            <li class="d-flex flex-wrap align-items-center justify-content-between" *ngFor="let user of userList$ | async; let i=index">
-              {{user.prenom}} "{{user.pseudo}}" {{user.nom}} — {{user.numeroAdherent}}
-              <div class="example-button-container">
-                <button mat-icon-button style="color: white; font-size: 20px;" (click)="onRedirectEditUser(user.id)">
-                  <mat-icon>edit</mat-icon>
-                </button>
-              </div>
+            <li class="d-flex flex-wrap align-items-center justify-content-between">
+              <strong>Nom :</strong> {{user?.nom}}
+            </li>
+            <li class="d-flex flex-wrap align-items-center justify-content-between">
+              <strong>Prénom :</strong> {{user?.prenom}}
+            </li>
+            <li class="d-flex flex-wrap align-items-center justify-content-between">
+              <strong>Numéro Adhérent :</strong> {{user?.numeroAdherent}}
+            </li>
+            <li class="d-flex flex-wrap align-items-center justify-content-between">
+              <strong>Pseudo :</strong> {{user?.pseudo}}
+            </li>
+            <li class="d-flex flex-wrap align-items-center justify-content-between">
+              <strong>Email :</strong> {{user?.email}}
+            </li>
+            <li class="d-flex flex-wrap align-items-center justify-content-between">
+              <strong>Numéro de tel :</strong> {{user?.numeroTelephone}}
+            </li>
+            <li class="d-flex flex-wrap align-items-center justify-content-between">
+              <strong>Permission :</strong> {{user?.permission?.statut}}
             </li>
           </ul>
+        </div>
+        <div class="d-flex align-items-center justify-content-center">
+          <app-buttons [value]="'Supprimer cet utilisateur'" class="button" (click)="onDeleteUser()"></app-buttons>
+          <app-buttons [value]="btnDelete" class="button" (click)="onUpdatePassword()"></app-buttons>
+        </div>
+        <div *ngIf="afficherPwd">
+          <p>Notez bien ce mot de passe, il ne s'affichera qu'une seule fois :</p>
+          <code>{{password}}</code>
+          <p *ngIf="passwordBienChange">Mot de passe modifié !</p>
         </div>
       </div>
     </div>

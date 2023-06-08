@@ -16,11 +16,18 @@ export class ModifierUtilisateurComponent implements OnInit{
   // boolean pour affichage de la validation de la requelle
   userValide: boolean = false;
   userDeleted: boolean = false;
+
+  changementMDPValide: boolean = false;
+  afficherPwd: boolean = false;
+  password!: string;
+  passwordBienChange:boolean = false;
+
   userid!: number;
   user!:Utilisateur|undefined;
 
   // je donne le nom du bouton
   btnValide: string = "Modifier le membre";
+  btnDelete: string = "Modifier le mot de passe";
 
   // formValues pour la soumission du nouveau membre
   formValues: FormGroup = this.formBuilder.group({
@@ -83,7 +90,7 @@ export class ModifierUtilisateurComponent implements OnInit{
     console.log(JSON.stringify(formGroup.value, null, 2));
     formGroup.value.permission = { "id": formGroup.value.permission }
     formGroup.value.id = this.user?.id;
-
+    alert(JSON.stringify(formGroup.value, null, 2));
     // je passe la variable submitted à true pour pouvoir afficher a confirmation à l'écran avec un ngIf
     this.submitted = true;
 
@@ -100,6 +107,63 @@ export class ModifierUtilisateurComponent implements OnInit{
       )
     }
   }
+
+  onDeleteUser(){
+    alert('deleteuser');
+  }
+
+  onUpdatePassword(){
+    if(!this.changementMDPValide){
+      this.changementMDPValide = true
+      this.btnDelete = "Etes vous sûr ?"
+    }
+    else if(this.changementMDPValide && !this.afficherPwd){
+      this.password = this.generatePassword();
+      this.afficherPwd = true;
+      let formDelete:FormGroup = this.formBuilder.group({
+        id: [this.user?.id],
+        nom: [this.user?.nom],
+        prenom: [this.user?.prenom],
+        numeroAdherent: [this.user?.numeroAdherent],
+        pseudo: [this.user?.pseudo],
+        email: [this.user?.email],
+        numeroTelephone: [this.user?.numeroTelephone],
+        hashMotDePasse: [this.password]
+      }) 
+      formDelete.value.permission = {"id": this.user?.permission.id};
+      this.userService.updateUser(formDelete.value).subscribe(
+        (response:any) => {
+          this.passwordBienChange=true;
+        },
+        (error:any) => {
+          //throw erreur
+          console.log(error);
+        }
+      )
+    }
+  }
+
+  generatePassword(){
+    //TODO: ceci n'est pas une méthode safe, et elle doit être changée à la mise
+    //en production. Il s'agit juste de faire des tests pour l'instant.
+    let wishlist = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@-#$";
+    let length = 20;
+    let pwd = new Array(length)
+
+    for (let index = 0; index < pwd.length; index++) {
+      let char = wishlist.charAt(this.getRandomInt(0, wishlist.length +1));
+      pwd[index] = char;
+    }
+
+    return pwd.join('');
+  }
+
+  getRandomInt(min:number, max:number) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+  }
+  
 
   async getUserData(){
     let returner:Utilisateur|undefined;
@@ -123,30 +187,6 @@ export class ModifierUtilisateurComponent implements OnInit{
     return returner;
   }
 
-  // onDeleteUser(id: number) {
-  //   console.log(" deleteFormValue : " + this.deleteFormValues);
-    
-  //   // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
-  //   // à l'utilisateur que le formulaire a bien été validé via un message
-  //   this.userService.deleteUser(id).subscribe(
-  //     (response:any) => {
-  //       this.userDeleted=true;
-  //     },
-  //     (error:any) => {
-  //       //throw erreur
-  //       console.log(error);
-  //     }
-  //   )
-    
-  // }
-
-
-
-  //debug pour vérifier si les datas sont valides.
-
-  onRedirectEditUser(id: number){
-    this.router.navigate(['/modifierutilisateur', id])
-  }
   alertFormValues(formGroup: FormGroup) {
     alert(JSON.stringify(formGroup.value, null, 2));
   }
