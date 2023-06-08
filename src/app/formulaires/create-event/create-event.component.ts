@@ -115,7 +115,7 @@ export class CreateEventComponent {
       
       // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
       // à l'utilisateur que le formulaire a bien été validé via un message
-      this.salleService.createSalle(formGroup.value).subscribe(
+      this.eventService.createEvent(formGroup.value).subscribe(
         (response:any) => {
           this.eventValide=true;
         },
