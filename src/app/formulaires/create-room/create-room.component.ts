@@ -20,7 +20,7 @@ export class CreateRoomComponent  implements OnInit{
 
   // formValues pour la soumission de la nouvelle salle
   formValues: FormGroup = this.formBuilder.group({
-    // je crée un champ nom qui est un FormControl, idem pour description
+    // je crée les champs du FormControl
     nom: ['', Validators.required],
     capacite: ['', Validators.required],
     lieu: ['', Validators.required],
@@ -43,12 +43,12 @@ export class CreateRoomComponent  implements OnInit{
   // je crée une liste de salles pour l'afficher
   salleList$!: Observable<Salle[]>;
 
-  // je crée un constructeur qui prend en paramètre la déclaration d'une variable nommée formBuilder de type formBuilder
+  // je crée un constructeur qui prend en paramètre la déclaration d'une variable
+  // nommée formBuilder de type formBuilder
   constructor(
     private formBuilder: FormBuilder,
     private salleService: SalleService
-    ){
-  }
+    ){}
 
   ngOnInit() {
     // je réinitialise si l'utilisateur change les champs
@@ -64,7 +64,7 @@ export class CreateRoomComponent  implements OnInit{
   }
 
   /**
-   * envoie les éléments de l'évènement vers le service au click
+   * envoie les éléments de la salle vers le service au click
    */
   onAddSalle(formGroup: FormGroup) {
     // debug
@@ -89,9 +89,11 @@ export class CreateRoomComponent  implements OnInit{
     }
   }
 
-  onDeleteSalle(id: number) {// empeche de rafraichir la page au moment de la soumisson
-    console.log("index:" + id);
-    
+  /**
+   * suppression d'une salle
+   * @param id de la salle
+   */
+  onDeleteSalle(id: number) {    
     // je passe la variable submitted à true
     this.deleteSubmitted = true;
       
@@ -103,8 +105,7 @@ export class CreateRoomComponent  implements OnInit{
         //throw erreur
         console.log(error);
       }
-    )
-    
+    )    
   }
 
   //debug pour vérifier si les datas sont valides.

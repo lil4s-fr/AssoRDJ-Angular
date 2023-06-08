@@ -5,7 +5,6 @@ import Article from 'src/app/models/article.model';
 import Categorie from 'src/app/models/categorie.model';
 import { ArticleService } from 'src/app/services/article.service';
 import { CategorieService } from 'src/app/services/categorie.service';
-import { formatDate } from '@angular/common';
 import { DateTime } from 'luxon';
 
 @Component({
@@ -14,23 +13,24 @@ import { DateTime } from 'luxon';
   styleUrls: ['./create-article.component.css']
 })
 export class CreateArticleComponent implements OnInit{
+  // instanciation d'un article
   article!: Article;
+
   // je récupère la liste des articles
   articleList$: Observable<Article[]> = this.articleService.getArticles();
+
   //je récupère la liste des catégories
   categories$: Observable<Categorie[]> =  this.categorieService.getCategories();
 
   // boolean pour affichage de la validation de la requelle
   articleValide: boolean = false;
   articleDeleted: boolean = false;
-  dateDuJour!: Date;
-  formatedDateDuJour!: string;
 
   // je donne le nom au bouton
   btnValide: string = "Valider l'article";
 
   formValues: FormGroup = this.formBuilder.group({
-    // je crée les champs qui sont un FormControl
+    // je crée les champs du FormControl
     categories: [[]],
     titre: ['', Validators.required], // je peux mettre un ou plusieurs validateur(s)
     corps: ['', Validators.required]   
@@ -67,30 +67,28 @@ export class CreateArticleComponent implements OnInit{
   }
 
   /**
-   * envoie les éléments de l'évènement vers le service
+   * envoie les éléments de ll'article vers le service
    * @param e event du template
    */
   onAddArticle(formGroup: FormGroup) {
     // debug
         console.log(JSON.stringify(formGroup.value, null, 2));
 
-    // je passe la variable submitted à true pour pouvoir afficher a confirmation à l'écran avec un ngIf
+    // je passe la variable submitted à true pour pouvoir afficher la confirmation à l'écran avec un ngIf
     this.submitted = true;
 
-    // je met la date du jour au bon format
+    // je mets la date du jour au bon format
     formGroup.value.date_ecriture = DateTime.now().toFormat('yyyy-MM-dd');
 
-    // je mets la catégorie dans l'objet à poster
+    // je mets la catégorie dans l'objet à poster et complète l'objet article
     formGroup.value.categories = [{"id": formGroup.value.categories}];
     formGroup.value.date_modif = formGroup.value.date_ecriture;
     formGroup.value.like_dislike = 0
     formGroup.value.id = this.article?.id;
-    console.log("objet catégorie : " + formGroup.value.categories);
     alert(JSON.stringify(formGroup.value, null, 2));
 
     //  je vérifie si le formulaire est valide
     if (formGroup.valid) {
-      console.log("valid");
       
       // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
       // à l'utilisateur que le formulaire a bien été validé via un message
@@ -106,8 +104,11 @@ export class CreateArticleComponent implements OnInit{
     }
   }
 
-  onDeleteArticle(id: number) {// empeche de rafraichir la page au moment de la soumisson
-    console.log("index:" + id);
+  /**
+   * suppression d'un article
+   * @param id de l'article
+   */
+  onDeleteArticle(id: number) {
     
     // je passe la variable submitted à true
     this.deleteSubmitted = true;
@@ -128,5 +129,4 @@ export class CreateArticleComponent implements OnInit{
   alertFormValues(formGroup: FormGroup) {
     alert(JSON.stringify(formGroup.value, null, 2));
   }
-
 }
