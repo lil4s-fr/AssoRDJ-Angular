@@ -55,7 +55,7 @@
         <li *ngFor="let salle of salleList$ | async; let i=index" class="d-flex flex-wrap align-items-center justify-content-between">{{salle.nom}}
           <div class="example-button-container">
             <form [formGroup]="formValues">
-              <button mat-icon-button style="color: white; font-size: 20px;">
+              <button routerLink="/modifiersalle" mat-icon-button (click)="onRedirectEditSalle(salle.id)" style="color: white; font-size: 20px;">
                 <mat-icon>edit</mat-icon>
               </button>
             </form>

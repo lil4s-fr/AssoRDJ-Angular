@@ -34,7 +34,7 @@ const routes: Routes = [
   {path: 'createEvent', component: CreateEventComponent},
   {path: 'joinEvent', component: JoinEventComponent},
   {path: 'modifierutilisateur/:id', component: ModifierUtilisateurComponent },
-  {path: 'modifiersalle/:id', component: ModifierUtilisateurComponent },
+  {path: 'modifiersalle/:id', component: ModifierSalleComponent },
   // a retirer quand la page 404 sera finie
   {path: '404', component: NotFoundComponent},
 

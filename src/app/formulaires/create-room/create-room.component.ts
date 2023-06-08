@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import Salle from 'src/app/models/salle.model';
 import { SalleService } from 'src/app/services/salle.service';
 
@@ -47,7 +48,8 @@ export class CreateRoomComponent  implements OnInit{
   // nommée formBuilder de type formBuilder
   constructor(
     private formBuilder: FormBuilder,
-    private salleService: SalleService
+    private salleService: SalleService,
+    private router: Router,
     ){}
 
   ngOnInit() {
@@ -111,5 +113,9 @@ export class CreateRoomComponent  implements OnInit{
   //debug pour vérifier si les datas sont valides.
   alertFormValues(formGroup: FormGroup) {
     alert(JSON.stringify(formGroup.value, null, 2));
+  }
+
+  onRedirectEditSalle(id: number){
+    this.router.navigate(['/modifiersalle', id])
   }
 }
