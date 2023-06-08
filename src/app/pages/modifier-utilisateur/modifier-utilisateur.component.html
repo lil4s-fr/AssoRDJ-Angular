@@ -102,6 +102,9 @@
           <app-buttons [value]="'Supprimer cet utilisateur'" class="button" (click)="onDeleteUser()"></app-buttons>
           <app-buttons [value]="btnDelete" class="button" (click)="onUpdatePassword()"></app-buttons>
         </div>
+        <div *ngIf="userDeleted">
+          <p>L'utilisateur a bien été supprimé.</p>
+        </div>
         <div *ngIf="afficherPwd">
           <p>Notez bien ce mot de passe, il ne s'affichera qu'une seule fois :</p>
           <code>{{password}}</code>

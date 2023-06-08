@@ -109,7 +109,20 @@ export class ModifierUtilisateurComponent implements OnInit{
   }
 
   onDeleteUser(){
-    alert('deleteuser');
+    let id = this.userid;
+    console.log(" deleteFormValue : " + this.deleteFormValues);
+    
+    // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
+    // à l'utilisateur que le formulaire a bien été validé via un message
+    this.userService.deleteUser(id).subscribe(
+      (response:any) => {
+        this.userDeleted=true;
+      },
+      (error:any) => {
+        //throw erreur
+        console.log(error);
+      }
+    )
   }
 
   onUpdatePassword(){
