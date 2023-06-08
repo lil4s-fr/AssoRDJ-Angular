@@ -6,6 +6,7 @@ import Categorie from 'src/app/models/categorie.model';
 import { ArticleService } from 'src/app/services/article.service';
 import { CategorieService } from 'src/app/services/categorie.service';
 import { formatDate } from '@angular/common';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'app-create-article',
@@ -78,7 +79,8 @@ export class CreateArticleComponent implements OnInit{
     // je passe la variable submitted à true pour pouvoir afficher a confirmation à l'écran avec un ngIf
     this.submitted = true;
 
-    formGroup.value.date_ecriture = "2023-06-08"
+    formGroup.value.date_ecriture = DateTime.now().toFormat('yyyy-MM-dd');
+    
     console.log(JSON.stringify(formGroup.value, null, 2));
     //  je vérifie si le formulaire est valide
     if (formGroup.valid) {
