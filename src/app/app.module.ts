@@ -41,6 +41,8 @@ import { CreateRoomComponent } from './formulaires/create-room/create-room.compo
 import { CreateUserComponent } from './formulaires/create-user/create-user.component';
 import { LastEventComponent } from './pages/home/last-event/last-event.component';
 import { DatePipe } from '@angular/common';
+import { ModifierUtilisateurComponent } from './pages/modifier-utilisateur/modifier-utilisateur.component';
+
 
 @NgModule({
   declarations: [
@@ -66,7 +68,8 @@ import { DatePipe } from '@angular/common';
     CategorieComponent,
     CreateRoomComponent,
     CreateUserComponent,
-    LastEventComponent
+    LastEventComponent,
+    ModifierUtilisateurComponent
   ],
   imports: [
     BrowserModule,
