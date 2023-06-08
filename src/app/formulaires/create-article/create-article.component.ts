@@ -30,12 +30,8 @@ export class CreateArticleComponent implements OnInit{
   formValues: FormGroup = this.formBuilder.group({
     // je crée les champs qui sont un FormControl
     categorie: [[]],
-    utilisateur: [[]],
     titre: ['', Validators.required], // je peux mettre un ou plusieurs validateur(s)
-    corps: ['', Validators.required], 
-    date_ecriture: ['', Validators.required],
-    date_modif: [''],
-    like_dislike: ['']
+    corps: ['', Validators.required]   
   });
 
   // formValues pour la suppression de la salle
@@ -61,10 +57,8 @@ export class CreateArticleComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.dateDuJour = new Date();
 
-
-      // je réinitialise si l'utilisateur change les champs
+    // je réinitialise si l'utilisateur change les champs
     this.formValues.valueChanges.subscribe(()=> {
       this.submitted=false;
     })
@@ -73,45 +67,23 @@ export class CreateArticleComponent implements OnInit{
     })
   }
 
-
-  formatDate(dateDuJour: Date) {
-    let month = '' + (dateDuJour.getMonth() + 1);
-    let day = '' + dateDuJour.getDate();
-    let year = dateDuJour.getFullYear();
-
-    if (month.length < 2) 
-        month = '0' + month;
-    if (day.length < 2) 
-        day = '0' + day;
-
-    return [year, month, day].join('-');
-}
-
-
   /**
    * envoie les éléments de l'évènement vers le service
    * @param e event du template
    */
   onAddArticle(formGroup: FormGroup) {
     // debug
-    console.log(JSON.stringify(formGroup.value, null, 2));
+    
 
     // je passe la variable submitted à true pour pouvoir afficher a confirmation à l'écran avec un ngIf
     this.submitted = true;
 
-    console.log(this.dateDuJour);
-    
-    const formattedDateEcriture = this.formatDate(formGroup.value.date_ecriture);
-
-    console.log(formattedDateEcriture);
-    
-    formGroup.patchValue({
-      date_ecriture: formattedDateEcriture
-    });
-    console.log(formGroup);
-    
+    formGroup.value.date_ecriture = "2023-06-08"
+    console.log(JSON.stringify(formGroup.value, null, 2));
     //  je vérifie si le formulaire est valide
     if (formGroup.valid) {
+      console.log("valid");
+      
       // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
       // à l'utilisateur que le formulaire a bien été validé via un message
       this.articleService.createArticle(formGroup.value).subscribe(
