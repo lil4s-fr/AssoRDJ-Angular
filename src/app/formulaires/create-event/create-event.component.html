@@ -9,12 +9,28 @@
         <!-- selection date-->
         <h3></h3>
         <mat-form-field class="w-100">
-          <mat-label>Date de l'évènement</mat-label>
+          <mat-label>Date de début de l'évènement</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            placeholder="Date de début de l'évènement"
+            formControlName="dateDebut"
+          />
+          
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+        
+        <mat-form-field class="w-100">
+          <mat-label>Date de fin de l'évènement</mat-label>
           <input
             matInput
             [matDatepicker]="picker"
-            placeholder="Date de la réservation"
-            formControlName="dateEvenement"
+            placeholder="Date de fin de l'évènement"
+            formControlName="dateFin"
           />
           <mat-datepicker-toggle
             matSuffix
@@ -23,14 +39,26 @@
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
+        <!-- nom-->
+        <br />
+        <mat-form-field class="w-100">
+          <mat-label>Nom de l'évènement</mat-label>
+          <input
+            matInput
+            formControlName="nom"
+            placeholder="Nom"
+            class="matinput"
+          />
+        </mat-form-field>
+
         <!-- catégorie de jeux-->
         <br />
         <mat-form-field class="w-100">
           <mat-label>Choisir la catégorie</mat-label>
-          <mat-select formControlName="categorie">
+          <mat-select formControlName="categories">
             <mat-option
               *ngFor="let categorie of categories$ | async"
-              [value]="categorie.nom"
+              [value]="categorie.id"
             >
               {{ categorie.nom }}
             </mat-option>
@@ -40,7 +68,7 @@
         <!-- lieu-->
         <br />
         <mat-form-field class="w-100">
-          <mat-label>Lieu</mat-label>
+          <mat-label>Lieu et adresse</mat-label>
           <input
             matInput
             formControlName="lieu"
@@ -49,23 +77,8 @@
           />
         </mat-form-field>
 
-        <!-- choix salle-->
-        <br />
-        <mat-form-field class="w-100">
-          <mat-label>Choisir une salle</mat-label>
-          <mat-select formControlName="salle">
-            <mat-option
-              *ngFor="let salle of salles$ | async"
-              [value]="salle.nom"
-            >
-              {{ salle.nom }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
         <!-- description-->
         <br />
-
         <mat-form-field class="w-100">
           <mat-label>Description de l'évènement</mat-label>
           <input
@@ -76,22 +89,6 @@
           />
         </mat-form-field>
 
-        <!--ce matériel angular fait planter les ngIf du composant parent
-    <mat-form-field>
-        <mat-label>Choisissez un fichier</mat-label>
-        <input matInput type="file" (change)="onFileSelected($event)">
-        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="clearFileInput()">
-            <mat-icon>clear</mat-icon>
-        </button>
-    </mat-form-field>-->
-        <div>
-          <input
-            class="w-100"
-            type="file"
-            class="form-control"
-            formControlName="file"
-          />
-        </div>
         <app-buttons [value]="btnValide" class="button"></app-buttons>
       </form>
     </div>

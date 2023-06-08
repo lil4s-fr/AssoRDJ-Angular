@@ -8,13 +8,14 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
 // Import Angular material
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -85,7 +86,7 @@ import { ModifierUtilisateurComponent } from './pages/modifier-utilisateur/modif
     MatButtonModule,
     MatIconModule,
     ReactiveFormsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
   ],
   providers: [
     DatePipe
