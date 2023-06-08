@@ -37,7 +37,7 @@
           <li *ngFor="let category of categoryList$ | async" class="d-flex flex-wrap align-items-center justify-content-between">{{category.nom}} : {{category.description}}
             <div class="example-button-container d-flex ">
               <form [formGroup]="formValues" >
-                <button mat-icon-button style="color: white; font-size: 20px;">
+                <button mat-icon-button (click)="onRedirectEditCategorie(category.id)" style="color: white; font-size: 20px;">
                   <mat-icon>edit</mat-icon>
                 </button>
               </form>

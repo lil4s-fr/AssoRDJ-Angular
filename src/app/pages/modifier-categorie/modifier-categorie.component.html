@@ -1,1 +1,48 @@
-<p>modifier-categorie works!</p>
+<div *ngIf="isLoaded | async">
+  
+    <div class="row m-0">
+      <div class="col-md-7">
+        <div class="d-flex flex-column p-3">
+          <h1 class="d-flex justify-content-center">Modifier les informations :</h1>
+        </div>
+        <div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
+          <form [formGroup]="formValues" (ngSubmit)="onEditCategorie(formValues)">
+            <!-- <form [formGroup]="formValues" (ngSubmit)="alertFormValues(formValues)"> -->
+              <!-- nom-->
+              <br>
+              <mat-form-field class="w-100">
+                <mat-label>Nom de la categorie :</mat-label>
+                <input matInput formControlName="nom" placeholder="Nom" class="matinput">
+              </mat-form-field>
+              
+              <!-- description-->
+              <br>
+              <mat-form-field class="w-100">
+                <mat-label>Description de la categorie :</mat-label>
+                <input matInput formControlName="description" placeholder="Déscription" class="matinput">
+              </mat-form-field>
+              
+              <div *ngIf="categorieValide">
+                <h3>La catégorie a bien été modifié !</h3>
+              </div>
+              <app-buttons [value]="btnValide" class="button"></app-buttons>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="d-flex flex-column p-3">
+            <h1 class="d-flex justify-content-center">Anciennes informations :</h1>
+          </div>
+          <div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
+            <ul>
+              <li class="d-flex flex-wrap align-items-center justify-content-between">
+                <strong>Nom :</strong> {{categorie?.nom}}
+              </li>
+              <li class="d-flex flex-wrap align-items-center justify-content-between">
+                <strong>Déscription :</strong> {{categorie?.description}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>

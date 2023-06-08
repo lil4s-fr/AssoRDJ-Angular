@@ -90,7 +90,7 @@ export class CategorieComponent implements OnInit{
   alertFormValues(formGroup: FormGroup) {
     alert(JSON.stringify(formGroup.value, null, 2));
   }
-  onRedirectEditSalle(id: number){
+  onRedirectEditCategorie(id: number){
     this.router.navigate(['/modifiercategorie', id])
   }
 }
