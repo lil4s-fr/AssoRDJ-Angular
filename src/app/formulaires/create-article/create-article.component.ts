@@ -14,6 +14,7 @@ import { DateTime } from 'luxon';
   styleUrls: ['./create-article.component.css']
 })
 export class CreateArticleComponent implements OnInit{
+  article!: Article;
   // je récupère la liste des articles
   articleList$: Observable<Article[]> = this.articleService.getArticles();
   //je récupère la liste des catégories
@@ -30,7 +31,7 @@ export class CreateArticleComponent implements OnInit{
 
   formValues: FormGroup = this.formBuilder.group({
     // je crée les champs qui sont un FormControl
-    categorie: [[]],
+    categories: [[]],
     titre: ['', Validators.required], // je peux mettre un ou plusieurs validateur(s)
     corps: ['', Validators.required]   
   });
@@ -52,10 +53,7 @@ export class CreateArticleComponent implements OnInit{
     private formBuilder: FormBuilder,
     private articleService: ArticleService,
     private categorieService: CategorieService
-    ){
-      
-      
-  }
+    ){}
 
   ngOnInit(): void {
 
@@ -74,14 +72,22 @@ export class CreateArticleComponent implements OnInit{
    */
   onAddArticle(formGroup: FormGroup) {
     // debug
-    
+        console.log(JSON.stringify(formGroup.value, null, 2));
 
     // je passe la variable submitted à true pour pouvoir afficher a confirmation à l'écran avec un ngIf
     this.submitted = true;
 
+    // je met la date du jour au bon format
     formGroup.value.date_ecriture = DateTime.now().toFormat('yyyy-MM-dd');
-    
-    console.log(JSON.stringify(formGroup.value, null, 2));
+
+    // je mets la catégorie dans l'objet à poster
+    formGroup.value.categories = [{"id": formGroup.value.categories}];
+    formGroup.value.date_modif = formGroup.value.date_ecriture;
+    formGroup.value.like_dislike = 0
+    formGroup.value.id = this.article?.id;
+    console.log("objet catégorie : " + formGroup.value.categories);
+    alert(JSON.stringify(formGroup.value, null, 2));
+
     //  je vérifie si le formulaire est valide
     if (formGroup.valid) {
       console.log("valid");
