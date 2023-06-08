@@ -44,6 +44,7 @@ import { LastEventComponent } from './pages/home/last-event/last-event.component
 import { DatePipe } from '@angular/common';
 import { ModifierUtilisateurComponent } from './pages/modifier-utilisateur/modifier-utilisateur.component';
 import { ModifierSalleComponent } from './pages/modifier-salle/modifier-salle.component';
+import { ModifierCategorieComponent } from './pages/modifier-categorie/modifier-categorie.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { ModifierSalleComponent } from './pages/modifier-salle/modifier-salle.co
     CreateUserComponent,
     LastEventComponent,
     ModifierUtilisateurComponent,
-    ModifierSalleComponent
+    ModifierSalleComponent,
+    ModifierCategorieComponent
   ],
   imports: [
     BrowserModule,

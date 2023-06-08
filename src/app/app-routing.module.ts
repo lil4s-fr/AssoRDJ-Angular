@@ -16,6 +16,7 @@ import { CreateRoomComponent } from './formulaires/create-room/create-room.compo
 import { CreateUserComponent } from './formulaires/create-user/create-user.component';
 import { ModifierUtilisateurComponent } from './pages/modifier-utilisateur/modifier-utilisateur.component';
 import { ModifierSalleComponent } from './pages/modifier-salle/modifier-salle.component';
+import { ModifierCategorieComponent } from './pages/modifier-categorie/modifier-categorie.component';
 
 const routes: Routes = [
   {path :'', redirectTo: 'home', pathMatch: 'full'},
@@ -35,6 +36,7 @@ const routes: Routes = [
   {path: 'joinEvent', component: JoinEventComponent},
   {path: 'modifierutilisateur/:id', component: ModifierUtilisateurComponent },
   {path: 'modifiersalle/:id', component: ModifierSalleComponent },
+  {path: 'modifiercategorie/:id', component: ModifierCategorieComponent },
   // a retirer quand la page 404 sera finie
   {path: '404', component: NotFoundComponent},
 
