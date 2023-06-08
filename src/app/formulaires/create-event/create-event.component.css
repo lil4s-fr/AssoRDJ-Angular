@@ -27,3 +27,6 @@ h1, h3 {
 .button {
     margin: 50px;
 }
+.demo-inline-calendar-card {
+    width: 300px;
+}

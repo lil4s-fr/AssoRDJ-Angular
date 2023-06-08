@@ -43,7 +43,7 @@
             formControlName="corps"
             placeholder="Corps de l'article"
             class="matinput"
-          >
+          />
         </mat-form-field>
 
         <div *ngIf="articleValide">
@@ -57,15 +57,19 @@
     <div class="d-flex flex-column p-3">
       <h1 class="d-flex justify-content-center">Articles existants</h1>
     </div>
-    <div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
+    <div class="d-flex flex-column container p-5 mb-5 bg-body-tertiary">
       <ul>
         <div *ngIf="articleDeleted">
           <h3>L'article est supprimé !</h3>
         </div>
-        <li *ngFor="let article of articleList$ | async">{{article.titre}}
+        <li *ngFor="let article of articleList$ | async">
+          {{ article.titre }}
           <div class="example-button-container">
-            <form [formGroup]="formValues" (ngSubmit)="onDeleteArticle(article.id)">
-              <button mat-icon-button style="color: red; font-size: 20px;">
+            <form
+              [formGroup]="formValues"
+              (ngSubmit)="onDeleteArticle(article.id)"
+            >
+              <button mat-icon-button style="color: red; font-size: 20px">
                 <mat-icon>delete</mat-icon>
               </button>
             </form>
