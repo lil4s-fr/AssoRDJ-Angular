@@ -101,6 +101,8 @@
           <span>
             {{book.salle.nom}} réservée le {{book.date_evenement | date: 'dd/MM/yy' }} à {{ book.creneau | slice: 0:2 }}:{{ book.creneau | slice: 2 }}
           </span>
+          <!-- mettre un ngIf sur le bouton valid en fonction de la permission de l'utilisateru
+          pour que le créateur de la réservation ne puisse pas le valider lui-même-->
             <div class="d-flex align-items-center">
               <form  [formGroup]="formValues" (ngSubmit)="updateValidation(book)" >
                 <button *ngIf="book.validation"  mat-icon-button style="color: green; font-size: 10px;">
