@@ -53,10 +53,15 @@
           <h3>La salle est supprimée !</h3>
         </div>
         <li *ngFor="let salle of salleList$ | async; let i=index" class="d-flex flex-wrap align-items-center justify-content-between">{{salle.nom}}
-          <div class="example-button-container">
+          <div class="example-button-container d-flex ">
             <form [formGroup]="formValues">
               <button routerLink="/modifiersalle" mat-icon-button (click)="onRedirectEditSalle(salle.id)" style="color: white; font-size: 20px;">
                 <mat-icon>edit</mat-icon>
+              </button>
+            </form>
+            <form [formGroup]="formValues" (ngSubmit)="onDeleteSalle(salle.id)">
+              <button mat-icon-button  style="color: red; font-size: 20px;">
+                <mat-icon>delete</mat-icon>
               </button>
             </form>
           </div>
