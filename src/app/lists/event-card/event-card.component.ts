@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import Categorie from 'src/app/models/categorie.model';
 import Evenement from 'src/app/models/evenement.model';
 import Utilisateur from 'src/app/models/utilisateur.model';
