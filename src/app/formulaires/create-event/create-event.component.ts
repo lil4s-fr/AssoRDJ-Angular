@@ -36,7 +36,7 @@ export class CreateEventComponent {
     // je crée les champs du FormControl
     nom: ['', Validators.required],
     dateDebut: ['', Validators.required],
-    dateFin: [''],
+    dateFin: ['', Validators.required],
     categories: ['', Validators.required],
     lieu: ['', Validators.required],
     description: ['', Validators.required]
