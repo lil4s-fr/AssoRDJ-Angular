@@ -13,11 +13,8 @@
           <input
             matInput
             [matDatepicker]="picker1"
-            placeholder="Date de début de l'évènement"
+            placeholder="Utilisez le calendrier pour choisir votre date ! 👉"
             formControlName="dateDebut"
-            type="date"
-            id="dateInput"
-            name="dateInput"
           />
           <mat-datepicker-toggle
             matSuffix
@@ -31,11 +28,8 @@
           <input
             matInput
             [matDatepicker]="picker"
-            placeholder="Date de début de l'évènement"
+            placeholder="Utilisez le calendrier pour choisir votre date ! 👉"
             formControlName="dateFin"
-            type="date"
-            id="dateInput"
-            name="dateInput"
           />
           <mat-datepicker-toggle
             matSuffix
@@ -96,6 +90,7 @@
 
         <app-buttons [value]="btnValide" class="button"></app-buttons>
       </form>
+      <h2 *ngIf="eventValide">L'évènement a bien été créé !</h2>
     </div>
   </div>
   <div class="col-md-5">

@@ -11,7 +11,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -44,6 +44,21 @@ import { LastEventComponent } from './pages/home/last-event/last-event.component
 import { DatePipe } from '@angular/common';
 import { ModifierUtilisateurComponent } from './pages/modifier-utilisateur/modifier-utilisateur.component';
 
+import { NativeDateAdapter, DateAdapter } from "@angular/material/core";
+    
+export class FrenchDateAdapter extends NativeDateAdapter {
+  override parse(value: any): Date | null {
+    if ((typeof value === 'string') && (value.indexOf('/') > -1)) {
+      const str = value.split('/');
+      if (str.length < 2 || isNaN(+str[0]) || isNaN(+str[1]) || isNaN(+str[2])) {
+        return null;
+      }
+      return new Date(Number(str[2]), Number(str[1]) - 1, Number(str[0]), 12);
+    }
+    const timestamp = typeof value === 'number' ? value : Date.parse(value);
+    return isNaN(timestamp) ? null : new Date(timestamp);
+  }
+}
 
 @NgModule({
   declarations: [
@@ -89,7 +104,9 @@ import { ModifierUtilisateurComponent } from './pages/modifier-utilisateur/modif
     MatSlideToggleModule,
   ],
   providers: [
-    DatePipe
+    DatePipe,
+    {provide: MAT_DATE_LOCALE, useValue: "fr-FR"},
+    {provide: DateAdapter, useClass: FrenchDateAdapter}
   ],
   bootstrap: [AppComponent]
 })
