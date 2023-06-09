@@ -104,6 +104,11 @@ export class ContactComponent implements OnInit{
       }
     )    
   }
+
+  onRedirectEditDemande(id: number){
+    this.router.navigate(['/infocontact', id])
+  }
+
   alertFormValues(formGroup: FormGroup) {
     alert(JSON.stringify(formGroup.value, null, 2));
   }
