@@ -62,7 +62,9 @@
                 <strong>Lieu :</strong> {{salle?.lieu}}
               </li>
               <li class="d-flex flex-wrap align-items-center justify-content-between">
-                <strong>Accés pmr  :</strong> {{salle?.acces_pmr}}
+                <strong>Accés pmr  :</strong>
+                <span *ngIf="salle?.acces_pmr"><mat-icon style="color: green;">done_outline</mat-icon></span>
+                <span *ngIf="!salle?.acces_pmr"><mat-icon style="color: red;">highlight_off</mat-icon></span>
               </li>
             </ul>
           </div>
