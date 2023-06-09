@@ -1,4 +1,5 @@
 
+import { TypeofExpr } from '@angular/compiler';
 import { Component, EventEmitter, Input, Output, OnInit  } from '@angular/core';
 
 
@@ -14,6 +15,8 @@ export class ButtonsComponent implements OnInit{
   // récupère la valeur à mettre dans le bouton dans le composant dans lequel il est appelé
   @Input()
   value: string = ""
+  @Input()
+  type: string = ""
 
   // évènement click émit par la méthode action vers le composant équipe pour la méthode addEquipe
   @Output()
@@ -26,6 +29,5 @@ export class ButtonsComponent implements OnInit{
    */
   action = () => {
     this.event.emit();
-
   }
 }
