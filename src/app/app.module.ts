@@ -46,6 +46,7 @@ import { DatePipe } from '@angular/common';
 import { ModifierUtilisateurComponent } from './pages/modifier-utilisateur/modifier-utilisateur.component';
 import { ModifierSalleComponent } from './pages/modifier-salle/modifier-salle.component';
 import { ModifierCategorieComponent } from './pages/modifier-categorie/modifier-categorie.component';
+import { ModifierArticleComponent } from './pages/modifier-article/modifier-article.component';
 
 
 @NgModule({
@@ -76,6 +77,8 @@ import { ModifierCategorieComponent } from './pages/modifier-categorie/modifier-
     ModifierUtilisateurComponent,
     ModifierSalleComponent,
     ModifierCategorieComponent,
+    ModifierArticleComponent
+
   ],
   imports: [
     BrowserModule,
