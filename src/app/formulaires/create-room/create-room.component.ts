@@ -95,20 +95,20 @@ export class CreateRoomComponent  implements OnInit{
    * suppression d'une salle
    * @param id de la salle
    */
-  // onDeleteSalle(id: number) {    
-  //   // je passe la variable submitted à true
-  //   this.deleteSubmitted = true;
+  onDeleteSalle(id: number) {    
+    // je passe la variable submitted à true
+    this.deleteSubmitted = true;
       
-  //   this.salleService.deleteSalle(id).subscribe(
-  //     (response:any) => {
-  //       this.salleDeleted=true;
-  //     },
-  //     (error:any) => {
-  //       //throw erreur
-  //       console.log(error);
-  //     }
-  //   )    
-  // }
+    this.salleService.deleteSalle(id).subscribe(
+      (response:any) => {
+        this.salleDeleted=true;
+      },
+      (error:any) => {
+        //throw erreur
+        console.log(error);
+      }
+    )    
+  }
 
   //debug pour vérifier si les datas sont valides.
   alertFormValues(formGroup: FormGroup) {

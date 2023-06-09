@@ -90,22 +90,6 @@ export class ModifierSalleComponent implements OnInit{
     }
   }
 
-  onDeleteSalle(){
-    let id = this.salleid;
-    console.log(" deleteFormValue : " + this.deleteFormValues);
-
-    // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
-    // à l'utilisateur que le formulaire a bien été validé via un message
-    this.salleService.deleteSalle(id).subscribe(
-      (Response:any) => {
-        this.salleDelete=true;
-      },
-      (error:any) => {
-        console.log(error);
-      }
-    )
-  }
-
   async getSalleData(){
     let returner: Salle|undefined;
     try{
