@@ -62,7 +62,7 @@
         <div *ngIf="articleDeleted">
           <h3>L'article est supprimé !</h3>
         </div>
-        <li *ngFor="let article of articleList$ | async"class="d-flex flex-wrap align-items-center justify-content-between">
+        <li *ngFor="let article of articleList$ | async "class="d-flex flex-wrap align-items-center justify-content-between">
           {{ article.titre }}
           <div class="example-button-container d-flex">
             <form [formGroup]="formValues" >
