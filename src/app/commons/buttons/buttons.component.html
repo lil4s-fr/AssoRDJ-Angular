@@ -2,3 +2,4 @@
 <!--le bouton appelle la méthode action() du ts : écoute un évènement-->
 <button *ngIf="type == 'ajouter' || type == '' " type="submit" (click)="action()" class="btn btn-primary btn-lg"> {{value}} </button>
 <button *ngIf="type == 'delete' " type="submit" (click)="action()" class="btn btn-danger btn-lg"> {{value}} </button>
+<button *ngIf="type == 'edit' " type="submit" (click)="action()" class="btn btn-outline-warning btn-lg"> {{value}} </button>

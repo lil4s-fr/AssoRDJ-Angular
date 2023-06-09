@@ -98,9 +98,9 @@
             </li>
           </ul>
         </div>
-        <div class="d-flex align-items-center justify-content-center">
-          <app-buttons [value]="'Supprimer cet utilisateur'" class="button" (click)="onDeleteUser()"></app-buttons>
-          <app-buttons [value]="btnDelete" class="button" (click)="onUpdatePassword()"></app-buttons>
+        <div class="d-flex align-items-center justify-content-evenly">
+          <app-buttons [value]="'Supprimer cet utilisateur'" [type]="'delete'" class="button" (click)="onDeleteUser()"></app-buttons>
+          <app-buttons [value]="btnDelete" class="button" [type]="'edit'" (click)="onUpdatePassword()"></app-buttons>
         </div>
         <div *ngIf="userDeleted">
           <p>L'utilisateur a bien été supprimé.</p>
