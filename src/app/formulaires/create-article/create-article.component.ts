@@ -6,6 +6,7 @@ import Categorie from 'src/app/models/categorie.model';
 import { ArticleService } from 'src/app/services/article.service';
 import { CategorieService } from 'src/app/services/categorie.service';
 import { DateTime } from 'luxon';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-article',
@@ -52,7 +53,8 @@ export class CreateArticleComponent implements OnInit{
   constructor(
     private formBuilder: FormBuilder,
     private articleService: ArticleService,
-    private categorieService: CategorieService
+    private categorieService: CategorieService,
+    private router:Router
     ){}
 
   ngOnInit(): void {
@@ -128,5 +130,8 @@ export class CreateArticleComponent implements OnInit{
   //debug pour vérifier si les datas sont valides.
   alertFormValues(formGroup: FormGroup) {
     alert(JSON.stringify(formGroup.value, null, 2));
+  }
+  onRedirectEditArticle(id: number){
+    this.router.navigate(['/modifierarticle', id])
   }
 }
