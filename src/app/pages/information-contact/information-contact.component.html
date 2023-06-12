@@ -1,1 +1,24 @@
-<p>information-contact works!</p>
+<div *ngIf="isLoaded | async">
+    <div class="d-flex flex-column p-3">
+        <h1 class="d-flex justify-content-center">Anciennes informations :</h1>
+    </div>
+    <div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
+        <form (ngSubmit)="onDeleteContact()">
+            <ul>
+                <li *ngIf="contact?.utilisateur" class="d-flex flex-wrap align-items-center justify-content-between">
+                <strong>Nom :</strong> {{contact?.utilisateur}}
+                </li>
+                <li class="d-flex flex-wrap align-items-center justify-content-between">
+                <strong>Email :</strong> {{contact?.mail}}
+                </li>
+                <li class="d-flex flex-wrap align-items-center justify-content-between">
+                <strong>Message :</strong> {{contact?.message}}
+                </li>
+                <li class="d-flex flex-wrap align-items-center justify-content-between">
+                    <strong>Type de demande :</strong> {{ contact?.typeDemande?.nom_type }}
+                </li>
+            </ul>
+            <app-buttons [value]="'Supprimer la demande'" [type]="'delete'" class="button d-flex justify-content-center"></app-buttons>
+        </form>
+    </div>
+</div>
