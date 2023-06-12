@@ -1,0 +1,8 @@
+<div class="row">
+  <div *ngFor="let article of articles" class="col-6 text-center">
+    <h3>{{article.titre}}</h3>
+    <p>{{formatDate(article.date_ecriture)}}</p>
+    <p>{{article.corps.substring(0,70) +("...")}}</p>
+  </div>
+  <app-buttons class="text-center" [value]="'Voir tous les articles'" routerLink="/articles"></app-buttons>
+</div>

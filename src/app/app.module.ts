@@ -50,6 +50,7 @@ import { ModifierArticleComponent } from './pages/modifier-article/modifier-arti
 
 import { NativeDateAdapter, DateAdapter } from "@angular/material/core";
 import { InformationContactComponent } from './pages/information-contact/information-contact.component';
+import { LastArticlesComponent } from './pages/home/last-articles/last-articles.component';
     
 export class FrenchDateAdapter extends NativeDateAdapter {
   override parse(value: any): Date | null {
@@ -94,7 +95,8 @@ export class FrenchDateAdapter extends NativeDateAdapter {
     ModifierSalleComponent,
     ModifierCategorieComponent,
     ModifierArticleComponent,
-    InformationContactComponent
+    InformationContactComponent,
+    LastArticlesComponent
 
   ],
   imports: [

@@ -7,7 +7,7 @@ export default interface Article{
     utilisateurs?: Utilisateur[],
     titre: string,
     corps: string,
-    date_ecriture?: string,
+    date_ecriture: string,
     date_modif?: string,
     like_dislike?: string    
 }
