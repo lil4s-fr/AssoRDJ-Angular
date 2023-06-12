@@ -18,6 +18,7 @@ import { ModifierUtilisateurComponent } from './pages/modifier-utilisateur/modif
 import { ModifierSalleComponent } from './pages/modifier-salle/modifier-salle.component';
 import { ModifierCategorieComponent } from './pages/modifier-categorie/modifier-categorie.component';
 import { ModifierArticleComponent } from './pages/modifier-article/modifier-article.component';
+import { InformationContactComponent } from './pages/information-contact/information-contact.component';
 
 
 const routes: Routes = [
@@ -40,6 +41,7 @@ const routes: Routes = [
   {path: 'modifiersalle/:id', component: ModifierSalleComponent },
   {path: 'modifiercategorie/:id', component: ModifierCategorieComponent },
   {path: 'modifierarticle/:id', component: ModifierArticleComponent },
+  {path: 'infocontact/:id', component: InformationContactComponent },
 
   // a retirer quand la page 404 sera finie
   {path: '404', component: NotFoundComponent},
