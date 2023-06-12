@@ -1,1 +1,26 @@
-<p>formulaires works!</p>
+<div class="page">
+  <div class="couples">
+    <app-buttons *ngIf="formulaire" [value]="btnValide1" class="button" (click)="directionNewArticle()"></app-buttons>
+    <app-create-article *ngIf="newArticle"></app-create-article>
+  </div>
+  <div class="couples">
+    <app-buttons *ngIf="formulaire" [value]="btnValide3" class="button" (click)="directionNewEvent()"></app-buttons>
+    <app-create-event *ngIf="newEvent"></app-create-event>
+  </div>
+  <div class="couples">
+    <app-buttons *ngIf="formulaire" [value]="btnValide5" class="button" (click)="directionNewMembre()"></app-buttons>
+    <app-create-user *ngIf="newMembre"></app-create-user>
+  </div>
+  <div class="couples">
+    <app-buttons *ngIf="formulaire" [value]="btnValide7" class="button" (click)="directionNewRoom()"></app-buttons>
+    <app-create-room *ngIf="newRoom"></app-create-room>
+  </div>
+  <div class="couples">
+    <app-buttons *ngIf="formulaire" [value]="btnValide9" class="button"(click)="directionNewBook()"></app-buttons>
+    <app-book *ngIf="newBook"></app-book>
+  </div>
+  <div class="couples">
+    <app-buttons *ngIf="formulaire" [value]="btnValide11" class="button"(click)="directionNewCategory()"></app-buttons>
+    <app-categorie *ngIf="newCategory"></app-categorie>
+  </div>
+</div>

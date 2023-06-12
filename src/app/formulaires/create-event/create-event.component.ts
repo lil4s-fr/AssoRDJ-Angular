@@ -106,12 +106,10 @@ export class CreateEventComponent {
     formGroup.value.categories = [{"id": formGroup.value.categories}];
        
     formGroup.value.id = this.event?.id;
-    console.log("objet catégorie : " + formGroup.value.categories);
-    alert(JSON.stringify(formGroup.value, null, 2));
+    //alert(JSON.stringify(formGroup.value, null, 2));
 
     //  je vérifie si le formulaire est valide
     if (formGroup.valid) {
-      console.log("valide");
       
       // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
       // à l'utilisateur que le formulaire a bien été validé via un message
@@ -135,7 +133,7 @@ export class CreateEventComponent {
     // je passe la variable submitted à true
     this.deleteSubmitted = true;
       
-    this.salleService.deleteSalle(id).subscribe(
+    this.eventService.deleteEvent(id).subscribe(
       (response:any) => {
         this.eventDeleted=true;
       },

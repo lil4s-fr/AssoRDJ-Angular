@@ -74,7 +74,7 @@ export class CreateArticleComponent implements OnInit{
    */
   onAddArticle(formGroup: FormGroup) {
     // debug
-        console.log(JSON.stringify(formGroup.value, null, 2));
+    console.log(JSON.stringify(formGroup.value, null, 2));
 
     // je passe la variable submitted à true pour pouvoir afficher la confirmation à l'écran avec un ngIf
     this.submitted = true;
@@ -86,12 +86,10 @@ export class CreateArticleComponent implements OnInit{
     formGroup.value.categories = [{"id": formGroup.value.categories}];
     formGroup.value.date_modif = formGroup.value.date_ecriture;
     formGroup.value.like_dislike = 0
-    formGroup.value.id = this.article?.id;
     alert(JSON.stringify(formGroup.value, null, 2));
 
     //  je vérifie si le formulaire est valide
     if (formGroup.valid) {
-      
       // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
       // à l'utilisateur que le formulaire a bien été validé via un message
       this.articleService.createArticle(formGroup.value).subscribe(

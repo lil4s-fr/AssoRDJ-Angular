@@ -42,7 +42,9 @@ const routes: Routes = [
   {path: 'modifiercategorie/:id', component: ModifierCategorieComponent },
   {path: 'modifierarticle/:id', component: ModifierArticleComponent },
   {path: 'informations', component: InformationsComponent},
-
+  {path: 'gestionSite', component: FormulairesComponent },
+  {path: 'infocontact/:id', component: InformationContactComponent },
+  
   // a retirer quand la page 404 sera finie
   {path: '404', component: NotFoundComponent},
 
