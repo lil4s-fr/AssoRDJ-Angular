@@ -1,4 +1,5 @@
 import Categorie from "./categorie.model"
+import Utilisateur from "./utilisateur.model"
 
 export default interface Evenement{
     id: number,
@@ -7,5 +8,7 @@ export default interface Evenement{
     dateCreation: string,
     dateDebut: string,
     dateFin: string,
-    description: string
+    description: string,
+    lieu: string,
+    utilisateur: Utilisateur[]
 }
