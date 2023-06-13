@@ -21,6 +21,7 @@ import { ModifierArticleComponent } from './pages/modifier-article/modifier-arti
 import { InformationsComponent } from './pages/informations/informations.component'
 import { InformationContactComponent } from './pages/information-contact/information-contact.component';
 import { FormulairesComponent } from './formulaires/formulaires.component';
+import { NewContactComponent } from './pages/new-contact/new-contact.component';
 
 
 const routes: Routes = [
@@ -31,7 +32,8 @@ const routes: Routes = [
   {path: 'articles', component: ArticlesComponent},
   {path: 'book', component: BookComponent},
   {path: 'login', component: ConnectionComponent},
-  {path: 'contact', component: ContactComponent},
+  {path: 'demandescontact', component: ContactComponent},
+  {path: 'contact', component: NewContactComponent},
   {path: 'createArticle', component: CreateArticleComponent},
   {path: 'createEvent', component: CreateEventComponent},
   {path: 'categorie', component: CategorieComponent},

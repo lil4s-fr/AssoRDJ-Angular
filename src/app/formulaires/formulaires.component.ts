@@ -13,4 +13,5 @@ export class FormulairesComponent {
   btnValide7: string = "Gérer les salles";
   btnValide9: string = "Gérer les réservations de salle";
   btnValide11: string = "Gérer les catégories";
+  btnValide13: string = "Gérer les demandes de contact";
 }
