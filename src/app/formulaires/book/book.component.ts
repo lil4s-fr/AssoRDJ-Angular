@@ -196,6 +196,7 @@ export class BookComponent implements OnInit{
     this.reservationService.updateReservation(reservation).subscribe(
       (response: any) => {
         console.log('Mise à jour réussie :', response);
+        window.location.reload();
       },
       (error: any) => {
         console.log('Erreur lors de la mise à jour :', error);

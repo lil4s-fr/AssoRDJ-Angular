@@ -18,9 +18,6 @@
             <input matInput formControlName="description" placeholder="Description" class="matinput">
           </mat-form-field>
           
-          <div *ngIf="categorieValide">
-            <h3>La nouvelle catégorie est validée !</h3>
-          </div>
           <app-buttons [value]="btnValide" class="button"></app-buttons>
         </form>
       </div>
@@ -31,9 +28,6 @@
       </div>
       <div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
         <ul>
-          <div *ngIf="salleDeleted">
-            <h3>La catégorie est supprimée !</h3>
-          </div>
           <li *ngFor="let category of categoryList$ | async" class="d-flex flex-wrap align-items-center justify-content-between">{{category.nom}} : {{category.description}}
             <div class="example-button-container d-flex ">
               <form [formGroup]="formValues" >

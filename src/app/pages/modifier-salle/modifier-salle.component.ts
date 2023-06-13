@@ -81,6 +81,7 @@ export class ModifierSalleComponent implements OnInit{
       this.salleService.updateSalle(formGroup.value).subscribe(
         (response:any) => {
           this.salleValide=true;
+          window.location.reload();
         },
         (error:any) => {
           //throw erreur
