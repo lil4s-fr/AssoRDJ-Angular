@@ -40,7 +40,7 @@
       </div>
       <div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
         <ul>
-          <li *ngFor="let demande of contactList$ | async; let i=index" class="d-flex flex-wrap align-items-center justify-content-between">{{demande.utilisateur}} {{demande.typeDemande.nom_type}}
+          <li *ngFor="let demande of contactList$ | async; let i=index" class="d-flex flex-wrap align-items-center justify-content-between">{{demande.mail}} — {{demande.typeDemande.nom_type}}
             <div class="example-button-container d-flex ">
                 <form [formGroup]="formValues" >
                     <button mat-icon-button  (click)="onRedirectEditDemande(demande.id)" style="color: #49b9ff; font-size: 20px;">
