@@ -86,7 +86,6 @@ export class CreateArticleComponent implements OnInit{
     formGroup.value.categories = [{"id": formGroup.value.categories}];
     formGroup.value.date_modif = formGroup.value.date_ecriture;
     formGroup.value.like_dislike = 0
-    alert(JSON.stringify(formGroup.value, null, 2));
 
     //  je vérifie si le formulaire est valide
     if (formGroup.valid) {
@@ -95,6 +94,7 @@ export class CreateArticleComponent implements OnInit{
       this.articleService.createArticle(formGroup.value).subscribe(
         (response:any) => {
           this.articleValide=true;
+          window.location.reload();
         },
         (error:any) => {
           //throw erreur
@@ -116,6 +116,7 @@ export class CreateArticleComponent implements OnInit{
     this.articleService.deleteArticle(id).subscribe(
       (response:any) => {
         this.articleDeleted=true;
+        window.location.reload();
       },
       (error:any) => {
         //throw erreur

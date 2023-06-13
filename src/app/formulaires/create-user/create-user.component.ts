@@ -87,6 +87,7 @@ export class CreateUserComponent implements OnInit{
       this.userService.createUser(formGroup.value).subscribe(
         (response:any) => {
           this.userValide=true;
+          window.location.reload();
         },
         (error:any) => {
           //throw erreur

@@ -46,9 +46,6 @@
           />
         </mat-form-field>
 
-        <div *ngIf="articleValide">
-          <h3>Le nouvel article est validée !</h3>
-        </div>
         <app-buttons [value]="btnValide" class="button"></app-buttons>
       </form>
     </div>
@@ -59,9 +56,6 @@
     </div>
     <div class="d-flex flex-column container p-5 mb-5 bg-body-tertiary">
       <ul>
-        <div *ngIf="articleDeleted">
-          <h3>L'article est supprimé !</h3>
-        </div>
         <li *ngFor="let article of articleList$ | async "class="d-flex flex-wrap align-items-center justify-content-between">
           {{ article.titre }}
           <div class="example-button-container d-flex">

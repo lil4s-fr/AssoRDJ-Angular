@@ -116,6 +116,7 @@ export class CreateEventComponent {
       this.eventService.createEvent(formGroup.value).subscribe(
         (response:any) => {
           this.eventValide=true;
+          window.location.reload();
         },
         (error:any) => {
           //throw erreur
@@ -136,6 +137,7 @@ export class CreateEventComponent {
     this.eventService.deleteEvent(id).subscribe(
       (response:any) => {
         this.eventDeleted=true;
+        window.location.reload();
       },
       (error:any) => {
         //throw erreur

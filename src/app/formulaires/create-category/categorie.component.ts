@@ -65,6 +65,7 @@ export class CategorieComponent implements OnInit{
       this.categorieService.createCategorie(formGroup.value).subscribe(
         (response:any) => {
           this.categorieValide=true;
+          window.location.reload();
         },
         (error:any) => {
           //throw erreur
@@ -78,6 +79,7 @@ export class CategorieComponent implements OnInit{
     this.categorieService.deleteCategorie(id).subscribe(
       (response:any) => {
         this.salleDeleted = true;
+        window.location.reload();
       },
       (error:any) => {
         //throw erreur

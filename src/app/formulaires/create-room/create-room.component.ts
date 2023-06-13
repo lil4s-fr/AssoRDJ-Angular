@@ -82,6 +82,7 @@ export class CreateRoomComponent  implements OnInit{
       this.salleService.createSalle(formGroup.value).subscribe(
         (response:any) => {
           this.salleValide=true;
+          window.location.reload();
         },
         (error:any) => {
           //throw erreur
@@ -102,6 +103,7 @@ export class CreateRoomComponent  implements OnInit{
     this.salleService.deleteSalle(id).subscribe(
       (response:any) => {
         this.salleDeleted=true;
+        window.location.reload();
       },
       (error:any) => {
         //throw erreur
