@@ -19,6 +19,8 @@ import { ModifierSalleComponent } from './pages/modifier-salle/modifier-salle.co
 import { ModifierCategorieComponent } from './pages/modifier-categorie/modifier-categorie.component';
 import { ModifierArticleComponent } from './pages/modifier-article/modifier-article.component';
 import { InformationsComponent } from './pages/informations/informations.component'
+import { InformationContactComponent } from './pages/information-contact/information-contact.component';
+import { FormulairesComponent } from './formulaires/formulaires.component';
 
 
 const routes: Routes = [
