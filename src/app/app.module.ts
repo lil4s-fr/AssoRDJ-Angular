@@ -49,6 +49,7 @@ import { ModifierCategorieComponent } from './pages/modifier-categorie/modifier-
 import { ModifierArticleComponent } from './pages/modifier-article/modifier-article.component';
 
 import { NativeDateAdapter, DateAdapter } from "@angular/material/core";
+import { InformationsComponent } from './pages/informations/informations.component';
 import { InformationContactComponent } from './pages/information-contact/information-contact.component';
     
 export class FrenchDateAdapter extends NativeDateAdapter {
@@ -94,6 +95,7 @@ export class FrenchDateAdapter extends NativeDateAdapter {
     ModifierSalleComponent,
     ModifierCategorieComponent,
     ModifierArticleComponent,
+    InformationsComponent,
     InformationContactComponent
 
   ],
