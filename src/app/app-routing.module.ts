@@ -26,10 +26,6 @@ import { FormulairesComponent } from './formulaires/formulaires.component';
 const routes: Routes = [
   {path :'', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
-  {path: 'membre', component: CreateUserComponent},
-  {path: 'category', component: CategorieComponent},
-  {path: 'room', component: CreateRoomComponent},
-  {path: 'reservation', component: BookComponent},
   {path: 'infoPerso', component: PersonalDataComponent},
   {path: 'event', component: EventsComponent},
   {path: 'articles', component: ArticlesComponent},
