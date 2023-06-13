@@ -18,17 +18,14 @@ import { ModifierUtilisateurComponent } from './pages/modifier-utilisateur/modif
 import { ModifierSalleComponent } from './pages/modifier-salle/modifier-salle.component';
 import { ModifierCategorieComponent } from './pages/modifier-categorie/modifier-categorie.component';
 import { ModifierArticleComponent } from './pages/modifier-article/modifier-article.component';
-import { FormulairesComponent } from './formulaires/formulaires.component';
+import { InformationsComponent } from './pages/informations/informations.component'
 import { InformationContactComponent } from './pages/information-contact/information-contact.component';
+import { FormulairesComponent } from './formulaires/formulaires.component';
 
 
 const routes: Routes = [
   {path :'', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
-  {path: 'membre', component: CreateUserComponent},
-  {path: 'category', component: CategorieComponent},
-  {path: 'room', component: CreateRoomComponent},
-  {path: 'reservation', component: BookComponent},
   {path: 'infoPerso', component: PersonalDataComponent},
   {path: 'event', component: EventsComponent},
   {path: 'articles', component: ArticlesComponent},
@@ -42,9 +39,10 @@ const routes: Routes = [
   {path: 'modifiersalle/:id', component: ModifierSalleComponent },
   {path: 'modifiercategorie/:id', component: ModifierCategorieComponent },
   {path: 'modifierarticle/:id', component: ModifierArticleComponent },
+  {path: 'informations', component: InformationsComponent},
   {path: 'gestionSite', component: FormulairesComponent },
   {path: 'infocontact/:id', component: InformationContactComponent },
-
+  
   // a retirer quand la page 404 sera finie
   {path: '404', component: NotFoundComponent},
 
