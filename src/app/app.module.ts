@@ -97,7 +97,7 @@ export class FrenchDateAdapter extends NativeDateAdapter {
     ModifierCategorieComponent,
     ModifierArticleComponent,
     InformationContactComponent,
-    LastArticlesComponent
+    LastArticlesComponent,
     InformationsComponent,
     InformationContactComponent
 

@@ -28,7 +28,7 @@
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" mat-icon-button style="color: white; "><mat-icon>person</mat-icon></a>
                         <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end ms-4">
                             <li>
-                                <a routerLink="login" class="nav-link d-flex align-items-center">
+                                <a (click)="openLoginModal()" class="nav-link d-flex align-items-center">
                                     <mat-icon style="color: white;">person_outline</mat-icon> 
                                     <span class="ps-2">Login</span>
                                 </a>
