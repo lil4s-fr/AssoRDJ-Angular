@@ -4,3 +4,23 @@
 .mat-mdc-dialog-surface{
     overflow: hidden !important;
 }
+/* En dessous de 750px de longueur, augmenter la taille de la modal 'se connecter' */
+
+@media screen and (max-width : 920px) {
+
+  .mat-mdc-dialog-surface{
+    width: 90vw !important;
+  }
+
+  .modal-body{
+    padding: 1vh !important;
+  }
+  
+}
+
+@media screen and (max-height : 700px) {
+  .mat-mdc-dialog-surface{
+    overflow: auto !important;
+}
+  
+}
