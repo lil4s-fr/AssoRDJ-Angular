@@ -42,6 +42,13 @@ export class ArticleService {
   getArticle(id: number): Observable<Article> {
     return this.httpClient.get<Article>(`${this.apiUrl}/articles/${id}`, this.httpOptions);
   }
+  /**
+   * On demande a retourner les 2 derniers articles
+   * @returns La partie entre parenthèse correspond à l'URL complète de notre route API
+   */
+  getTwoLastArticles(): Observable<Article[]> {
+    return this.httpClient.get<Article[]>(`${this.apiUrl}/articles/twolastarticles`)
+  }
 
   /**
    * requète pour créer un article
