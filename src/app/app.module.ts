@@ -53,6 +53,7 @@ import { InformationsComponent } from './pages/informations/informations.compone
 import { InformationContactComponent } from './pages/information-contact/information-contact.component';
 import { LastArticlesComponent } from './pages/home/last-articles/last-articles.component';
 import { NewContactComponent } from './pages/new-contact/new-contact.component';
+import { ModifierPersonalDataComponent } from './pages/personal-data/modifier-personal-data/modifier-personal-data.component';
     
 export class FrenchDateAdapter extends NativeDateAdapter {
   override parse(value: any): Date | null {
@@ -101,7 +102,8 @@ export class FrenchDateAdapter extends NativeDateAdapter {
     LastArticlesComponent,
     InformationsComponent,
     InformationContactComponent,
-    NewContactComponent
+    NewContactComponent,
+    ModifierPersonalDataComponent
 
   ],
   imports: [

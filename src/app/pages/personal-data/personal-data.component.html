@@ -4,85 +4,29 @@
       <h1 class="d-flex justify-content-center">Informations personnelles</h1>
     </div>
     <div class="d-flex flex-column container p-5 mb-5 bg-body-tertiary">
-      
-      <h2 class="d-flex justify-content-center p-2">Nom :</h2>
-      <!-- {{ user.nom }} -->
-      <h2 class="d-flex justify-content-center p-2">Prénom :</h2>
-      <!-- {{ user.prenom }} -->
-      <h2 class="d-flex justify-content-center p-2">Adresse :</h2>
-      <!-- {{ user.coordonnees }} -->
-      <h2 class="d-flex justify-content-center p-2">Téléphone :</h2>
-      <!-- {{ user.telephone }} -->
-      <h2 class="d-flex justify-content-center p-2">Email :</h2>
-      <!-- {{ user.email }} -->
-      <h2 class="d-flex justify-content-center p-2">Pseudo :</h2>
-      <!-- {{ user.pseudo }} -->
-      <h2 class="d-flex justify-content-center p-2">Numéro asso :</h2>
-      <!-- {{ user.numeroAdherent }} -->
-      <button
-        mat-icon-button
-        class="icon-display"
-        (click)="onChangeAffichage()"
-      >
-        <mat-icon>edit</mat-icon>
-      </button>
-      <div class="example-button-container">
-        <form
-          *ngIf="affiche == true"
-          [formGroup]="formValues"
-          (ngSubmit)="onModifyUser(formValues)"
+      <div class="d-flex justify-content-end">
+        <button
+          mat-icon-button
+          (click)="onChangeAffichage()"
         >
-          <div class="d-flex flex-column container p-5 mb-5 bg-body-tertiary">
-            <h2 class="d-flex justify-content-center p-2">Nom :</h2>
-            <mat-form-field class="w-100">
-              <!-- <mat-label>{{user.nom}}</mat-label> -->
-              <input matInput formControlName="nom" class="matinput" />
-            </mat-form-field>
-            <br />
-            <h2 class="d-flex justify-content-center p-2">Prénom :</h2>
-            <mat-form-field class="w-100">
-              <!-- <mat-label>{{ user.prenom }}</mat-label> -->
-              <input matInput formControlName="nom" class="matinput" />
-            </mat-form-field>
-            <br />
-            <h2 class="d-flex justify-content-center p-2">Adresse :</h2>
-            <mat-form-field class="w-100">
-              <!-- <mat-label>{{ user.coordonnees }}</mat-label> -->
-              <input matInput formControlName="nom" class="matinput" />
-            </mat-form-field>
-            <br />
-            <h2 class="d-flex justify-content-center p-2">Téléphone :</h2>
-            <mat-form-field class="w-100">
-              <!-- <mat-label>{{ user.telephone }}</mat-label> -->
-              <input matInput formControlName="nom" class="matinput" />
-            </mat-form-field>
-            <br />
-            <h2 class="d-flex justify-content-center p-2">Email :</h2>
-            <mat-form-field class="w-100">
-              <!-- <mat-label>{{ user.email }}</mat-label> -->
-              <input matInput formControlName="nom" class="matinput" />
-            </mat-form-field>
-            <br />
-            <h2 class="d-flex justify-content-center p-2">Pseudo :</h2>
-            <mat-form-field class="w-100">
-              <!-- <mat-label>{{ user.pseudo }}</mat-label> -->
-              <input matInput formControlName="nom" class="matinput" />
-            </mat-form-field>
-            <br />
-            <h2 class="d-flex justify-content-center p-2">Numéro asso :</h2>
-            <mat-form-field class="w-100">
-              <!-- <mat-label>{{ user.numeroAdherent }}</mat-label> -->
-              <input matInput formControlName="nom" class="matinput" />
-            </mat-form-field>
-            <br />
-          </div>
-          <app-buttons
-            [value]="btnValide"
-            class="button"
-            type="submit"
-          ></app-buttons>
-        </form>
-      </div>
+          <mat-icon>edit</mat-icon>
+        </button>
+    </div>
+      
+      <h4 class="p-2">Nom :</h4>
+      <!-- {{ user.nom }} -->
+      <h4 class="p-2">Prénom :</h4>
+      <!-- {{ user.prenom }} -->
+      <h4 class="p-2">Adresse :</h4>
+      <!-- {{ user.coordonnees }} -->
+      <h4 class="p-2">Téléphone :</h4>
+      <!-- {{ user.telephone }} -->
+      <h4 class="p-2">Email :</h4>
+      <!-- {{ user.email }} -->
+      <h4 class="p-2">Pseudo :</h4>
+      <!-- {{ user.pseudo }} -->
+      <h4 class="p-2">Numéro asso :</h4>
+      <!-- {{ user.numeroAdherent }} -->
     </div>
   </div>
 </div>

@@ -22,7 +22,7 @@ export class NavbarComponent {
   }
   openContactModal(){
     const dialogRef = this.dialog.open(NewContactComponent, {
-      width: '80vw', // Largeur de la modale en pixels
+      width: '85vw', // Largeur de la modale en pixels
       height: '75vh', // Hauteur de la modale en pixels
       // Autres options de configuration de la modale
       
