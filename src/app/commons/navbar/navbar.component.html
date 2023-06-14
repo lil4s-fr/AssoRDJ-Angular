@@ -24,7 +24,7 @@
                     <a routerLink="articles" class="nav-link">articles</a>
                 </li>
                 <li class="d-flex justify-content-end"><!--retirer le routerLink quand la page 404 sera faite-->
-                    <a routerLink="contact" class="btn btn-outline-primary">Nous rejoindre !</a>
+                    <a (click)="openContactModal()" class="btn btn-outline-primary">Nous rejoindre !</a>
                 </li>
                 <!-- Lieu login deconnexion et info perso -->
                 <li class="navbar-brand d-flex justify-content-end">
