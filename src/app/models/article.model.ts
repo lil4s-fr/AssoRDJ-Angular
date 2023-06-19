@@ -2,13 +2,13 @@ import Categorie from "./categorie.model";
 import Utilisateur from "./utilisateur.model";
 
 export default interface Article{
-    id: number,
-    categories: Categorie[],
+    id?: number,
+    categories: Partial<Categorie>[] | {id:number},
     utilisateurs?: Utilisateur[],
     titre: string,
     corps: string,
-    fichier: FormData,
-    date_ecriture: string,
+    fichier: string,
+    date_ecriture?: string,
     date_modif?: string,
-    like_dislike?: string    
+    like_dislike?: number    
 }

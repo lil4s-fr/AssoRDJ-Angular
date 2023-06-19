@@ -48,7 +48,7 @@
         <!--directive pour faire un glisser-deposer de fichier mais pas utilisé par pas adapté
         à l'utilisation de l'application
         <div class="fichier" formControlName="fichier" appUpload (onFileDropped)="uploadFile($event)" >Glisser-déposer un fichier ici</div>-->
-        <input type="file" class="fichier" formControlName="fichier"/>
+        <input type="file" class="fichier" (change)="onFileSelected($event)" #fileUpload/>
         <app-buttons [value]="btnValide" class="button"></app-buttons>
       </form>
     </div>
