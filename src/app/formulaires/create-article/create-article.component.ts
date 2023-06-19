@@ -20,6 +20,7 @@ export class CreateArticleComponent implements OnInit{
 
   // je récupère la liste des articles
   articleList$: Observable<Article[]> = this.articleService.getArticles();
+  articleList: Article[] = [];
 
   //je récupère la liste des catégories
   categories$: Observable<Categorie[]> =  this.categorieService.getCategories();
@@ -65,6 +66,10 @@ export class CreateArticleComponent implements OnInit{
     ){}
 
   ngOnInit(): void {
+
+    this.articleService.getArticles().subscribe(articles => {
+      this.articleList = articles;
+    })
 
     // je réinitialise si l'utilisateur change les champs
     this.formValues.valueChanges.subscribe(()=> {
@@ -135,7 +140,7 @@ export class CreateArticleComponent implements OnInit{
       this.articleService.createArticle(result).subscribe({
         next:(response:any) => {
           this.articleValide=true;
-          this.articleList$ = this.articleService.getArticles();
+          this.articleList.push(response);
           
         },
         error:(error:any) => {
@@ -157,6 +162,7 @@ export class CreateArticleComponent implements OnInit{
     if (id) this.articleService.deleteArticle(id).subscribe({
       next:(response:any) => {
         this.articleDeleted=true;
+        this.articleList = this.articleList.filter(article=>article.id!==id);
       },
       error:(error:any) => {
         //throw erreur

@@ -9,6 +9,10 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./article-card.component.css']
 })
 export class ArticleCardComponent implements OnInit{
+
+  @Input()
+  article!: Article;
+
   // bollean affichage de l'article complet
   afficheArticle: boolean = true;
 
@@ -31,8 +35,6 @@ export class ArticleCardComponent implements OnInit{
       }
     )
   }
-  @Input()
-  article!: Article;
 
   afficheArticleComplet = () => { 
     console.log(this.afficheArticle);
@@ -40,5 +42,9 @@ export class ArticleCardComponent implements OnInit{
 
     console.log(this.afficheArticle);
 
+  }
+
+  get imageUrl(){
+    return "http://localhost:8080/articles/img/"+this.article.fichier
   }
 }
