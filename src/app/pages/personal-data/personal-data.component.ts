@@ -1,33 +1,29 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ContactService } from 'src/app/services/contact.service';
-import { UserService } from 'src/app/services/user.service';
+import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
+import Utilisateur from 'src/app/models/utilisateur.model';
+import { MatDialog } from '@angular/material/dialog';
+import { ModifierPersonalDataComponent } from './modifier-personal-data/modifier-personal-data.component';
 
 @Component({
   selector: 'app-personal-data',
   templateUrl: './personal-data.component.html',
   styleUrls: ['./personal-data.component.css']
 })
-export class PersonalDataComponent implements OnInit{
-  id!: number;
+export class PersonalDataComponent{
+  // je crée une liste de salles pour l'afficher
+  userList$!: Observable<Utilisateur[]>;
+
   @Input()
-  nom!: string;
-  prenom!: string;
-  adresse!: string;
-  numeroAsso!: number;
+  user!: Utilisateur;
 
-  constructor(private userService: UserService) {}
+  constructor(private dialog: MatDialog){}
 
-  ngOnInit(): void {
-      this.getPersonnalData();
+  onChangeAffichage(){
+    const dialogRef = this.dialog.open(ModifierPersonalDataComponent, {
+      width: '50vw', // Largeur de la modale en pixels
+      height: '70vh', // Hauteur de la modale en pixels
+      // Autres options de configuration de la modale
+    });
   }
 
-  /**
-   * récupération des données du service contact
-   */
-  getPersonnalData = () => {
-    this.nom = this.userService.nom;
-    this.prenom = this.userService.prenom;
-    this.adresse = this.userService.adresse;
-    this.numeroAsso = this.userService.numeroAsso;
-  }
 }

@@ -1,0 +1,72 @@
+<div class="example-button-container">
+  <div class="d-flex justify-content-end p-2">
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" mat-dialog-close></button>
+  </div>
+    <form
+      [formGroup]="formValues"
+      (ngSubmit)="onModifyUser(formValues)"
+    >
+      <div class="d-flex flex-column ps-5 pe-5 m-0 bg-body-tertiary">
+        <div class="row">
+          <div class="col d-flex flex-column">
+            <h5 class="d-flex justify-content-center">Nom :</h5>
+            <mat-form-field class="w-80">
+              <!-- <mat-label>{{user.nom}}</mat-label> -->
+              <input matInput formControlName="nom" class="matinput" />
+            </mat-form-field>
+          </div>
+          <div class="col d-flex flex-column">
+            <h5 class="d-flex justify-content-center">Prénom :</h5>
+            <mat-form-field class="w-80">
+              <!-- <mat-label>{{ user.prenom }}</mat-label> -->
+              <input matInput formControlName="prenom" class="matinput" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col d-flex flex-column">
+            <h5 class="d-flex justify-content-center">Adresse :</h5>
+            <mat-form-field class="w-80">
+              <!-- <mat-label>{{ user.coordonnees }}</mat-label> -->
+              <input matInput formControlName="Adresse" class="matinput" />
+            </mat-form-field>
+          </div>
+          <div class="col d-flex flex-column">
+            <h5 class="d-flex justify-content-center">Téléphone :</h5>
+            <mat-form-field class="w-80">
+              <!-- <mat-label>{{ user.telephone }}</mat-label> -->
+              <input matInput formControlName="telephone" class="matinput" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col d-flex flex-column">
+            <h5 class="d-flex justify-content-center">Email :</h5>
+            <mat-form-field class="w-80">
+              <!-- <mat-label>{{ user.email }}</mat-label> -->
+              <input matInput formControlName="email" class="matinput" />
+            </mat-form-field>
+          </div>
+          <div class="col d-flex flex-column">
+            <h5 class="d-flex justify-content-center">Pseudo :</h5>
+            <mat-form-field class="w-80">
+              <!-- <mat-label>{{ user.pseudo }}</mat-label> -->
+              <input matInput formControlName="pseudo" class="matinput" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col d-flex flex-column">
+            <h5 class="d-flex justify-content-center">Numéro asso :</h5>
+            <mat-form-field class="w-80">
+              <!-- <mat-label>{{ user.numeroAdherent }}</mat-label> -->
+              <input matInput formControlName="numeroAdherent" class="matinput" />
+            </mat-form-field>
+          </div>
+          <div class="col d-flex flex-column align-items-center justify-content-center">
+            <app-buttons [value]="btnValide" class="button"></app-buttons>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>

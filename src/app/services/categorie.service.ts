@@ -5,7 +5,6 @@ import { Observable, throwError } from 'rxjs';
 
 //import du modele categorie
 import Categorie from '../models/categorie.model';
-import { FormGroup } from '@angular/forms';
 
 
 @Injectable({
@@ -36,7 +35,7 @@ export class CategorieService {
     return throwError( () => new Error("message que tu veux"))
   }
   /**
-   * On demande à retourner une liste d'articles
+   * On demande à retourner une liste de catégories
    * @returns La partie entre parenthèse correspond à l'URL complète de notre route API
    */
   getCategories(): Observable<Categorie[]> {
@@ -44,9 +43,9 @@ export class CategorieService {
   }
 
   /**
-   * récupérer un article en particulier
+   * récupérer une catégorie en particulier
    * Lorsqu'on appellera la méthode, on devra alors lui passer l'ID en argument
-   * @param id id article
+   * @param id id catégorie
    * @returns lien vers l'API
    */
   getCategorie(id: number): Observable<Categorie> {
@@ -54,13 +53,11 @@ export class CategorieService {
   }
 
   /**
-   * requète pour créer un article
-   * @param article id article
+   * requète pour créer une catégorie
+   * @param article id catégorie
    * @returns lien vers l'API
    */
-  createCategorie(categorie: Categorie): Observable<Categorie> {
-    console.log(categorie);
-    
+  createCategorie(categorie: Categorie): Observable<Categorie> {    
     return this.http.post<Categorie>(`${this.apiUrl}/categories`, categorie).pipe(catchError(this.handleError));
   }
 
@@ -76,12 +73,12 @@ export class CategorieService {
   }
 
   /**
-   * requète pour détruire un categorie
+   * requète pour détruire une categorie
    * @param id id categorie
    * @returns lien vers l'API
    */
   deleteCategorie(id: number): Observable<Categorie> {
-    return this.http.delete<Categorie>(`${this.apiUrl}/categories/${id}`, this.httpOptions);
+    return this.http.delete<Categorie>(`${this.apiUrl}/categories/${id}`, this.httpOptions).pipe(catchError(this.handleError));
   }
  
 }

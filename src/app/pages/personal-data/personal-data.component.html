@@ -1,5 +1,32 @@
-<h1><u>Informations personnelles</u></h1>
-<h2>Nom : {{nom}}</h2>
-<h2>Prénom : {{prenom}}</h2>
-<h2>Adresse : {{adresse}}</h2>
-<h2>Numéro asso :  {{numeroAsso}}</h2>
+<div class="row m-0">
+  <div>
+    <div class="d-flex flex-column p-3">
+      <h1 class="d-flex justify-content-center">Informations personnelles</h1>
+    </div>
+    <div class="d-flex flex-column container p-5 mb-5 bg-body-tertiary">
+      <div class="d-flex justify-content-end">
+        <button
+          mat-icon-button
+          (click)="onChangeAffichage()"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+    </div>
+      
+      <h4 class="p-2">Nom :</h4>
+      <!-- {{ user.nom }} -->
+      <h4 class="p-2">Prénom :</h4>
+      <!-- {{ user.prenom }} -->
+      <h4 class="p-2">Adresse :</h4>
+      <!-- {{ user.coordonnees }} -->
+      <h4 class="p-2">Téléphone :</h4>
+      <!-- {{ user.telephone }} -->
+      <h4 class="p-2">Email :</h4>
+      <!-- {{ user.email }} -->
+      <h4 class="p-2">Pseudo :</h4>
+      <!-- {{ user.pseudo }} -->
+      <h4 class="p-2">Numéro asso :</h4>
+      <!-- {{ user.numeroAdherent }} -->
+    </div>
+  </div>
+</div>

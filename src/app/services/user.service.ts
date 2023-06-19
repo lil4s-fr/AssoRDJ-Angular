@@ -1,19 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable, catchError, throwError } from 'rxjs';
 
 //import du modele user
-import User from '../models/utilisateur.model';
+import Utilisateur from '../models/utilisateur.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-// valeurs en dur pour le codage en attendant le lien dans la base de données
-  nom: string = "";
-  prenom: string = "";
-  adresse: string = "";
-  numeroAsso: number = 0;
 
   // Déclaration de l'URL vers notre API, pour ne pas avoir à la rappeller à chaque fois.
   // Idéalement, on devrait la placer en tant que variable d'environnement.
@@ -29,12 +24,21 @@ export class UserService {
   // Injection de la dépendence HttpClient
   constructor(private httpClient: HttpClient) { }
 
+  handleError(error: HttpErrorResponse){
+    if (error.status === 0) {
+        console.error("erreur: ", error.error);
+    } else {
+        console.error("erreur: " + error.status + "message: " + error.error)
+    }
+    return throwError( () => new Error("Erreur de récupération SalleService"))
+  }
+  
   /**
    * On demande à retourner une liste d'utilisateurs
    * @returns URL complète de notre route API
    */
-  getUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>(`${this.apiUrl}/users`, this.httpOptions)
+  getUsers(): Observable<Utilisateur[]> {
+    return this.httpClient.get<Utilisateur[]>(`${this.apiUrl}/utilisateurs`, this.httpOptions)
   }
 
   /**
@@ -43,8 +47,8 @@ export class UserService {
    * @param id id user
    * @returns URL complète de notre route API
    */
-  getUser(id: number): Observable<User> {
-    return this.httpClient.get<User>(`${this.apiUrl}/users/${id}`, this.httpOptions);
+  getUser(id: number): Observable<Utilisateur> {
+    return this.httpClient.get<Utilisateur>(`${this.apiUrl}/utilisateurs/${id}`, this.httpOptions);
   }
 
   /**
@@ -52,8 +56,8 @@ export class UserService {
    * @param user id user
    * @returns URL complète de notre route API
    */
-  createUser(user: User): Observable<User> {
-    return this.httpClient.post<User>(`${this.apiUrl}/users`, user, this.httpOptions);
+  createUser(user: Utilisateur): Observable<Utilisateur> {
+    return this.httpClient.post<Utilisateur>(`${this.apiUrl}/utilisateurs`, user, this.httpOptions).pipe(catchError(this.handleError));
   }
 
   /**
@@ -62,8 +66,8 @@ export class UserService {
    * @param user id user
    * @returns URL complète de notre route API
    */
-  updateUser(user: User): Observable<User> {
-    return this.httpClient.put<User>(`${this.apiUrl}/users/${user.numeroAdherent}`, user, this.httpOptions);
+  updateUser(user: Utilisateur): Observable<Utilisateur> {
+    return this.httpClient.put<Utilisateur>(`${this.apiUrl}/utilisateurs/${user.id}`, user, this.httpOptions);
   }
 
   /**
@@ -71,8 +75,8 @@ export class UserService {
    * @param id id user
    * @returns URL complète de notre route API
    */
-  deleteUser(id: number): Observable<User> {
-    return this.httpClient.delete<User>(`${this.apiUrl}/users/${id}`, this.httpOptions);
+  deleteUser(id: number): Observable<Utilisateur> {
+    return this.httpClient.delete<Utilisateur>(`${this.apiUrl}/utilisateurs/${id}`, this.httpOptions).pipe(catchError(this.handleError));
   }
 
   connexion = (email: string, password: string):void => {}

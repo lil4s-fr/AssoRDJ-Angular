@@ -1,0 +1,45 @@
+<div class="row bg-body-tertiary m-0">
+  <div class="col-md-12 m-0">
+    <div class="d-flex flex-column pe-4 pt-3">
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" mat-dialog-close></button>
+      </div>
+      <h1 class="d-flex justify-content-center">Nous contacter</h1>
+    </div>
+    <div class="d-flex flex-column container">
+      <form class="ps-2 pe-2" [formGroup]="formValues" (ngSubmit)="onAddContact(formValues)">
+      <!-- <form [formGroup]="formValues" (ngSubmit)="alertFormValues(formValues)"> -->
+        <!--Email-->
+        <br>
+        <mat-form-field class="w-100">
+          <mat-label>Adresse Email</mat-label>
+          <input matInput formControlName="mail" placeholder="john.doe@exemple.fr" class="matinput">
+        </mat-form-field>
+
+        <!--Message-->
+        <br>
+        <mat-form-field class="w-100">
+          <mat-label>Message</mat-label>
+          <input matInput formControlName="message"  class="matinput">
+        </mat-form-field>
+
+        <!--Type de demande-->
+        <br>
+        <mat-form-field class="w-100">
+          <mat-label>Type de demande</mat-label>
+          <mat-select formControlName="typeDemande">
+            <mat-option [value]="1">Devenir adherent</mat-option>
+            <mat-option [value]="2">Demande d'aide</mat-option>
+            <mat-option [value]="3">Demande </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="d-flex justify-content-center ">
+          <app-buttons [value]="btnValide" class="button"></app-buttons>
+        </div>
+      </form>
+      <h3 *ngIf="contactValide">Votre demande a bien été envoyée !</h3>
+    </div>
+  </div>
+</div>
+
+

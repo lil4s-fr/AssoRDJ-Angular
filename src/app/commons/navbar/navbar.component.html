@@ -3,42 +3,60 @@
 <!--HEADER-->
 <nav data-bs-theme="dark" class="navbar navbar-expand-lg bg-body-tertiary navbar-dark bg-dark">
     <div class="container-fluid">
-    <a class="navbar-brand" routerLink="home">
-        <img src="https://cdn.helloasso.com/img/logos/association%20roi%20des%20jeux-cd90bcde162e4b34961ce5f6c09603db.png"
-        alt="Association Roi Des Jeux" width="30" height="30" class="d-inline-block align-text-top me-2">
-        Association Roi Des Jeux
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>  
-    <div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
-        <ul class="navbar-nav d-flex flex-lg-row justify-content-start align-items-lg-center">
-        <li class="nav-item text-uppercase me-lg-4 d-flex justify-content-end">
-            <a routerLink="/reservation" class="nav-link">réserver une salle</a>
-        </li>
-        <li class="nav-item text-uppercase me-lg-4 d-flex justify-content-end">
-            <a routerLink="category" class="nav-link">categories</a>
-        </li>
-        <li class="nav-item text-uppercase me-lg-4 d-flex justify-content-end">
-            <a routerLink="event" class="nav-link">prochains évenements</a>
-        </li>
-        <!--Ajout du lien article sur la nav-bar-->
-        <li class="nav-item text-uppercase me-lg-4 d-flex justify-content-end">
-            <a routerLink="articles" class="nav-link">articles</a>
-        </li>
-        <li class="nav-item text-uppercase me-lg-4 d-flex justify-content-end">
-            <a routerLink="infoPerso" class="nav-link">infos perso</a>
-        </li>
-        <li class="nav-item text-uppercase me-lg-4 d-flex justify-content-end">
-            <a routerLink="login" class="nav-link">Login</a>
-        </li>
-        <li class="nav-item text-uppercase me-lg-4 d-flex justify-content-end">
-            <a routerLink="contact" class="nav-link">call me baby</a>
-        </li>
-        <li class="d-flex justify-content-end"><!--retirer le routerLink quand la page 404 sera faite-->
-            <a routerLink="404" class="btn btn-outline-primary">Nous rejoindre !</a>
-        </li>
-        </ul>
-    </div>
+        <a class="navbar-brand" routerLink="home">
+            <img src="assets/logo.webp"
+            alt="Association Roi Des Jeux" width="30" height="30" class="d-inline-block align-text-top me-2">
+            Association Roi Des Jeux
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>  
+        <div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
+            <ul class="navbar-nav d-flex flex-lg-row justify-content-start align-items-lg-center">
+                <li class="nav-item text-uppercase me-lg-2 d-flex justify-content-end">
+                    <a routerLink="informations" class="nav-link">informations</a>
+                </li>
+                <li class="nav-item text-uppercase me-lg-2 d-flex justify-content-end">
+                    <a routerLink="event" class="nav-link">prochains évenements</a>
+                </li>
+                <!--Ajout du lien article sur la nav-bar-->
+                <li class="nav-item text-uppercase me-lg-2 d-flex justify-content-end">
+                    <a routerLink="articles" class="nav-link">articles</a>
+                </li>
+                <li class="d-flex justify-content-end"><!--retirer le routerLink quand la page 404 sera faite-->
+                    <a (click)="openContactModal()" class="btn btn-outline-primary">Nous rejoindre !</a>
+                </li>
+                <!-- Lieu login deconnexion et info perso -->
+                <li class="navbar-brand d-flex justify-content-end">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" mat-icon-button style="color: white; "><mat-icon>person</mat-icon></a>
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end ms-4">
+                            <li>
+                                <a (click)="openLoginModal()" class="nav-link d-flex align-items-center">
+                                    <mat-icon style="color: white;">person_outline</mat-icon> 
+                                    <span class="ps-2">Login</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a routerLink="infoPerso" class="nav-link d-flex align-items-center">
+                                    <mat-icon style="color: white;">information</mat-icon>
+                                    <span class="ps-2">Infos perso</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a routerLink="gestionSite" class="nav-link d-flex align-items-center">
+                                    <mat-icon style="color: white;">perm_data_setting</mat-icon>
+                                    <span class="ps-2">Gestion du site</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="nav-link d-flex align-items-center" href="404">
+                                    <mat-icon style="color: red;">clear</mat-icon>
+                                    <span class="ps-2">Déconnexion</span>
+                                </a>
+                            </li>
+                        </ul>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>

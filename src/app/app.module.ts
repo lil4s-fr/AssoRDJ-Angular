@@ -3,17 +3,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle'; 
 
 
 
 // Import Angular material
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,7 +38,36 @@ import { ButtonsComponent } from './commons/buttons/buttons.component';
 import { ListsComponent } from './lists/lists.component';
 import { FormulairesComponent } from './formulaires/formulaires.component';
 import { PersonalDataComponent } from './pages/personal-data/personal-data.component';
-import { CategorieComponent } from './formulaires/categorie/categorie.component';
+import { CategorieComponent } from './formulaires/create-category/categorie.component';
+import { CreateRoomComponent } from './formulaires/create-room/create-room.component';
+import { CreateUserComponent } from './formulaires/create-user/create-user.component';
+import { LastEventComponent } from './pages/home/last-event/last-event.component';
+import { DatePipe } from '@angular/common';
+import { ModifierUtilisateurComponent } from './pages/modifier-utilisateur/modifier-utilisateur.component';
+import { ModifierSalleComponent } from './pages/modifier-salle/modifier-salle.component';
+import { ModifierCategorieComponent } from './pages/modifier-categorie/modifier-categorie.component';
+import { ModifierArticleComponent } from './pages/modifier-article/modifier-article.component';
+
+import { NativeDateAdapter, DateAdapter } from "@angular/material/core";
+import { InformationsComponent } from './pages/informations/informations.component';
+import { InformationContactComponent } from './pages/information-contact/information-contact.component';
+import { LastArticlesComponent } from './pages/home/last-articles/last-articles.component';
+import { NewContactComponent } from './pages/new-contact/new-contact.component';
+import { ModifierPersonalDataComponent } from './pages/personal-data/modifier-personal-data/modifier-personal-data.component';
+    
+export class FrenchDateAdapter extends NativeDateAdapter {
+  override parse(value: any): Date | null {
+    if ((typeof value === 'string') && (value.indexOf('/') > -1)) {
+      const str = value.split('/');
+      if (str.length < 2 || isNaN(+str[0]) || isNaN(+str[1]) || isNaN(+str[2])) {
+        return null;
+      }
+      return new Date(Number(str[2]), Number(str[1]) - 1, Number(str[0]), 12);
+    }
+    const timestamp = typeof value === 'number' ? value : Date.parse(value);
+    return isNaN(timestamp) ? null : new Date(timestamp);
+  }
+}
 
 @NgModule({
   declarations: [
@@ -58,7 +90,21 @@ import { CategorieComponent } from './formulaires/categorie/categorie.component'
     ListsComponent,
     FormulairesComponent,
     PersonalDataComponent,
-    CategorieComponent
+    CategorieComponent,
+    CreateRoomComponent,
+    CreateUserComponent,
+    LastEventComponent,
+    ModifierUtilisateurComponent,
+    ModifierSalleComponent,
+    ModifierCategorieComponent,
+    ModifierArticleComponent,
+    InformationContactComponent,
+    LastArticlesComponent,
+    InformationsComponent,
+    InformationContactComponent,
+    NewContactComponent,
+    ModifierPersonalDataComponent
+
   ],
   imports: [
     BrowserModule,
@@ -73,9 +119,15 @@ import { CategorieComponent } from './formulaires/categorie/categorie.component'
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSlideToggleModule,
+    MatDialogModule,
   ],
-  providers: [],
+  providers: [
+    DatePipe,
+    {provide: MAT_DATE_LOCALE, useValue: "fr-FR"},
+    {provide: DateAdapter, useClass: FrenchDateAdapter}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

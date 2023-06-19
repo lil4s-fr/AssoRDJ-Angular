@@ -42,6 +42,13 @@ export class ArticleService {
   getArticle(id: number): Observable<Article> {
     return this.httpClient.get<Article>(`${this.apiUrl}/articles/${id}`, this.httpOptions);
   }
+  /**
+   * On demande a retourner les 2 derniers articles
+   * @returns La partie entre parenthèse correspond à l'URL complète de notre route API
+   */
+  getTwoLastArticles(): Observable<Article[]> {
+    return this.httpClient.get<Article[]>(`${this.apiUrl}/articles/twolastarticles`)
+  }
 
   /**
    * requète pour créer un article
@@ -59,7 +66,7 @@ export class ArticleService {
    * @returns lien vers l'API
    */
   updateArticle(article: Article): Observable<Article> {
-    return this.httpClient.put<Article>(`${this.apiUrl}/artciles/${article.id}`, article, this.httpOptions);
+    return this.httpClient.put<Article>(`${this.apiUrl}/articles/${article.id}`, article, this.httpOptions);
   }
 
   /**
@@ -70,6 +77,4 @@ export class ArticleService {
   deleteArticle(id: number): Observable<Article> {
     return this.httpClient.delete<Article>(`${this.apiUrl}/articles/${id}`, this.httpOptions);
   }
-
-  onAddArticle(game: string, title: string, corpsArticle: string): void { }
 }

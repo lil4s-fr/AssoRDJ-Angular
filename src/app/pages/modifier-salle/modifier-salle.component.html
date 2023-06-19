@@ -1,0 +1,70 @@
+<div *ngIf="isLoaded | async">
+  
+    <div class="row m-0">
+      <div class="col-md-7">
+        <div class="d-flex flex-column p-3">
+          <h1 class="d-flex justify-content-center">Modifier les informations :</h1>
+        </div>
+        <div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
+          <form [formGroup]="formValues" (ngSubmit)="onEditSalle(formValues)">
+            <!-- <form [formGroup]="formValues" (ngSubmit)="alertFormValues(formValues)"> -->
+              <!-- nom-->
+              <br>
+              <mat-form-field class="w-100">
+                <mat-label>Nom de la salle :</mat-label>
+                <input matInput formControlName="nom" placeholder="Nom" class="matinput">
+              </mat-form-field>
+              
+              <!-- capacite-->
+              <br>
+              <mat-form-field class="w-100">
+                <mat-label>capacite de la salle :</mat-label>
+                <input matInput formControlName="capacite" placeholder="Capacité" class="matinput">
+              </mat-form-field>
+              
+              <!-- lieu-->
+              <br>
+              <mat-form-field class="w-100">
+                <mat-label>Lieu :</mat-label>
+                <input matInput formControlName="lieu" placeholder="Lieu" class="matinput">
+              </mat-form-field>
+              
+              <!-- acces PMR-->
+              <br>
+              <mat-form-field class="w-100">
+                <mat-label>Acces PMR :</mat-label>
+                <mat-select formControlName="acces_pmr">
+                  <mat-option [value]="true">Oui</mat-option>
+                  <mat-option [value]="false">non</mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+              <app-buttons [value]="btnValide" class="button"></app-buttons>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="d-flex flex-column p-3">
+            <h1 class="d-flex justify-content-center"> informations :</h1>
+          </div>
+          <div class="d-flex  flex-column container p-5  mb-5 bg-body-tertiary">
+            <ul>
+              <li class="d-flex flex-wrap align-items-center justify-content-between">
+                <strong>Nom :</strong> {{salle?.nom}}
+              </li>
+              <li class="d-flex flex-wrap align-items-center justify-content-between">
+                <strong>Capacité :</strong> {{salle?.capacite}}
+              </li>
+              <li class="d-flex flex-wrap align-items-center justify-content-between">
+                <strong>Lieu :</strong> {{salle?.lieu}}
+              </li>
+              <li class="d-flex flex-wrap align-items-center justify-content-between">
+                <strong>Accés pmr  :</strong>
+                <span *ngIf="salle?.acces_pmr"><mat-icon style="color: green;">done_outline</mat-icon></span>
+                <span *ngIf="!salle?.acces_pmr"><mat-icon style="color: red;">highlight_off</mat-icon></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
