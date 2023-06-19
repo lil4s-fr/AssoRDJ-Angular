@@ -23,7 +23,8 @@ export class CreateArticleComponent implements OnInit{
   //je récupère la liste des catégories
   categories$: Observable<Categorie[]> =  this.categorieService.getCategories();
 
-  // boolean pour affichage de la validation de la requelle
+  // boolean pour affichage de la validation de la requete
+  fichierValide: boolean = false;
   articleValide: boolean = false;
   articleDeleted: boolean = false;
 
@@ -34,7 +35,9 @@ export class CreateArticleComponent implements OnInit{
     // je crée les champs du FormControl
     categories: [[]],
     titre: ['', Validators.required], // je peux mettre un ou plusieurs validateur(s)
-    corps: ['', Validators.required]   
+    corps: ['', Validators.required],
+    uuid: [''],
+    fichier: []   
   });
 
   // formValues pour la suppression de la salle
@@ -79,6 +82,26 @@ export class CreateArticleComponent implements OnInit{
     // je passe la variable submitted à true pour pouvoir afficher la confirmation à l'écran avec un ngIf
     this.submitted = true;
 
+    //récupération de uuid du ficher
+    this.articleService.sendFile(formGroup.value.fichier).subscribe({
+      next:(reponse:any) => {
+        this.fichierValide = true;
+        formGroup.value.uuid = reponse;
+      },
+      error:(error:any) => {
+        //throw erreur
+        console.log(error);
+      }
+    })
+    this.onCompletForm(formGroup);
+  }
+   
+  /**
+   * méthode qui complète le formulaire et la création de l'article après avoir
+   * récupéré l'uuid du fichier
+   * @param formGroup formulaire de l'article
+   */
+  onCompletForm(formGroup: FormGroup) {
     // je mets la date du jour au bon format
     formGroup.value.date_ecriture = DateTime.now().toFormat('yyyy-MM-dd');
 
@@ -91,16 +114,16 @@ export class CreateArticleComponent implements OnInit{
     if (formGroup.valid) {
       // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
       // à l'utilisateur que le formulaire a bien été validé via un message
-      this.articleService.createArticle(formGroup.value).subscribe(
-        (response:any) => {
+      this.articleService.createArticle(formGroup.value).subscribe({
+        next:(response:any) => {
           this.articleValide=true;
           window.location.reload();
         },
-        (error:any) => {
+        error:(error:any) => {
           //throw erreur
           console.log(error);
         }
-      )
+      })
     }
   }
 
@@ -113,17 +136,16 @@ export class CreateArticleComponent implements OnInit{
     // je passe la variable submitted à true
     this.deleteSubmitted = true;
       
-    this.articleService.deleteArticle(id).subscribe(
-      (response:any) => {
+    this.articleService.deleteArticle(id).subscribe({
+      next:(response:any) => {
         this.articleDeleted=true;
         window.location.reload();
       },
-      (error:any) => {
+      error:(error:any) => {
         //throw erreur
         console.log(error);
       }
-    )
-    
+    })    
   }
 
   //debug pour vérifier si les datas sont valides.
@@ -133,4 +155,19 @@ export class CreateArticleComponent implements OnInit{
   onRedirectEditArticle(id: number){
     this.router.navigate(['/modifierarticle', id])
   }
+
+  /**
+   * méthode de récupération du fichier de la directive upload
+   * @param evt le fichier à transmettre
+   * 
+   * la directive n'est pas utilisée car pas adaptée à l'utilisation del'appli
+   
+  uploadFile(evt: any){
+    // evt est un tableau de fichier(s) déposé(s) sur notre div. Ici nous supposerons qu'il y a un seul fichier uploadé
+      
+      let payload = new FormData();
+      payload.append('data', evt[0]);
+      // Nous pouvons maintenant uploader le fichier en lancant une requete POST avec la variable payload comme corps de requete :)
+    }*/
+    
 }

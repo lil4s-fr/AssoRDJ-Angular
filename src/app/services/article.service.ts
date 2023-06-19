@@ -49,6 +49,14 @@ export class ArticleService {
   getTwoLastArticles(): Observable<Article[]> {
     return this.httpClient.get<Article[]>(`${this.apiUrl}/articles/twolastarticles`)
   }
+  /**
+   * envoie du fichier pour récupérer uuid
+   * @param file fichier à stocker
+   * @returns 
+   */
+  sendFile(file: FormData): Observable<FormData> {
+    return this.httpClient.post<FormData>(`${this.apiUrl}/articles`, file, this.httpOptions);
+  }
 
   /**
    * requète pour créer un article

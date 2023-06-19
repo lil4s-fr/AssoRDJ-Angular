@@ -54,6 +54,7 @@ import { InformationContactComponent } from './pages/information-contact/informa
 import { LastArticlesComponent } from './pages/home/last-articles/last-articles.component';
 import { NewContactComponent } from './pages/new-contact/new-contact.component';
 import { ModifierPersonalDataComponent } from './pages/personal-data/modifier-personal-data/modifier-personal-data.component';
+import { UploadDirective } from './directives/upload.directive';
     
 export class FrenchDateAdapter extends NativeDateAdapter {
   override parse(value: any): Date | null {
@@ -103,7 +104,8 @@ export class FrenchDateAdapter extends NativeDateAdapter {
     InformationsComponent,
     InformationContactComponent,
     NewContactComponent,
-    ModifierPersonalDataComponent
+    ModifierPersonalDataComponent,
+    UploadDirective
 
   ],
   imports: [

@@ -2,3 +2,8 @@
     min-width: 100% !important;
     width: 100% !important;
   }
+
+.fichier {
+  color: lightgray;
+  border-radius: 8px;
+  }
