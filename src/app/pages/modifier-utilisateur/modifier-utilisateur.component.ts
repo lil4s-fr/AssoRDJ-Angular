@@ -17,6 +17,11 @@ export class ModifierUtilisateurComponent implements OnInit{
   userValide: boolean = false;
   userDeleted: boolean = false;
 
+  //transmission du fichier
+  fileName: string = '';
+  file!: File;
+  uuid!: string;
+
   changementMDPValide: boolean = false;
   afficherPwd: boolean = false;
   password!: string;
@@ -38,7 +43,8 @@ export class ModifierUtilisateurComponent implements OnInit{
     pseudo: [''],
     email: ['', Validators.required],
     telephone: ['', Validators.required],
-    permission: ['', Validators.required]
+    permission: ['', Validators.required],
+    fichier: [null]
   });
 
   // formValues pour la suppression du membre
@@ -57,6 +63,7 @@ export class ModifierUtilisateurComponent implements OnInit{
 
   // je crée une liste de salles pour l'afficher
   userList$!: Observable<Utilisateur[]>;
+  userList: Utilisateur[] = [];
 
    // je crée un constructeur qui prend en paramètre la déclaration d'une variable nommée formBuilder de type formBuilder
    constructor(
@@ -70,6 +77,9 @@ export class ModifierUtilisateurComponent implements OnInit{
   }
 
   ngOnInit() {
+    this.userService.getUsers().subscribe(users => {
+      this.userList = users;
+    })
     // j'obtiens l'ID de l'utilisateur depuis l'URL
     // this.route.snapshot.paramMap.get('id')
     //                                         non-null assertion 👇
@@ -80,6 +90,27 @@ export class ModifierUtilisateurComponent implements OnInit{
     this.deleteFormValues.valueChanges.subscribe(()=> {
       this.submitted=false;
     })
+  }
+
+  /**
+   * envoie du fichier vers le service pour pécupérer l'uuid
+   * @param event fichier en transit
+   */
+  onFileSelected(event: any) {
+    this.file = event.target.files[0];
+    if (this.file) {
+      this.fileName = this.file.name;
+      this.userService.sendFile(this.file).subscribe({
+        next:(response:any) => {
+          console.log(response, !!response)
+          this.uuid=response.fichier;          
+        },
+        error:(error:any) => {
+          //throw erreur
+          console.log(error);
+        }
+      })
+    }
   }
 
   /**

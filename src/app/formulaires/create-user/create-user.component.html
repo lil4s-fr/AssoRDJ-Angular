@@ -80,7 +80,7 @@
         <div *ngIf="userDeleted">
           <h3>Le membre est supprimé !</h3>
         </div>
-        <li class="d-flex flex-wrap align-items-center justify-content-between" *ngFor="let user of userList$ | async; let i=index">
+        <li class="d-flex flex-wrap align-items-center justify-content-between" *ngFor="let user of userList; let i=index">
           {{user.prenom}} "{{user.pseudo}}" {{user.nom}} — {{user.numeroAdherent}}
           <div class="example-button-container">
             <button mat-icon-button style="color: white; font-size: 20px;" (click)="onRedirectEditUser(user.id)">

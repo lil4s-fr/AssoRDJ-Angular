@@ -77,9 +77,6 @@ export class CreateUserComponent implements OnInit{
     this.deleteFormValues.valueChanges.subscribe(()=> {
       this.submitted=false;
     })
-
-    // j'initialise la liste des salles en allant chercher dans le service
-    this.userList$ = this.userService.getUsers();
   }
 
   /**

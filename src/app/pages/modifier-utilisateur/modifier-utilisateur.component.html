@@ -61,7 +61,7 @@
                 <mat-option [value]="4">Membre du site</mat-option>
               </mat-select>
             </mat-form-field>
-            
+            <input type="file" class="fichier" (change)="onFileSelected($event)" #fileUpload/>
             <div *ngIf="userValide">
               <h3>L'utilisateur a bien été modifié !</h3>
             </div>
