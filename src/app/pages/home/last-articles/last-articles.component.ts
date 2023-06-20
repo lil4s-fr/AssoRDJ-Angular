@@ -23,8 +23,8 @@ export class LastArticlesComponent {
     })
   }
 
-  formatDate(dateString: string):string{
-    const date = new Date(dateString);
+  formatDate(dateString?: string):string{
+    const date = dateString ? new Date(dateString) : new Date();
     const options: Intl.DateTimeFormatOptions = {
       weekday: 'long',
       day: 'numeric',

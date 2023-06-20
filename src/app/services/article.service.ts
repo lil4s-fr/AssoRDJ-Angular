@@ -54,8 +54,11 @@ export class ArticleService {
    * @param file fichier à stocker
    * @returns 
    */
-  sendFile(file: FormData): Observable<FormData> {
-    return this.httpClient.post<FormData>(`${this.apiUrl}/articles`, file, this.httpOptions);
+  sendFile(file: any): Observable<string> {
+    console.log(file);
+    const formData = new FormData();
+    formData.append("img", file)
+    return this.httpClient.post<string>(`${this.apiUrl}/articles/img`, formData);
   }
 
   /**
