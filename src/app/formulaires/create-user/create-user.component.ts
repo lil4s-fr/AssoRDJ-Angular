@@ -20,6 +20,11 @@ export class CreateUserComponent implements OnInit{
   // je donne le nom du bouton
   btnValide: string = "Valider le membre";
 
+  //transmission du fichier
+  fileName: string = '';
+  file!: File;
+  uuid!: string;
+
   // formValues pour la soumission du nouveau membre
   formValues: FormGroup = this.formBuilder.group({
     // je crée un champ nom qui est un FormControl, idem pour les autres champs
@@ -28,9 +33,10 @@ export class CreateUserComponent implements OnInit{
     numeroAdherent: ['', Validators.required],
     pseudo: [''],
     email: ['', Validators.required],
-    numeroTelephone: ['', Validators.required],
+    telephone: ['', Validators.required],
     hashMotDePasse: ['', Validators.required],
-    permission: ['', Validators.required]
+    permission: ['', Validators.required],
+    fichier: [null]
   });
 
   // formValues pour la suppression du membre
@@ -49,6 +55,7 @@ export class CreateUserComponent implements OnInit{
 
   // je crée une liste de salles pour l'afficher
   userList$!: Observable<Utilisateur[]>;
+  userList: Utilisateur[] = [];
 
   // je crée un constructeur qui prend en paramètre la déclaration d'une variable nommée formBuilder de type formBuilder
   constructor(
@@ -59,6 +66,10 @@ export class CreateUserComponent implements OnInit{
   }
 
   ngOnInit() {
+    this.userService.getUsers().subscribe(users => {
+      this.userList = users;
+    })
+
     // je réinitialise si l'utilisateur change les champs
     this.formValues.valueChanges.subscribe(()=> {
       this.submitted=false;
@@ -72,34 +83,65 @@ export class CreateUserComponent implements OnInit{
   }
 
   /**
+   * envoie du fichier vers le service pour pécupérer l'uuid
+   * @param event fichier en transit
+   */
+  onFileSelected(event: any) {
+    this.file = event.target.files[0];
+    if (this.file) {
+      this.fileName = this.file.name;
+      this.userService.sendFile(this.file).subscribe({
+        next:(response:any) => {
+          console.log(response, !!response)
+          this.uuid=response.fichier;          
+        },
+        error:(error:any) => {
+          //throw erreur
+          console.log(error);
+        }
+      })
+    }
+  }
+
+  /**
    * envoie les éléments de l'évènement vers le service au click
    */
   onAddUser(formGroup: FormGroup) {
-    //debug
-    console.log(JSON.stringify(formGroup.value, null, 2));
-    formGroup.value.permission = { "id": formGroup.value.permission }
-
+    //je reconstitue le formulaire
+    const result = {
+      nom: formGroup.value.nom,
+      prenom: formGroup.value.prenom,
+      numeroAdherent: formGroup.value.numeroAdherent,
+      pseudo: formGroup.value.pseudo,
+      email: formGroup.value.email,
+      numeroTelephone: formGroup.value.telephone,
+      hashMotDePasse: formGroup.value.hashMotDePasse,
+      permission: { "id": formGroup.value.permission },
+      coordonnees: [],
+      fichier: this.uuid
+    }
+    
     // je passe la variable submitted à true pour pouvoir afficher a confirmation à l'écran avec un ngIf
     this.submitted = true;
 
     //  je vérifie si le formulaire est valide
-    if (formGroup.valid) {
-      this.userService.createUser(formGroup.value).subscribe(
-        (response:any) => {
+    if (result) {
+      this.userService.createUser(result).subscribe({
+        next:(response:any) => {
           this.userValide=true;
-          window.location.reload();
+          this.userList.push(result);
         },
-        (error:any) => {
+        error:(error:any) => {
           //throw erreur
           console.log(error);
         }
-      )
+      })
     }
   }
 
   //debug pour vérifier si les datas sont valides.
   
-  onRedirectEditUser(id: number){
+  onRedirectEditUser(id?: number){
     this.router.navigate(['/modifierutilisateur', id])
   }
   alertFormValues(formGroup: FormGroup) {

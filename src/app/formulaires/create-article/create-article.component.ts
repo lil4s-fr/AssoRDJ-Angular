@@ -5,9 +5,7 @@ import Article from 'src/app/models/article.model';
 import Categorie from 'src/app/models/categorie.model';
 import { ArticleService } from 'src/app/services/article.service';
 import { CategorieService } from 'src/app/services/categorie.service';
-import { DateTime } from 'luxon';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-create-article',
@@ -24,7 +22,9 @@ export class CreateArticleComponent implements OnInit{
 
   //je récupère la liste des catégories
   categories$: Observable<Categorie[]> =  this.categorieService.getCategories();
+  categorieList: Categorie[]=[];
 
+  //transmission du fichier
   fileName: string = '';
   file!: File;
   uuid!: string;
@@ -61,8 +61,7 @@ export class CreateArticleComponent implements OnInit{
     private formBuilder: FormBuilder,
     private articleService: ArticleService,
     private categorieService: CategorieService,
-    private router:Router,
-    private http: HttpClient
+    private router:Router
     ){}
 
   ngOnInit(): void {
@@ -80,6 +79,10 @@ export class CreateArticleComponent implements OnInit{
     })
   }
 
+  /**
+   * envoie du fichier vers le service pour pécupérer l'uuid
+   * @param event fichier en transit
+   */
   onFileSelected(event: any) {
     this.file = event.target.files[0];
     if (this.file) {
@@ -87,9 +90,7 @@ export class CreateArticleComponent implements OnInit{
       this.articleService.sendFile(this.file).subscribe({
         next:(response:any) => {
           console.log(response, !!response)
-          this.uuid=response.fichier;
-          console.log("onfileselected : "+ this.uuid);
-          
+          this.uuid=response.fichier;          
         },
         error:(error:any) => {
           //throw erreur
@@ -107,6 +108,7 @@ export class CreateArticleComponent implements OnInit{
 
     // je passe la variable submitted à true pour pouvoir afficher la confirmation à l'écran avec un ngIf
     this.submitted = true; 
+    //je reconstitue le formulaire
     const result = {
       titre: formGroup.value.titre,
       corps: formGroup.value.corps,
@@ -133,7 +135,6 @@ export class CreateArticleComponent implements OnInit{
 
     //  je vérifie si le formulaire est valide
     if (formGroup.valid) {
-      console.log("formgroup valid");
       
       // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
       // à l'utilisateur que le formulaire a bien été validé via un message
@@ -175,6 +176,11 @@ export class CreateArticleComponent implements OnInit{
   alertFormValues(formGroup: FormGroup) {
     alert(JSON.stringify(formGroup.value, null, 2));
   }
+  
+  /**
+   * redirection vers la page de modification des articles
+   * @param id id article à modifier
+   */
   onRedirectEditArticle(id?: number){
     this.router.navigate(['/modifierarticle', id])
   }

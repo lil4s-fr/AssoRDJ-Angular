@@ -1,13 +1,11 @@
 import { formatDate } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DateTime } from 'luxon';
 import { Observable } from 'rxjs';
 import Categorie from 'src/app/models/categorie.model';
 import Evenement from 'src/app/models/evenement.model';
 import { CategorieService } from 'src/app/services/categorie.service';
 import { EventService } from 'src/app/services/event.service';
-import { SalleService } from 'src/app/services/salle.service';
 
 @Component({
   selector: 'app-create-event',
@@ -18,15 +16,22 @@ export class CreateEventComponent {
   // instanciation d'un évènement
   event!: Evenement;
   
-  // boolean pour affichage de la validation de la requète
-  eventValide: boolean = false;
-  eventDeleted: boolean = false;
+  // Liste des évènements à récupérer de la bdd
+  eventList$: Observable<Evenement[]> =  this.eventService.getEvents();
+  eventList: Evenement[] = [];
 
   // Liste de catégories à récupérer de la bdd
   categories$: Observable<Categorie[]> =  this.categorieService.getCategories();
+  categorieList: Categorie[]=[];
 
-  // Liste des évènements à récupérer de la bdd
-  eventList$: Observable<Evenement[]> =  this.eventService.getEvents();
+  //transmission du fichier
+  fileName: string = '';
+  file!: File;
+  uuid!: string;
+
+  // boolean pour affichage de la validation de la requète
+  eventValide: boolean = false;
+  eventDeleted: boolean = false;
 
   // je donne le nom au bouton
   btnValide: string = "Valider l'évènement";
@@ -37,9 +42,10 @@ export class CreateEventComponent {
     nom: ['', Validators.required],
     dateDebut: ['', Validators.required],
     dateFin: ['', Validators.required],
-    categories: ['', Validators.required],
+    categories: [[]],
     lieu: ['', Validators.required],
-    description: ['', Validators.required]
+    description: ['', Validators.required],
+    fichier: [null]
   });
 
   // formValues pour la suppression de la salle
@@ -58,13 +64,16 @@ export class CreateEventComponent {
   constructor(
     private formBuilder: FormBuilder,
     private eventService: EventService,
-    private categorieService: CategorieService,
-    private salleService: SalleService
+    private categorieService: CategorieService
     ){
      
   }
 
   ngOnInit() {
+    this.eventService.getEvents().subscribe(events => {
+      this.eventList = events;
+    })
+
     // je réinitialise si l'utilisateur change les champs
     this.formValues.valueChanges.subscribe(()=> {
       this.submitted=false;
@@ -75,54 +84,75 @@ export class CreateEventComponent {
   }
 
   /**
+   * envoie du fichier vers le service pour pécupérer l'uuid
+   * @param event fichier en transit
+   */
+  onFileSelected(event: any) {
+    this.file = event.target.files[0];
+    if (this.file) {
+      this.fileName = this.file.name;
+      this.eventService.sendFile(this.file).subscribe({
+        next:(response:any) => {
+          console.log(response, !!response)
+          this.uuid=response.fichier;          
+        },
+        error:(error:any) => {
+          //throw erreur
+          console.log(error);
+        }
+      })
+    }
+  }
+
+  /**
    * envoie les éléments de l'évènement vers le service
    * @param e event du template
    */
   onAddEvent(formGroup: FormGroup) {
-    // debug
-    console.log(JSON.stringify(formGroup.value, null, 2));
-
     // je passe la variable submitted à true pour pouvoir afficher a confirmation à l'écran avec un ngIf
     this.submitted = true;
-
-    // je mets la date du jour au bon format
-    formGroup.value.dateCreation = DateTime.now().toFormat('yyyy-MM-dd');
 
     // mise au format des dates de début et fin    
     const formattedDateDebut = this.formatDate(formGroup.value.dateDebut);
     formGroup.patchValue({
       dateDebut: formattedDateDebut
     });
+    let formattedDateFin = '';
     if (formGroup.value.dateFin == '') {
-      formGroup.value.dateFin = formGroup.value.dateDebut;
+      formattedDateFin = formattedDateDebut;
     } else {
-      const formattedDateFin = this.formatDate(formGroup.value.dateFin);
+      formattedDateFin = this.formatDate(formGroup.value.dateFin);
     formGroup.patchValue({
       dateFin: formattedDateFin
     });
     }
-    
-    // je mets la catégorie dans l'objet à poster et complète l'objet event
-    formGroup.value.categories = [{"id": formGroup.value.categories}];
-       
-    formGroup.value.id = this.event?.id;
-    //alert(JSON.stringify(formGroup.value, null, 2));
+
+    //je reconstitue le formulaire
+    const result = {
+      nom: formGroup.value.nom,
+      lieu: formGroup.value.lieu,
+      description: formGroup.value.description,
+      dateDebut: formattedDateDebut,
+      dateFin: formattedDateFin,
+      fichier: this.uuid,
+      categories: [{"id": formGroup.value.categories}]
+    }
 
     //  je vérifie si le formulaire est valide
-    if (formGroup.valid) {
+    if (result) {
       
       // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
       // à l'utilisateur que le formulaire a bien été validé via un message
-      this.eventService.createEvent(formGroup.value).subscribe(
-        (response:any) => {
+      this.eventService.createEvent(result).subscribe({
+        next:(response:any) => {
           this.eventValide=true;
-          window.location.reload();
+          this.eventList.push(response);
         },
-        (error:any) => {
+        error:(error:any) => {
           //throw erreur
           console.log(error);
         }
-      )
+      })
     }
   } 
 
@@ -130,20 +160,20 @@ export class CreateEventComponent {
    * suppression d'un évènement de la liste
    * @param id de l'event
    */
-  onDeleteEvent(id: number) { 
+  onDeleteEvent(id?: number) { 
     // je passe la variable submitted à true
     this.deleteSubmitted = true;
       
-    this.eventService.deleteEvent(id).subscribe(
-      (response:any) => {
+    if (id) this.eventService.deleteEvent(id).subscribe({
+      next:(response:any) => {
         this.eventDeleted=true;
-        window.location.reload();
+        this.eventList = this.eventList.filter(event=>event.id!==id);
       },
-      (error:any) => {
+      error:(error:any) => {
         //throw erreur
         console.log(error);
       }
-    )    
+    })    
   }
 
   //debug pour vérifier si les datas sont valides.

@@ -45,7 +45,7 @@
         <br>
         <mat-form-field class="w-100">
           <mat-label>Numero de téléphone :</mat-label>
-          <input matInput formControlName="numeroTelephone" placeholder="Numéro de téléphone" class="matinput">
+          <input matInput formControlName="telephone" placeholder="Numéro de téléphone" class="matinput">
         </mat-form-field>
         
         <!-- mot de passe provisoire-->
@@ -66,6 +66,7 @@
             <mat-option [value]="4">Membre du site</mat-option>
           </mat-select>
         </mat-form-field>
+        <input type="file" class="fichier" (change)="onFileSelected($event)" #fileUpload/>
         <app-buttons [value]="btnValide" class="button"></app-buttons>
       </form>
     </div>

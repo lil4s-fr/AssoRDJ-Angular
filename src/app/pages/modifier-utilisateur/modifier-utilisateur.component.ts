@@ -37,7 +37,7 @@ export class ModifierUtilisateurComponent implements OnInit{
     numeroAdherent: ['', Validators.required],
     pseudo: [''],
     email: ['', Validators.required],
-    numeroTelephone: ['', Validators.required],
+    telephone: ['', Validators.required],
     permission: ['', Validators.required]
   });
 
@@ -114,15 +114,15 @@ export class ModifierUtilisateurComponent implements OnInit{
     
     // si le formulaire est valide, je passe la variable formValidated à true ce qui me permettra de signaler
     // à l'utilisateur que le formulaire a bien été validé via un message
-    this.userService.deleteUser(id).subscribe(
-      (response:any) => {
+    this.userService.deleteUser(id).subscribe({
+      next:(response:any) => {
         this.userDeleted=true;
       },
-      (error:any) => {
+      error:(error:any) => {
         //throw erreur
         console.log(error);
       }
-    )
+    })
   }
 
   onUpdatePassword(){
@@ -144,15 +144,15 @@ export class ModifierUtilisateurComponent implements OnInit{
         hashMotDePasse: [this.password]
       }) 
       formDelete.value.permission = {"id": this.user?.permission.id};
-      this.userService.updateUser(formDelete.value).subscribe(
-        (response:any) => {
+      this.userService.updateUser(formDelete.value).subscribe({
+        next:(response:any) => {
           this.passwordBienChange=true;
         },
-        (error:any) => {
+        error:(error:any) => {
           //throw erreur
           console.log(error);
         }
-      )
+      })
     }
   }
 

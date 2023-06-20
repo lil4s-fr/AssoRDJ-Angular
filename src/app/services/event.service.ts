@@ -48,6 +48,17 @@ export class EventService {
   }
 
   /**
+   * envoie du fichier pour récupérer uuid
+   * @param file fichier à stocker
+   * @returns 
+   */
+  sendFile(file: any): Observable<string> {
+    const formData = new FormData();
+    formData.append("img", file)
+    return this.httpClient.post<string>(`${this.apiUrl}/evenements/img`, formData);
+  }
+
+  /**
    * création d'un évènement
    * @param event id event
    * @returns lien vers l'API

@@ -20,20 +20,19 @@ export class ArticleCardComponent implements OnInit{
   users!: Utilisateur[];
 
   constructor ( 
-    private articleService: ArticleService,
     private utilisateurService: UserService
     ){}
 
   ngOnInit() {
     // alert(JSON.stringify(this.event, null, 2));
-    this.utilisateurService.getUsers().subscribe(
-      (response:any) => {
+    this.utilisateurService.getUsers().subscribe({
+      next:(response:any) => {
         this.users = response;
       },
-      (error:any) => {
+      error:(error:any) => {
         alert(error);
       }
-    )
+    })
   }
 
   afficheArticleComplet = () => { 
@@ -44,6 +43,9 @@ export class ArticleCardComponent implements OnInit{
 
   }
 
+  /**
+   * récupère les images du back, il faudra changer localhost:8080
+   */
   get imageUrl(){
     return "http://localhost:8080/articles/img/"+this.article.fichier
   }

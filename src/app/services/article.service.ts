@@ -49,13 +49,13 @@ export class ArticleService {
   getTwoLastArticles(): Observable<Article[]> {
     return this.httpClient.get<Article[]>(`${this.apiUrl}/articles/twolastarticles`)
   }
+  
   /**
    * envoie du fichier pour récupérer uuid
    * @param file fichier à stocker
    * @returns 
    */
   sendFile(file: any): Observable<string> {
-    console.log(file);
     const formData = new FormData();
     formData.append("img", file)
     return this.httpClient.post<string>(`${this.apiUrl}/articles/img`, formData);

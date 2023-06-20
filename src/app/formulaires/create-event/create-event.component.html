@@ -87,6 +87,7 @@
             class="matinput"
           />
         </mat-form-field>
+        <input type="file" class="fichier" (change)="onFileSelected($event)" #fileUpload/>
         <app-buttons [value]="btnValide" class="button"></app-buttons>
       </form>
     </div>
@@ -98,7 +99,7 @@
     <div class="d-flex flex-column container p-5 mb-5 bg-body-tertiary">
       <ul>
         <li
-          *ngFor="let event of eventList$ | async; let i = index"
+          *ngFor="let event of eventList; let i = index"
           class="d-flex flex-wrap align-items-center justify-content-between"
         >
           {{ event.nom }}

@@ -28,24 +28,24 @@ export class EventCardComponent implements OnInit{
 
   ngOnInit() {
     // alert(JSON.stringify(this.event, null, 2));
-    this.categorieService.getCategories().subscribe(
-      (response:any) => {
+    this.categorieService.getCategories().subscribe({
+      next:(response:any) => {
         this.categories = response;
       },
-      (error:any) => {
+      error:(error:any) => {
         alert(error);
       }
-    )
+    })
 
     // alert(JSON.stringify(this.event, null, 2));
-    this.utilisateurService.getUsers().subscribe(
-      (response:any) => {
+    this.utilisateurService.getUsers().subscribe({
+      next:(response:any) => {
         this.users = response;
       },
-      (error:any) => {
+      error:(error:any) => {
         alert(error);
       }
-    )
+    })
   }
 
   @Input()
@@ -58,5 +58,12 @@ export class EventCardComponent implements OnInit{
 
     console.log(this.afficheEvent);
 
+  }
+  
+  /**
+   * récupère les images du back, il faudra changer localhost:8080
+   */
+  get imageUrl(){
+    return "http://localhost:8080/evenements/img/"+this.event.fichier
   }
 }
